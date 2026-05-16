@@ -6179,9 +6179,51 @@ const { t, locale } = useI18n();
 const appStore = useAppStore();
 const adminSettingsStore = useAdminSettingsStore();
 const isZhLocale = computed(() => locale.value.startsWith("zh"));
+const isViLocale = computed(() => locale.value.startsWith("vi"));
+
+const VI_LOCAL_TEXT_MAP: Record<string, string> = {
+  'Add document': 'Thêm tài liệu',
+  'Agreement documents': 'Tài liệu thỏa thuận',
+  'Backend Callback URL': 'URL callback backend',
+  'Callback URL set and copied.': 'Đã điền và sao chép URL callback.',
+  'Changing the date or content requires fresh consent.': 'Khi đổi ngày hoặc nội dung, người dùng phải đồng ý lại.',
+  Checkbox: 'Hộp kiểm',
+  Disabled: 'Tắt',
+  'Display mode': 'Kiểu hiển thị',
+  'Document title': 'Tên tài liệu',
+  'Email OAuth Sign-in': 'Đăng nhập Email OAuth',
+  Enabled: 'Bật',
+  'Example: Terms of Service': 'Ví dụ: Điều khoản dịch vụ',
+  'Frontend Callback URL': 'URL callback frontend',
+  'Generate and copy': 'Tạo và sao chép',
+  'Login agreement': 'Điều khoản đăng nhập',
+  'Markdown content': 'Nội dung Markdown',
+  'Mobile App': 'Ứng dụng di động',
+  'Mobile App ID': 'ID ứng dụng di động',
+  'Mobile App Secret': 'Mã bí mật ứng dụng di động',
+  Modal: 'Hộp thoại',
+  'Official Account': 'Tài khoản chính thức',
+  'Official Account App ID': 'ID ứng dụng tài khoản chính thức',
+  'PC App': 'Ứng dụng PC',
+  'PC App ID': 'ID ứng dụng PC',
+  'PC App Secret': 'Mã bí mật ứng dụng PC',
+  'Route slug': 'Slug đường dẫn',
+  'Secret configured. Leave empty to keep the current value.': 'Đã có mã bí mật. Để trống nếu muốn giữ giá trị hiện tại.',
+  'The checkbox appears below the login button and gates all login actions.': 'Hộp kiểm sẽ hiện dưới nút đăng nhập và chặn mọi cách đăng nhập cho tới khi người dùng đồng ý.',
+  'The modal opens on the login page and gates all login actions until accepted.': 'Hộp thoại sẽ bật lên ở trang đăng nhập và chặn mọi cách đăng nhập cho tới khi người dùng đồng ý.',
+  'Untitled document': 'Tài liệu chưa có tên',
+  'Updated date': 'Ngày cập nhật',
+  'Write the final Markdown content here.': 'Nhập nội dung Markdown hoàn chỉnh tại đây.',
+};
 
 function localText(zh: string, en: string): string {
-  return isZhLocale.value ? zh : en;
+  if (isZhLocale.value) {
+    return zh;
+  }
+  if (isViLocale.value) {
+    return VI_LOCAL_TEXT_MAP[en] ?? en;
+  }
+  return en;
 }
 
 const paymentGuideHref = computed(() =>

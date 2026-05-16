@@ -1,6 +1,6 @@
 import { createI18n } from 'vue-i18n'
 
-type LocaleCode = 'en' | 'zh'
+export type LocaleCode = 'en' | 'zh' | 'vi'
 
 type LocaleMessages = Record<string, any>
 
@@ -9,11 +9,12 @@ const DEFAULT_LOCALE: LocaleCode = 'en'
 
 const localeLoaders: Record<LocaleCode, () => Promise<{ default: LocaleMessages }>> = {
   en: () => import('./locales/en'),
-  zh: () => import('./locales/zh')
+  zh: () => import('./locales/zh'),
+  vi: () => import('./locales/vi')
 }
 
 function isLocaleCode(value: string): value is LocaleCode {
-  return value === 'en' || value === 'zh'
+  return value === 'en' || value === 'zh' || value === 'vi'
 }
 
 function getDefaultLocale(): LocaleCode {
@@ -25,6 +26,9 @@ function getDefaultLocale(): LocaleCode {
   const browserLang = navigator.language.toLowerCase()
   if (browserLang.startsWith('zh')) {
     return 'zh'
+  }
+  if (browserLang.startsWith('vi')) {
+    return 'vi'
   }
 
   return DEFAULT_LOCALE
@@ -83,9 +87,25 @@ export function getLocale(): LocaleCode {
   return isLocaleCode(current) ? current : DEFAULT_LOCALE
 }
 
+export function resolveBrowserLocale(locale: string = getLocale()): string {
+  const normalized = locale.toLowerCase()
+  if (normalized.startsWith('zh')) {
+    return 'zh-CN'
+  }
+  if (normalized.startsWith('vi')) {
+    return 'vi-VN'
+  }
+  return 'en-US'
+}
+
+export function resolveAirwallexLocale(locale: string = getLocale()): 'zh' | 'en' {
+  return locale.toLowerCase().startsWith('zh') ? 'zh' : 'en'
+}
+
 export const availableLocales = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'zh', name: '中文', flag: '🇨🇳' }
+  { code: 'zh', name: '中文', flag: '🇨🇳' },
+  { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' }
 ] as const
 
 export default i18n

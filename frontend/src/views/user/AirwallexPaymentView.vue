@@ -30,6 +30,7 @@ import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import Icon from '@/components/icons/Icon.vue'
+import { resolveAirwallexLocale } from '@/i18n'
 import {
   PAYMENT_RECOVERY_STORAGE_KEY,
   readPaymentRecoverySnapshot,
@@ -91,7 +92,7 @@ function restoreAirwallexSnapshot(): PaymentRecoverySnapshot | null {
 
 onMounted(async () => {
   const snapshot = restoreAirwallexSnapshot()
-  const checkoutLocale = locale.value.toLowerCase().startsWith('zh') ? 'zh' : 'en'
+  const checkoutLocale = resolveAirwallexLocale(locale.value)
 
   if (!snapshot) {
     loading.value = false

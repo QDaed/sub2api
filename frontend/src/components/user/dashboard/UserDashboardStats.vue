@@ -136,6 +136,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import Icon from '@/components/icons/Icon.vue'
+import { resolveBrowserLocale } from '@/i18n'
 import type { UserDashboardStats as UserStatsType } from '@/api/usage'
 
 defineProps<{
@@ -143,10 +144,10 @@ defineProps<{
   balance: number
   isSimple: boolean
 }>()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const formatBalance = (b: number) =>
-  new Intl.NumberFormat('en-US', {
+  new Intl.NumberFormat(resolveBrowserLocale(locale.value), {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   }).format(b)

@@ -173,6 +173,9 @@ export default {
     totalCacheRead: '累计缓存读取',
     totalCost: '累计费用',
     avgDuration: '平均耗时',
+    dayShort: '日',
+    weekShort: '周',
+    monthShort: '月',
     // Messages
     enterApiKey: '请输入 API Key',
     querySuccess: '查询成功',

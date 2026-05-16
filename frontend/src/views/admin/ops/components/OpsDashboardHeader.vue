@@ -7,6 +7,7 @@ import BaseDialog from '@/components/common/BaseDialog.vue'
 import Icon from '@/components/icons/Icon.vue'
 import { adminAPI } from '@/api'
 import { opsAPI, type OpsDashboardOverview, type OpsMetricThresholds, type OpsRealtimeTrafficSummary } from '@/api/admin/ops'
+import { resolveBrowserLocale } from '@/i18n'
 import type { OpsRequestDetailsPreset } from './OpsRequestDetailsModal.vue'
 import { useAdminSettingsStore } from '@/stores'
 import { formatNumber } from '@/utils/format'
@@ -848,6 +849,20 @@ const jobsStatusClass = computed(() => {
 
 const showJobsDetails = ref(false)
 
+const lastUpdatedLabel = computed(() => {
+  if (!props.lastUpdated) {
+    return t('common.unknown')
+  }
+  return props.lastUpdated.toLocaleString(resolveBrowserLocale(), {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  }).replace(/\//g, '-')
+})
+
 function openJobsDetails() {
   showJobsDetails.value = true
 }
@@ -884,11 +899,11 @@ function handleToolbarRefresh() {
           </span>
 
           <span>·</span>
-          <span>{{ t('common.refresh') }}: {{ props.lastUpdated ? props.lastUpdated.toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).replace(/\//g, '-') : t('common.unknown') }}</span>
+          <span>{{ t('common.refresh') }}: {{ lastUpdatedLabel }}</span>
 
           <template v-if="props.autoRefreshEnabled && props.autoRefreshCountdown !== undefined">
             <span>·</span>
-            <span>剩余 {{ props.autoRefreshCountdown }}s</span>
+            <span>{{ t('common.autoRefresh.countdown', { seconds: props.autoRefreshCountdown }) }}</span>
           </template>
         </div>
       </div>

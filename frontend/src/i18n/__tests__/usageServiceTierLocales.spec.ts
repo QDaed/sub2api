@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import en from '../locales/en'
+import vi from '../locales/vi'
 import zh from '../locales/zh'
 
 describe('usage service tier locale keys', () => {
@@ -16,5 +17,11 @@ describe('usage service tier locale keys', () => {
     expect(en.usage.serviceTierPriority).toBe('Fast')
     expect(en.usage.serviceTierFlex).toBe('Flex')
     expect(en.usage.serviceTierStandard).toBe('Standard')
+  })
+
+  it('contains vi labels for core key usage entries', () => {
+    expect(vi.keyUsage.title).toBe('Tra cứu sử dụng API Key')
+    expect(vi.keyUsage.dayShort).toBe('Ngày')
+    expect(vi.common.autoRefresh.countdown).toBe('Tự động làm mới sau: {seconds} giây')
   })
 })
