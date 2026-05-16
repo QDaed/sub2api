@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Hot reload test - FINAL TEST - should reload instantly!
 import { RouterView, useRouter, useRoute } from "vue-router";
 import { onMounted, onBeforeUnmount, watch } from "vue";
 import Toast from "@/components/common/Toast.vue";
