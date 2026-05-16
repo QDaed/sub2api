@@ -1,0 +1,103 @@
+# =============================================================================
+# Sub2API Development Dockerfile with Hot Reload
+# =============================================================================
+
+ARG NODE_IMAGE=node:24-alpine
+ARG GOLANG_IMAGE=golang:1.26.3-alpine
+ARG ALPINE_IMAGE=alpine:3.21
+ARG POSTGRES_IMAGE=postgres:18-alpine
+ARG GOPROXY=https://goproxy.cn,direct
+ARG GOSUMDB=sum.golang.google.cn
+
+# -----------------------------------------------------------------------------
+# Stage 1: Frontend Builder (install dependencies only)
+# -----------------------------------------------------------------------------
+FROM ${NODE_IMAGE} AS frontend-builder
+
+WORKDIR /app/frontend
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Install dependencies
+COPY frontend/package.json frontend/pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile --ignore-scripts
+
+# -----------------------------------------------------------------------------
+# Stage 2: Base Development Image
+# -----------------------------------------------------------------------------
+FROM ${GOLANG_IMAGE} AS dev-base
+
+ARG GOPROXY
+ARG GOSUMDB
+
+ENV GOPROXY=${GOPROXY}
+ENV GOSUMDB=${GOSUMDB}
+
+# Install development tools
+RUN apk add --no-cache \
+    git \
+    ca-certificates \
+    tzdata \
+    wget \
+    curl \
+    nodejs \
+    npm \
+    su-exec \
+    libpq \
+    zstd-libs \
+    lz4-libs \
+    krb5-libs \
+    libldap \
+    libedit
+
+# Install air for Go hot reload
+RUN go install github.com/air-verse/air@latest
+
+# Install pnpm for frontend
+RUN npm install -g pnpm
+
+# Copy PostgreSQL client tools
+FROM ${POSTGRES_IMAGE} AS pg-client
+FROM dev-base
+
+# Copy pg_dump and psql
+COPY --from=pg-client /usr/local/bin/pg_dump /usr/local/bin/pg_dump
+COPY --from=pg-client /usr/local/bin/psql /usr/local/bin/psql
+COPY --from=pg-client /usr/local/lib/libpq.so.5* /usr/local/lib/
+
+# Create non-root user
+RUN addgroup -g 1000 sub2api && \
+    adduser -u 1000 -G sub2api -s /bin/sh -D sub2api
+
+WORKDIR /app
+
+# Copy frontend dependencies from builder
+COPY --from=frontend-builder --chown=sub2api:sub2api /app/frontend/node_modules /app/frontend/node_modules
+COPY --from=frontend-builder --chown=sub2api:sub2api /app/frontend/package.json /app/frontend/
+COPY --from=frontend-builder --chown=sub2api:sub2api /app/frontend/pnpm-lock.yaml /app/frontend/
+
+# Copy backend dependencies
+COPY --chown=sub2api:sub2api backend/go.mod backend/go.sum /app/backend/
+
+# Download Go modules
+RUN cd /app/backend && go mod download
+
+# Create data directory
+RUN mkdir -p /app/data && chown sub2api:sub2api /app/data
+
+# Copy hot reload script
+COPY deploy/hot-reload.sh /app/hot-reload.sh
+RUN chmod +x /app/hot-reload.sh
+
+# Copy entrypoint script
+COPY deploy/docker-entrypoint.sh /app/docker-entrypoint.sh
+RUN chmod +x /app/docker-entrypoint.sh
+
+EXPOSE 8080 5173
+
+# Switch to non-root user
+USER sub2api
+
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
+CMD ["/app/hot-reload.sh"]
