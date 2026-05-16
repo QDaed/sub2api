@@ -1,19 +1,25 @@
 <script setup lang="ts">
-import { RouterView, useRouter, useRoute } from 'vue-router'
-import { onMounted, onBeforeUnmount, watch } from 'vue'
-import Toast from '@/components/common/Toast.vue'
-import NavigationProgress from '@/components/common/NavigationProgress.vue'
-import { resolveDocumentTitle } from '@/router/title'
-import AnnouncementPopup from '@/components/common/AnnouncementPopup.vue'
-import { useAppStore, useAuthStore, useSubscriptionStore, useAnnouncementStore } from '@/stores'
-import { getSetupStatus } from '@/api/setup'
+// Hot reload test - FINAL TEST - should reload instantly!
+import { RouterView, useRouter, useRoute } from "vue-router";
+import { onMounted, onBeforeUnmount, watch } from "vue";
+import Toast from "@/components/common/Toast.vue";
+import NavigationProgress from "@/components/common/NavigationProgress.vue";
+import { resolveDocumentTitle } from "@/router/title";
+import AnnouncementPopup from "@/components/common/AnnouncementPopup.vue";
+import {
+  useAppStore,
+  useAuthStore,
+  useSubscriptionStore,
+  useAnnouncementStore,
+} from "@/stores";
+import { getSetupStatus } from "@/api/setup";
 
-const router = useRouter()
-const route = useRoute()
-const appStore = useAppStore()
-const authStore = useAuthStore()
-const subscriptionStore = useSubscriptionStore()
-const announcementStore = useAnnouncementStore()
+const router = useRouter();
+const route = useRoute();
+const appStore = useAppStore();
+const authStore = useAuthStore();
+const subscriptionStore = useSubscriptionStore();
+const announcementStore = useAnnouncementStore();
 
 /**
  * Update favicon dynamically
@@ -21,14 +27,14 @@ const announcementStore = useAnnouncementStore()
  */
 function updateFavicon(logoUrl: string) {
   // Find existing favicon link or create new one
-  let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]')
+  let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
   if (!link) {
-    link = document.createElement('link')
-    link.rel = 'icon'
-    document.head.appendChild(link)
+    link = document.createElement("link");
+    link.rel = "icon";
+    document.head.appendChild(link);
   }
-  link.type = logoUrl.endsWith('.svg') ? 'image/svg+xml' : 'image/x-icon'
-  link.href = logoUrl
+  link.type = logoUrl.endsWith(".svg") ? "image/svg+xml" : "image/x-icon";
+  link.href = logoUrl;
 }
 
 // Watch for site settings changes and update favicon/title
@@ -36,16 +42,16 @@ watch(
   () => appStore.siteLogo,
   (newLogo) => {
     if (newLogo) {
-      updateFavicon(newLogo)
+      updateFavicon(newLogo);
     }
   },
-  { immediate: true }
-)
+  { immediate: true },
+);
 
 // Watch for authentication state and manage subscription data + announcements
 function onVisibilityChange() {
-  if (document.visibilityState === 'visible' && authStore.isAuthenticated) {
-    announcementStore.fetchAnnouncements()
+  if (document.visibilityState === "visible" && authStore.isAuthenticated) {
+    announcementStore.fetchAnnouncements();
   }
 }
 
@@ -55,60 +61,64 @@ watch(
     if (isAuthenticated) {
       // User logged in: preload subscriptions and start polling
       subscriptionStore.fetchActiveSubscriptions().catch((error) => {
-        console.error('Failed to preload subscriptions:', error)
-      })
-      subscriptionStore.startPolling()
+        console.error("Failed to preload subscriptions:", error);
+      });
+      subscriptionStore.startPolling();
 
       // Announcements: new login vs page refresh restore
       if (oldValue === false) {
         // New login: delay 3s then force fetch
-        setTimeout(() => announcementStore.fetchAnnouncements(true), 3000)
+        setTimeout(() => announcementStore.fetchAnnouncements(true), 3000);
       } else {
         // Page refresh restore (oldValue was undefined)
-        announcementStore.fetchAnnouncements()
+        announcementStore.fetchAnnouncements();
       }
 
       // Register visibility change listener
-      document.addEventListener('visibilitychange', onVisibilityChange)
+      document.addEventListener("visibilitychange", onVisibilityChange);
     } else {
       // User logged out: clear data and stop polling
-      subscriptionStore.clear()
-      announcementStore.reset()
-      document.removeEventListener('visibilitychange', onVisibilityChange)
+      subscriptionStore.clear();
+      announcementStore.reset();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
     }
   },
-  { immediate: true }
-)
+  { immediate: true },
+);
 
 // Route change trigger (throttled by store)
 router.afterEach(() => {
   if (authStore.isAuthenticated) {
-    announcementStore.fetchAnnouncements()
+    announcementStore.fetchAnnouncements();
   }
-})
+});
 
 onBeforeUnmount(() => {
-  document.removeEventListener('visibilitychange', onVisibilityChange)
-})
+  document.removeEventListener("visibilitychange", onVisibilityChange);
+});
 
 onMounted(async () => {
   // Check if setup is needed
   try {
-    const status = await getSetupStatus()
-    if (status.needs_setup && route.path !== '/setup') {
-      router.replace('/setup')
-      return
+    const status = await getSetupStatus();
+    if (status.needs_setup && route.path !== "/setup") {
+      router.replace("/setup");
+      return;
     }
   } catch {
     // If setup endpoint fails, assume normal mode and continue
   }
 
   // Load public settings into appStore (will be cached for other components)
-  await appStore.fetchPublicSettings()
+  await appStore.fetchPublicSettings();
 
   // Re-resolve document title now that siteName is available
-  document.title = resolveDocumentTitle(route.meta.title, appStore.siteName, route.meta.titleKey as string)
-})
+  document.title = resolveDocumentTitle(
+    route.meta.title,
+    appStore.siteName,
+    route.meta.titleKey as string,
+  );
+});
 </script>
 
 <template>

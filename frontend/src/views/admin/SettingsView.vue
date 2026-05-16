@@ -349,9 +349,7 @@
                       class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                     >
                       {{
-                        t(
-                          "admin.settings.rateLimit429Cooldown.cooldownSeconds",
-                        )
+                        t("admin.settings.rateLimit429Cooldown.cooldownSeconds")
                       }}
                     </label>
                     <input
@@ -1280,9 +1278,7 @@
 
                 <!-- Fallback Action (only when model_whitelist is non-empty) -->
                 <div
-                  v-if="
-                    rule.model_whitelist && rule.model_whitelist.length > 0
-                  "
+                  v-if="rule.model_whitelist && rule.model_whitelist.length > 0"
                   class="mt-3"
                 >
                   <label
@@ -1784,7 +1780,9 @@
             </div>
             <div class="space-y-6 p-6">
               <div class="grid grid-cols-1 gap-6 xl:grid-cols-2">
-                <div class="rounded-lg border border-gray-200 p-4 dark:border-dark-700">
+                <div
+                  class="rounded-lg border border-gray-200 p-4 dark:border-dark-700"
+                >
                   <div class="flex items-start justify-between gap-4">
                     <div>
                       <h3 class="font-medium text-gray-900 dark:text-white">
@@ -1803,7 +1801,9 @@
                   </div>
 
                   <div v-if="form.github_oauth_enabled" class="mt-4 space-y-4">
-                    <div class="rounded-lg bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:bg-dark-800 dark:text-gray-300">
+                    <div
+                      class="rounded-lg bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:bg-dark-800 dark:text-gray-300"
+                    >
                       <template v-if="isZhLocale">
                         开通引导：GitHub Settings → Developer settings →
                         <a
@@ -1812,8 +1812,10 @@
                           target="_blank"
                           rel="noopener noreferrer"
                           class="font-medium text-primary-600 hover:underline dark:text-primary-400"
-                        >OAuth Apps</a>
-                        → New OAuth App；Homepage URL 填站点域名，Authorization callback URL 填下面的后端回调地址。
+                          >OAuth Apps</a
+                        >
+                        → New OAuth App；Homepage URL 填站点域名，Authorization
+                        callback URL 填下面的后端回调地址。
                       </template>
                       <template v-else>
                         Setup guide: GitHub Settings → Developer settings →
@@ -1823,14 +1825,20 @@
                           target="_blank"
                           rel="noopener noreferrer"
                           class="font-medium text-primary-600 hover:underline dark:text-primary-400"
-                        >OAuth Apps</a>
-                        → New OAuth App. Use your site origin as Homepage URL and the backend callback URL below as Authorization callback URL.
+                          >OAuth Apps</a
+                        >
+                        → New OAuth App. Use your site origin as Homepage URL
+                        and the backend callback URL below as Authorization
+                        callback URL.
                       </template>
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
                       <div>
-                        <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Client ID</label>
+                        <label
+                          class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          >Client ID</label
+                        >
                         <input
                           v-model="form.github_oauth_client_id"
                           type="text"
@@ -1839,14 +1847,20 @@
                         />
                       </div>
                       <div>
-                        <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Client Secret</label>
+                        <label
+                          class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          >Client Secret</label
+                        >
                         <input
                           v-model="form.github_oauth_client_secret"
                           type="password"
                           class="input font-mono text-sm"
                           :placeholder="
                             form.github_oauth_client_secret_configured
-                              ? localText('密钥已配置，留空以保留当前值。', 'Secret configured. Leave empty to keep the current value.')
+                              ? localText(
+                                  '密钥已配置，留空以保留当前值。',
+                                  'Secret configured. Leave empty to keep the current value.',
+                                )
                               : 'GitHub OAuth Client Secret'
                           "
                         />
@@ -1854,7 +1868,9 @@
                     </div>
 
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <label
+                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                      >
                         {{ localText("后端回调地址", "Backend Callback URL") }}
                       </label>
                       <input
@@ -1863,7 +1879,9 @@
                         class="input font-mono text-sm"
                         placeholder="https://your-domain.com/api/v1/auth/oauth/github/callback"
                       />
-                      <div class="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+                      <div
+                        class="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3"
+                      >
                         <button
                           type="button"
                           class="btn btn-secondary btn-sm w-fit"
@@ -1881,7 +1899,9 @@
                     </div>
 
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <label
+                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                      >
                         {{ localText("前端回跳地址", "Frontend Callback URL") }}
                       </label>
                       <input
@@ -1894,7 +1914,9 @@
                   </div>
                 </div>
 
-                <div class="rounded-lg border border-gray-200 p-4 dark:border-dark-700">
+                <div
+                  class="rounded-lg border border-gray-200 p-4 dark:border-dark-700"
+                >
                   <div class="flex items-start justify-between gap-4">
                     <div>
                       <h3 class="font-medium text-gray-900 dark:text-white">
@@ -1913,7 +1935,9 @@
                   </div>
 
                   <div v-if="form.google_oauth_enabled" class="mt-4 space-y-4">
-                    <div class="rounded-lg bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:bg-dark-800 dark:text-gray-300">
+                    <div
+                      class="rounded-lg bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:bg-dark-800 dark:text-gray-300"
+                    >
                       {{
                         localText(
                           "开通引导：Google Cloud Console → APIs & Services → OAuth consent screen 完成同意屏幕；Credentials → Create Credentials → OAuth client ID，类型选择 Web application，并把下面地址加入 Authorized redirect URIs。",
@@ -1924,7 +1948,10 @@
 
                     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
                       <div>
-                        <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Client ID</label>
+                        <label
+                          class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          >Client ID</label
+                        >
                         <input
                           v-model="form.google_oauth_client_id"
                           type="text"
@@ -1933,14 +1960,20 @@
                         />
                       </div>
                       <div>
-                        <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Client Secret</label>
+                        <label
+                          class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          >Client Secret</label
+                        >
                         <input
                           v-model="form.google_oauth_client_secret"
                           type="password"
                           class="input font-mono text-sm"
                           :placeholder="
                             form.google_oauth_client_secret_configured
-                              ? localText('密钥已配置，留空以保留当前值。', 'Secret configured. Leave empty to keep the current value.')
+                              ? localText(
+                                  '密钥已配置，留空以保留当前值。',
+                                  'Secret configured. Leave empty to keep the current value.',
+                                )
                               : 'Google OAuth Client Secret'
                           "
                         />
@@ -1948,7 +1981,9 @@
                     </div>
 
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <label
+                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                      >
                         {{ localText("后端回调地址", "Backend Callback URL") }}
                       </label>
                       <input
@@ -1957,7 +1992,9 @@
                         class="input font-mono text-sm"
                         placeholder="https://your-domain.com/api/v1/auth/oauth/google/callback"
                       />
-                      <div class="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+                      <div
+                        class="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3"
+                      >
                         <button
                           type="button"
                           class="btn btn-secondary btn-sm w-fit"
@@ -1975,7 +2012,9 @@
                     </div>
 
                     <div>
-                      <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <label
+                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                      >
                         {{ localText("前端回跳地址", "Frontend Callback URL") }}
                       </label>
                       <input
@@ -2032,7 +2071,9 @@
                         <h3 class="font-medium text-gray-900 dark:text-white">
                           {{ localText("PC 应用", "PC App") }}
                         </h3>
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                        <p
+                          class="mt-1 text-sm text-gray-500 dark:text-gray-400"
+                        >
                           {{
                             localText(
                               "桌面浏览器通过微信开放平台扫码登录。可与公众号或移动应用同时存在。",
@@ -2105,7 +2146,9 @@
                         <h3 class="font-medium text-gray-900 dark:text-white">
                           {{ localText("公众号", "Official Account") }}
                         </h3>
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                        <p
+                          class="mt-1 text-sm text-gray-500 dark:text-gray-400"
+                        >
                           {{
                             localText(
                               "仅在微信内浏览器可用；非微信环境下会显示不可用。",
@@ -2128,7 +2171,9 @@
                         <label
                           class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                         >
-                          {{ localText("公众号 AppID", "Official Account App ID") }}
+                          {{
+                            localText("公众号 AppID", "Official Account App ID")
+                          }}
                         </label>
                         <input
                           v-model="form.wechat_connect_mp_app_id"
@@ -2136,10 +2181,7 @@
                           type="text"
                           class="input font-mono text-sm"
                           :placeholder="
-                            localText(
-                              '公众号 AppID',
-                              'Official Account App ID',
-                            )
+                            localText('公众号 AppID', 'Official Account App ID')
                           "
                         />
                       </div>
@@ -2183,7 +2225,9 @@
                         <h3 class="font-medium text-gray-900 dark:text-white">
                           {{ localText("移动应用", "Mobile App") }}
                         </h3>
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                        <p
+                          class="mt-1 text-sm text-gray-500 dark:text-gray-400"
+                        >
                           {{
                             localText(
                               "原生移动端通过微信 SDK 唤起授权，网页端不会直接发起该流程。",
@@ -2214,10 +2258,7 @@
                           type="text"
                           class="input font-mono text-sm"
                           :placeholder="
-                            localText(
-                              '移动应用 AppID',
-                              'Mobile App ID',
-                            )
+                            localText('移动应用 AppID', 'Mobile App ID')
                           "
                         />
                       </div>
@@ -2225,7 +2266,9 @@
                         <label
                           class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                         >
-                          {{ localText("移动应用 AppSecret", "Mobile App Secret") }}
+                          {{
+                            localText("移动应用 AppSecret", "Mobile App Secret")
+                          }}
                         </label>
                         <input
                           v-model="form.wechat_connect_mobile_app_secret"
@@ -2270,19 +2313,16 @@
                     <label
                       class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                     >
-                      {{
-                        localText(
-                          "浏览器回调地址",
-                          "Browser Redirect URL",
-                        )
-                      }}
+                      {{ localText("浏览器回调地址", "Browser Redirect URL") }}
                     </label>
                     <input
                       data-testid="wechat-connect-redirect-url"
                       v-model="form.wechat_connect_redirect_url"
                       type="url"
                       class="input font-mono text-sm"
-                      :placeholder="t('admin.settings.wechatConnect.redirectUrlPlaceholder')"
+                      :placeholder="
+                        t('admin.settings.wechatConnect.redirectUrlPlaceholder')
+                      "
                     />
                     <p class="mt-1.5 text-xs text-gray-500 dark:text-gray-400">
                       {{
@@ -2316,17 +2356,25 @@
                   <label
                     class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
-                    {{ t("admin.settings.wechatConnect.frontendRedirectUrlLabel") }}
+                    {{
+                      t("admin.settings.wechatConnect.frontendRedirectUrlLabel")
+                    }}
                   </label>
                   <input
                     data-testid="wechat-connect-frontend-redirect-url"
                     v-model="form.wechat_connect_frontend_redirect_url"
                     type="text"
                     class="input font-mono text-sm"
-                    :placeholder="t('admin.settings.wechatConnect.frontendRedirectUrlPlaceholder')"
+                    :placeholder="
+                      t(
+                        'admin.settings.wechatConnect.frontendRedirectUrlPlaceholder',
+                      )
+                    "
                   />
                   <p class="mt-1.5 text-xs text-gray-500 dark:text-gray-400">
-                    {{ t("admin.settings.wechatConnect.frontendRedirectUrlHint") }}
+                    {{
+                      t("admin.settings.wechatConnect.frontendRedirectUrlHint")
+                    }}
                   </p>
                 </div>
               </div>
@@ -2972,10 +3020,14 @@
               >
                 <div>
                   <label class="font-medium text-gray-900 dark:text-white">
-                    {{ t("admin.settings.authSourceDefaults.requireEmailLabel") }}
+                    {{
+                      t("admin.settings.authSourceDefaults.requireEmailLabel")
+                    }}
                   </label>
                   <p class="text-sm text-gray-500 dark:text-gray-400">
-                    {{ t("admin.settings.authSourceDefaults.requireEmailHint") }}
+                    {{
+                      t("admin.settings.authSourceDefaults.requireEmailHint")
+                    }}
                   </p>
                 </div>
                 <Toggle v-model="form.force_email_on_third_party_signup" />
@@ -3056,12 +3108,20 @@
                         <label
                           class="font-medium text-gray-900 dark:text-white"
                         >
-                          {{ t("admin.settings.authSourceDefaults.grantOnFirstBindLabel") }}
+                          {{
+                            t(
+                              "admin.settings.authSourceDefaults.grantOnFirstBindLabel",
+                            )
+                          }}
                         </label>
                         <p
                           class="mt-0.5 text-xs text-gray-500 dark:text-gray-400"
                         >
-                          {{ t("admin.settings.authSourceDefaults.grantOnFirstBindHint") }}
+                          {{
+                            t(
+                              "admin.settings.authSourceDefaults.grantOnFirstBindHint",
+                            )
+                          }}
                         </p>
                       </div>
                       <Toggle
@@ -3077,10 +3137,18 @@
                         <label
                           class="font-medium text-gray-900 dark:text-white"
                         >
-                          {{ t("admin.settings.authSourceDefaults.defaultSubscriptionsLabel") }}
+                          {{
+                            t(
+                              "admin.settings.authSourceDefaults.defaultSubscriptionsLabel",
+                            )
+                          }}
                         </label>
                         <p class="text-sm text-gray-500 dark:text-gray-400">
-                          {{ t("admin.settings.authSourceDefaults.defaultSubscriptionsHint") }}
+                          {{
+                            t(
+                              "admin.settings.authSourceDefaults.defaultSubscriptionsHint",
+                            )
+                          }}
                         </p>
                       </div>
                       <button
@@ -3104,7 +3172,11 @@
                       "
                       class="rounded border border-dashed border-gray-300 px-4 py-3 text-sm text-gray-500 dark:border-dark-600 dark:text-gray-400"
                     >
-                      {{ t("admin.settings.authSourceDefaults.noSourceSubscriptions") }}
+                      {{
+                        t(
+                          "admin.settings.authSourceDefaults.noSourceSubscriptions",
+                        )
+                      }}
                     </div>
 
                     <div v-else class="space-y-3">
@@ -3323,7 +3395,9 @@
                   </label>
                   <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
                     {{
-                      t("admin.settings.openaiExperimentalScheduler.description")
+                      t(
+                        "admin.settings.openaiExperimentalScheduler.description",
+                      )
                     }}
                   </p>
                 </div>
@@ -3947,11 +4021,11 @@
                   <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                     {{ t("admin.settings.site.backendModeDescription") }}
                   </p>
-	                </div>
-	                <Toggle v-model="form.backend_mode_enabled" />
-	              </div>
+                </div>
+                <Toggle v-model="form.backend_mode_enabled" />
+              </div>
 
-	              <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div>
                   <label
                     class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -4467,43 +4541,59 @@
               </button>
             </div>
           </div>
-	        </div>
-	        <!-- /Tab: General -->
+        </div>
+        <!-- /Tab: General -->
 
-	        <!-- Tab: Login Agreement -->
-	        <div v-show="activeTab === 'agreement'" class="space-y-6">
-	          <div class="card">
-	            <div class="border-b border-gray-100 px-6 py-4 dark:border-dark-700">
-	              <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-	                <div>
-	                  <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
-	                    {{ localText("登录条款确认", "Login agreement") }}
-	                  </h2>
-	                  <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-	                    {{
-	                      localText(
-	                        "控制登录页是否要求用户先阅读并同意服务条款、隐私政策或其他 Markdown 文档。",
-	                        "Control whether the login page requires users to accept Markdown policy documents first.",
-	                      )
-	                    }}
-	                  </p>
-	                </div>
-	                <div class="flex items-center gap-3">
-	                  <span class="text-sm text-gray-600 dark:text-gray-300">
-	                    {{ form.login_agreement_enabled ? localText("已启用", "Enabled") : localText("未启用", "Disabled") }}
-	                  </span>
-	                  <Toggle v-model="form.login_agreement_enabled" />
-	                </div>
-	              </div>
-	            </div>
+        <!-- Tab: Login Agreement -->
+        <div v-show="activeTab === 'agreement'" class="space-y-6">
+          <div class="card">
+            <div
+              class="border-b border-gray-100 px-6 py-4 dark:border-dark-700"
+            >
+              <div
+                class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between"
+              >
+                <div>
+                  <h2
+                    class="text-lg font-semibold text-gray-900 dark:text-white"
+                  >
+                    {{ localText("登录条款确认", "Login agreement") }}
+                  </h2>
+                  <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    {{
+                      localText(
+                        "控制登录页是否要求用户先阅读并同意服务条款、隐私政策或其他 Markdown 文档。",
+                        "Control whether the login page requires users to accept Markdown policy documents first.",
+                      )
+                    }}
+                  </p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-sm text-gray-600 dark:text-gray-300">
+                    {{
+                      form.login_agreement_enabled
+                        ? localText("已启用", "Enabled")
+                        : localText("未启用", "Disabled")
+                    }}
+                  </span>
+                  <Toggle v-model="form.login_agreement_enabled" />
+                </div>
+              </div>
+            </div>
 
-	            <div class="space-y-6 p-6">
-	              <div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_220px]">
-	                <div>
-	                  <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-	                    {{ localText("展示形式", "Display mode") }}
-	                  </label>
-	                  <div class="grid grid-cols-2 gap-2 rounded-lg bg-gray-100 p-1 dark:bg-dark-700">
+            <div class="space-y-6 p-6">
+              <div
+                class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_220px]"
+              >
+                <div>
+                  <label
+                    class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    {{ localText("展示形式", "Display mode") }}
+                  </label>
+                  <div
+                    class="grid grid-cols-2 gap-2 rounded-lg bg-gray-100 p-1 dark:bg-dark-700"
+                  >
                     <button
                       type="button"
                       class="inline-flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition"
@@ -4534,14 +4624,22 @@
                   <p class="mt-1.5 text-xs text-gray-500 dark:text-gray-400">
                     {{
                       form.login_agreement_mode === "checkbox"
-                        ? localText("复选框会显示在登录按钮下方，未勾选前所有登录入口禁用。", "The checkbox appears below the login button and gates all login actions.")
-                        : localText("弹窗会在登录页打开，用户拒绝后所有登录入口保持禁用。", "The modal opens on the login page and gates all login actions until accepted.")
+                        ? localText(
+                            "复选框会显示在登录按钮下方，未勾选前所有登录入口禁用。",
+                            "The checkbox appears below the login button and gates all login actions.",
+                          )
+                        : localText(
+                            "弹窗会在登录页打开，用户拒绝后所有登录入口保持禁用。",
+                            "The modal opens on the login page and gates all login actions until accepted.",
+                          )
                     }}
                   </p>
                 </div>
 
                 <div>
-                  <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label
+                    class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
                     {{ localText("条款更新日期", "Updated date") }}
                   </label>
                   <input
@@ -4550,15 +4648,24 @@
                     class="input"
                   />
                   <p class="mt-1.5 text-xs text-gray-500 dark:text-gray-400">
-                    {{ localText("日期或文档内容变化后，用户需要重新同意。", "Changing the date or content requires fresh consent.") }}
+                    {{
+                      localText(
+                        "日期或文档内容变化后，用户需要重新同意。",
+                        "Changing the date or content requires fresh consent.",
+                      )
+                    }}
                   </p>
                 </div>
               </div>
 
               <div>
-                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div
+                  class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+                >
                   <div>
-                    <h3 class="text-sm font-medium text-gray-900 dark:text-white">
+                    <h3
+                      class="text-sm font-medium text-gray-900 dark:text-white"
+                    >
                       {{ localText("协议文档", "Agreement documents") }}
                     </h3>
                     <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
@@ -4588,7 +4695,9 @@
                   >
                     <div class="mb-3 flex items-center justify-between gap-3">
                       <div class="flex min-w-0 items-center gap-3">
-                        <span class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-md bg-gray-100 text-gray-700 dark:bg-dark-700 dark:text-dark-200">
+                        <span
+                          class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-md bg-gray-100 text-gray-700 dark:bg-dark-700 dark:text-dark-200"
+                        >
                           <Icon
                             :name="
                               index === 1
@@ -4603,10 +4712,17 @@
                           />
                         </span>
                         <div class="min-w-0">
-                          <p class="truncate text-sm font-semibold text-gray-900 dark:text-white">
-                            {{ doc.title || localText("未命名文档", "Untitled document") }}
+                          <p
+                            class="truncate text-sm font-semibold text-gray-900 dark:text-white"
+                          >
+                            {{
+                              doc.title ||
+                              localText("未命名文档", "Untitled document")
+                            }}
                           </p>
-                          <p class="truncate text-xs text-gray-500 dark:text-gray-400">
+                          <p
+                            class="truncate text-xs text-gray-500 dark:text-gray-400"
+                          >
                             {{ loginAgreementRoutePath(doc, index) }}
                           </p>
                         </div>
@@ -4626,22 +4742,35 @@
 
                     <div class="grid grid-cols-1 gap-3 lg:grid-cols-2">
                       <div>
-                        <label class="mb-1 block text-xs font-medium text-gray-600 dark:text-gray-400">
+                        <label
+                          class="mb-1 block text-xs font-medium text-gray-600 dark:text-gray-400"
+                        >
                           {{ localText("文档名称", "Document title") }}
                         </label>
                         <input
                           v-model="doc.title"
                           type="text"
                           class="input text-sm"
-                          :placeholder="localText('例如：服务条款', 'Example: Terms of Service')"
+                          :placeholder="
+                            localText(
+                              '例如：服务条款',
+                              'Example: Terms of Service',
+                            )
+                          "
                         />
                       </div>
                       <div>
-                        <label class="mb-1 block text-xs font-medium text-gray-600 dark:text-gray-400">
+                        <label
+                          class="mb-1 block text-xs font-medium text-gray-600 dark:text-gray-400"
+                        >
                           {{ localText("路由标识", "Route slug") }}
                         </label>
-                        <div class="flex overflow-hidden rounded-lg border border-gray-300 bg-white focus-within:border-primary-500 focus-within:ring-1 focus-within:ring-primary-500 dark:border-dark-600 dark:bg-dark-900">
-                          <span class="inline-flex flex-shrink-0 items-center border-r border-gray-200 bg-gray-50 px-3 text-sm text-gray-500 dark:border-dark-700 dark:bg-dark-800 dark:text-dark-400">
+                        <div
+                          class="flex overflow-hidden rounded-lg border border-gray-300 bg-white focus-within:border-primary-500 focus-within:ring-1 focus-within:ring-primary-500 dark:border-dark-600 dark:bg-dark-900"
+                        >
+                          <span
+                            class="inline-flex flex-shrink-0 items-center border-r border-gray-200 bg-gray-50 px-3 text-sm text-gray-500 dark:border-dark-700 dark:bg-dark-800 dark:text-dark-400"
+                          >
                             /legal/
                           </span>
                           <input
@@ -4654,15 +4783,22 @@
                       </div>
                     </div>
                     <div class="mt-3">
-                      <label class="mb-1 block text-xs font-medium text-gray-600 dark:text-gray-400">
+                      <label
+                        class="mb-1 block text-xs font-medium text-gray-600 dark:text-gray-400"
+                      >
                         {{ localText("Markdown 内容", "Markdown content") }}
                       </label>
-                        <textarea
-                          v-model="doc.content_md"
-                          rows="8"
-                          class="input font-mono text-sm"
-                          :placeholder="localText('在这里填写正式 Markdown 内容。', 'Write the final Markdown content here.')"
-                        ></textarea>
+                      <textarea
+                        v-model="doc.content_md"
+                        rows="8"
+                        class="input font-mono text-sm"
+                        :placeholder="
+                          localText(
+                            '在这里填写正式 Markdown 内容。',
+                            'Write the final Markdown content here.',
+                          )
+                        "
+                      ></textarea>
                     </div>
                   </div>
                 </div>
@@ -4672,526 +4808,774 @@
         </div>
         <!-- /Tab: Login Agreement -->
 
-	        <!-- Tab: Features (功能开关) -->
+        <!-- Tab: Features (功能开关) -->
         <div v-show="activeTab === 'features'" class="space-y-6">
-
-        <div class="card">
-          <div class="border-b border-gray-100 px-6 py-4 dark:border-dark-700">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
-              {{ t('admin.settings.features.channelMonitor.title') }}
-            </h2>
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              {{ t('admin.settings.features.channelMonitor.description') }}
-            </p>
-            <p class="mt-1.5 text-xs">
-              <router-link
-                to="/admin/channels/monitor"
-                class="inline-flex items-center gap-1 text-primary-600 hover:underline dark:text-primary-400"
-              >
-                {{ t('admin.settings.features.channelMonitor.configureLink') }}
-                <span aria-hidden="true">→</span>
-              </router-link>
-            </p>
-          </div>
-          <div class="space-y-5 p-6">
-            <div class="flex items-center justify-between">
-              <div>
-                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {{ t('admin.settings.features.channelMonitor.enabled') }}
-                </label>
-                <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
-                  {{ t('admin.settings.features.channelMonitor.enabledHint') }}
-                </p>
-              </div>
-              <Toggle v-model="form.channel_monitor_enabled" />
-            </div>
-
-            <div v-if="form.channel_monitor_enabled">
-              <label class="input-label">
-                {{ t('admin.settings.features.channelMonitor.defaultInterval') }}
-                <span class="text-red-500">*</span>
-              </label>
-              <input
-                v-model.number="form.channel_monitor_default_interval_seconds"
-                type="number"
-                min="15"
-                max="3600"
-                class="input"
-              />
-              <p class="mt-1 text-xs text-gray-400">
-                {{ t('admin.settings.features.channelMonitor.defaultIntervalHint') }}
+          <div class="card">
+            <div
+              class="border-b border-gray-100 px-6 py-4 dark:border-dark-700"
+            >
+              <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+                {{ t("admin.settings.features.channelMonitor.title") }}
+              </h2>
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                {{ t("admin.settings.features.channelMonitor.description") }}
+              </p>
+              <p class="mt-1.5 text-xs">
+                <router-link
+                  to="/admin/channels/monitor"
+                  class="inline-flex items-center gap-1 text-primary-600 hover:underline dark:text-primary-400"
+                >
+                  {{
+                    t("admin.settings.features.channelMonitor.configureLink")
+                  }}
+                  <span aria-hidden="true">→</span>
+                </router-link>
               </p>
             </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="border-b border-gray-100 px-6 py-4 dark:border-dark-700">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
-              {{ t('admin.settings.features.availableChannels.title') }}
-            </h2>
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              {{ t('admin.settings.features.availableChannels.description') }}
-            </p>
-            <p class="mt-1.5 text-xs">
-              <router-link
-                to="/admin/channels/pricing"
-                class="inline-flex items-center gap-1 text-primary-600 hover:underline dark:text-primary-400"
-              >
-                {{ t('admin.settings.features.availableChannels.configureLink') }}
-                <span aria-hidden="true">→</span>
-              </router-link>
-            </p>
-          </div>
-          <div class="space-y-5 p-6">
-            <div class="flex items-center justify-between">
-              <div>
-                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {{ t('admin.settings.features.availableChannels.enabled') }}
-                </label>
-                <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
-                  {{ t('admin.settings.features.availableChannels.enabledHint') }}
-                </p>
+            <div class="space-y-5 p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <label
+                    class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    {{ t("admin.settings.features.channelMonitor.enabled") }}
+                  </label>
+                  <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                    {{
+                      t("admin.settings.features.channelMonitor.enabledHint")
+                    }}
+                  </p>
+                </div>
+                <Toggle v-model="form.channel_monitor_enabled" />
               </div>
-              <Toggle v-model="form.available_channels_enabled" />
-            </div>
-          </div>
-        </div>
 
-        <div class="card">
-          <div class="border-b border-gray-100 px-6 py-4 dark:border-dark-700">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
-              {{ t('admin.settings.features.riskControl.title') }}
-            </h2>
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              {{ t('admin.settings.features.riskControl.description') }}
-            </p>
-            <p class="mt-1.5 text-xs">
-              <router-link
-                to="/admin/risk-control"
-                class="inline-flex items-center gap-1 text-primary-600 hover:underline dark:text-primary-400"
-              >
-                {{ t('admin.settings.features.riskControl.configureLink') }}
-                <span aria-hidden="true">→</span>
-              </router-link>
-            </p>
-          </div>
-          <div class="space-y-5 p-6">
-            <div class="flex items-center justify-between">
-              <div>
-                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {{ t('admin.settings.features.riskControl.enabled') }}
-                </label>
-                <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
-                  {{ t('admin.settings.features.riskControl.enabledHint') }}
-                </p>
-              </div>
-              <Toggle v-model="form.risk_control_enabled" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Affiliate (邀请返利) feature card -->
-        <div class="card">
-          <div class="border-b border-gray-100 px-6 py-4 dark:border-dark-700">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
-              {{ t('admin.settings.features.affiliate.title') }}
-            </h2>
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              {{ t('admin.settings.features.affiliate.description') }}
-            </p>
-          </div>
-          <div class="space-y-5 p-6">
-            <div class="flex items-center justify-between">
-              <div>
-                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {{ t('admin.settings.features.affiliate.enabled') }}
-                </label>
-                <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
-                  {{ t('admin.settings.features.affiliate.enabledHint') }}
-                </p>
-              </div>
-              <Toggle v-model="form.affiliate_enabled" />
-            </div>
-
-            <div v-if="form.affiliate_enabled" class="space-y-6">
-              <div>
+              <div v-if="form.channel_monitor_enabled">
                 <label class="input-label">
-                  {{ t('admin.settings.features.affiliate.rebateRate') }}
+                  {{
+                    t("admin.settings.features.channelMonitor.defaultInterval")
+                  }}
+                  <span class="text-red-500">*</span>
                 </label>
-                <div class="relative">
+                <input
+                  v-model.number="form.channel_monitor_default_interval_seconds"
+                  type="number"
+                  min="15"
+                  max="3600"
+                  class="input"
+                />
+                <p class="mt-1 text-xs text-gray-400">
+                  {{
+                    t(
+                      "admin.settings.features.channelMonitor.defaultIntervalHint",
+                    )
+                  }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div
+              class="border-b border-gray-100 px-6 py-4 dark:border-dark-700"
+            >
+              <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+                {{ t("admin.settings.features.availableChannels.title") }}
+              </h2>
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                {{ t("admin.settings.features.availableChannels.description") }}
+              </p>
+              <p class="mt-1.5 text-xs">
+                <router-link
+                  to="/admin/channels/pricing"
+                  class="inline-flex items-center gap-1 text-primary-600 hover:underline dark:text-primary-400"
+                >
+                  {{
+                    t("admin.settings.features.availableChannels.configureLink")
+                  }}
+                  <span aria-hidden="true">→</span>
+                </router-link>
+              </p>
+            </div>
+            <div class="space-y-5 p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <label
+                    class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    {{ t("admin.settings.features.availableChannels.enabled") }}
+                  </label>
+                  <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                    {{
+                      t("admin.settings.features.availableChannels.enabledHint")
+                    }}
+                  </p>
+                </div>
+                <Toggle v-model="form.available_channels_enabled" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div
+              class="border-b border-gray-100 px-6 py-4 dark:border-dark-700"
+            >
+              <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+                {{ t("admin.settings.features.riskControl.title") }}
+              </h2>
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                {{ t("admin.settings.features.riskControl.description") }}
+              </p>
+              <p class="mt-1.5 text-xs">
+                <router-link
+                  to="/admin/risk-control"
+                  class="inline-flex items-center gap-1 text-primary-600 hover:underline dark:text-primary-400"
+                >
+                  {{ t("admin.settings.features.riskControl.configureLink") }}
+                  <span aria-hidden="true">→</span>
+                </router-link>
+              </p>
+            </div>
+            <div class="space-y-5 p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <label
+                    class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    {{ t("admin.settings.features.riskControl.enabled") }}
+                  </label>
+                  <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                    {{ t("admin.settings.features.riskControl.enabledHint") }}
+                  </p>
+                </div>
+                <Toggle v-model="form.risk_control_enabled" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Affiliate (邀请返利) feature card -->
+          <div class="card">
+            <div
+              class="border-b border-gray-100 px-6 py-4 dark:border-dark-700"
+            >
+              <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+                {{ t("admin.settings.features.affiliate.title") }}
+              </h2>
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                {{ t("admin.settings.features.affiliate.description") }}
+              </p>
+            </div>
+            <div class="space-y-5 p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <label
+                    class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    {{ t("admin.settings.features.affiliate.enabled") }}
+                  </label>
+                  <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                    {{ t("admin.settings.features.affiliate.enabledHint") }}
+                  </p>
+                </div>
+                <Toggle v-model="form.affiliate_enabled" />
+              </div>
+
+              <div v-if="form.affiliate_enabled" class="space-y-6">
+                <div>
+                  <label class="input-label">
+                    {{ t("admin.settings.features.affiliate.rebateRate") }}
+                  </label>
+                  <div class="relative">
+                    <input
+                      v-model.number="form.affiliate_rebate_rate"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      max="100"
+                      class="input pr-8"
+                      placeholder="20"
+                    />
+                    <span
+                      class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                      >%</span
+                    >
+                  </div>
+                  <p class="mt-1 text-xs text-gray-400">
+                    {{ t("admin.settings.features.affiliate.rebateRateHint") }}
+                  </p>
+                </div>
+
+                <div>
+                  <label class="input-label">
+                    {{ t("admin.settings.features.affiliate.freezeHours") }}
+                  </label>
                   <input
-                    v-model.number="form.affiliate_rebate_rate"
+                    v-model.number="form.affiliate_rebate_freeze_hours"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="720"
+                    class="input"
+                  />
+                  <p class="mt-1 text-xs text-gray-400">
+                    {{ t("admin.settings.features.affiliate.freezeHoursDesc") }}
+                  </p>
+                </div>
+
+                <div>
+                  <label class="input-label">
+                    {{ t("admin.settings.features.affiliate.durationDays") }}
+                  </label>
+                  <input
+                    v-model.number="form.affiliate_rebate_duration_days"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="3650"
+                    class="input"
+                  />
+                  <p class="mt-1 text-xs text-gray-400">
+                    {{
+                      t("admin.settings.features.affiliate.durationDaysDesc")
+                    }}
+                  </p>
+                </div>
+
+                <div>
+                  <label class="input-label">
+                    {{ t("admin.settings.features.affiliate.perInviteeCap") }}
+                  </label>
+                  <input
+                    v-model.number="form.affiliate_rebate_per_invitee_cap"
                     type="number"
                     step="0.01"
                     min="0"
-                    max="100"
-                    class="input pr-8"
-                    placeholder="20"
+                    class="input"
                   />
-                  <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span>
+                  <p class="mt-1 text-xs text-gray-400">
+                    {{
+                      t("admin.settings.features.affiliate.perInviteeCapDesc")
+                    }}
+                  </p>
                 </div>
-                <p class="mt-1 text-xs text-gray-400">
-                  {{ t('admin.settings.features.affiliate.rebateRateHint') }}
-                </p>
+
+                <!-- 专属用户管理 -->
+                <div class="border-t border-gray-100 pt-6 dark:border-dark-700">
+                  <div class="mb-3 flex items-center justify-between">
+                    <div>
+                      <h3
+                        class="text-sm font-semibold text-gray-900 dark:text-white"
+                      >
+                        {{
+                          t(
+                            "admin.settings.features.affiliate.customUsers.title",
+                          )
+                        }}
+                      </h3>
+                      <p
+                        class="mt-0.5 text-xs text-gray-500 dark:text-gray-400"
+                      >
+                        {{
+                          t(
+                            "admin.settings.features.affiliate.customUsers.description",
+                          )
+                        }}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-sm"
+                      @click="openAffiliateModal(null)"
+                    >
+                      +
+                      {{
+                        t(
+                          "admin.settings.features.affiliate.customUsers.addButton",
+                        )
+                      }}
+                    </button>
+                  </div>
+
+                  <div class="mb-3 flex items-center gap-2">
+                    <input
+                      v-model="affiliateState.search"
+                      type="text"
+                      class="input flex-1"
+                      :placeholder="
+                        t(
+                          'admin.settings.features.affiliate.customUsers.searchPlaceholder',
+                        )
+                      "
+                      @input="onAffiliateSearchInput"
+                    />
+                    <button
+                      v-if="affiliateState.selected.length > 0"
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                      @click="openAffiliateBatchModal"
+                    >
+                      {{
+                        t(
+                          "admin.settings.features.affiliate.customUsers.batchButton",
+                          { count: affiliateState.selected.length },
+                        )
+                      }}
+                    </button>
+                  </div>
+
+                  <div
+                    class="overflow-hidden rounded-lg border border-gray-200 dark:border-dark-700"
+                  >
+                    <table
+                      class="min-w-full divide-y divide-gray-200 dark:divide-dark-700"
+                    >
+                      <thead class="bg-gray-50 dark:bg-dark-800">
+                        <tr>
+                          <th class="px-3 py-2 text-left">
+                            <input
+                              type="checkbox"
+                              :checked="
+                                affiliateState.entries.length > 0 &&
+                                affiliateState.selected.length ===
+                                  affiliateState.entries.length
+                              "
+                              @change="toggleAffiliateSelectAll"
+                            />
+                          </th>
+                          <th
+                            class="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500"
+                          >
+                            {{
+                              t(
+                                "admin.settings.features.affiliate.customUsers.col.email",
+                              )
+                            }}
+                          </th>
+                          <th
+                            class="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500"
+                          >
+                            {{
+                              t(
+                                "admin.settings.features.affiliate.customUsers.col.username",
+                              )
+                            }}
+                          </th>
+                          <th
+                            class="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500"
+                          >
+                            {{
+                              t(
+                                "admin.settings.features.affiliate.customUsers.col.code",
+                              )
+                            }}
+                          </th>
+                          <th
+                            class="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500"
+                          >
+                            {{
+                              t(
+                                "admin.settings.features.affiliate.customUsers.col.rate",
+                              )
+                            }}
+                          </th>
+                          <th
+                            class="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500"
+                          >
+                            {{
+                              t(
+                                "admin.settings.features.affiliate.customUsers.col.actions",
+                              )
+                            }}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody
+                        class="divide-y divide-gray-200 bg-white dark:divide-dark-700 dark:bg-dark-900"
+                      >
+                        <tr v-if="affiliateState.loading">
+                          <td
+                            colspan="6"
+                            class="px-3 py-6 text-center text-sm text-gray-500"
+                          >
+                            {{ t("common.loading") }}
+                          </td>
+                        </tr>
+                        <tr v-else-if="affiliateState.entries.length === 0">
+                          <td
+                            colspan="6"
+                            class="px-3 py-6 text-center text-sm text-gray-500"
+                          >
+                            {{
+                              t(
+                                "admin.settings.features.affiliate.customUsers.empty",
+                              )
+                            }}
+                          </td>
+                        </tr>
+                        <tr
+                          v-for="entry in affiliateState.entries"
+                          :key="entry.user_id"
+                        >
+                          <td class="px-3 py-2">
+                            <input
+                              type="checkbox"
+                              :checked="
+                                affiliateState.selected.includes(entry.user_id)
+                              "
+                              @change="toggleAffiliateSelect(entry.user_id)"
+                            />
+                          </td>
+                          <td
+                            class="px-3 py-2 text-sm text-gray-900 dark:text-white"
+                          >
+                            {{ entry.email }}
+                          </td>
+                          <td
+                            class="px-3 py-2 text-sm text-gray-600 dark:text-gray-300"
+                          >
+                            {{ entry.username }}
+                          </td>
+                          <td class="px-3 py-2 text-sm font-mono">
+                            {{ entry.aff_code }}
+                            <span
+                              v-if="entry.aff_code_custom"
+                              class="ml-1 inline-block rounded bg-primary-100 px-1.5 py-0.5 text-[10px] font-medium text-primary-700 dark:bg-primary-900/30 dark:text-primary-300"
+                              >{{
+                                t(
+                                  "admin.settings.features.affiliate.customUsers.customBadge",
+                                )
+                              }}</span
+                            >
+                          </td>
+                          <td class="px-3 py-2 text-sm">
+                            <span v-if="entry.aff_rebate_rate_percent != null"
+                              >{{ entry.aff_rebate_rate_percent }}%</span
+                            >
+                            <span v-else class="text-gray-400">{{
+                              t(
+                                "admin.settings.features.affiliate.customUsers.useGlobal",
+                              )
+                            }}</span>
+                          </td>
+                          <td class="px-3 py-2 text-sm">
+                            <div class="flex items-center gap-2">
+                              <button
+                                type="button"
+                                class="text-primary-600 hover:underline"
+                                @click="openAffiliateModal(entry)"
+                              >
+                                {{ t("common.edit") }}
+                              </button>
+                              <button
+                                type="button"
+                                class="text-red-600 hover:underline"
+                                @click="askResetAffiliateUser(entry)"
+                              >
+                                {{ t("common.delete") }}
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div
+                    v-if="affiliateState.total > affiliateState.pageSize"
+                    class="mt-3 flex items-center justify-between text-sm"
+                  >
+                    <span class="text-gray-500">
+                      {{
+                        t(
+                          "admin.settings.features.affiliate.customUsers.totalLabel",
+                          { total: affiliateState.total },
+                        )
+                      }}
+                    </span>
+                    <div class="flex items-center gap-2">
+                      <button
+                        type="button"
+                        class="btn btn-secondary btn-sm"
+                        :disabled="affiliateState.page <= 1"
+                        @click="changeAffiliatePage(affiliateState.page - 1)"
+                      >
+                        {{ t("pagination.previous") }}
+                      </button>
+                      <span class="text-gray-500"
+                        >{{ affiliateState.page }} /
+                        {{
+                          Math.max(
+                            1,
+                            Math.ceil(
+                              affiliateState.total / affiliateState.pageSize,
+                            ),
+                          )
+                        }}</span
+                      >
+                      <button
+                        type="button"
+                        class="btn btn-secondary btn-sm"
+                        :disabled="
+                          affiliateState.page >=
+                          Math.ceil(
+                            affiliateState.total / affiliateState.pageSize,
+                          )
+                        "
+                        @click="changeAffiliatePage(affiliateState.page + 1)"
+                      >
+                        {{ t("pagination.next") }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Affiliate add/edit modal -->
+          <div
+            v-if="affiliateModal.open"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+            @click.self="closeAffiliateModal"
+          >
+            <div
+              class="w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-dark-900"
+            >
+              <h3 class="mb-4 text-lg font-semibold">
+                {{
+                  affiliateModal.mode === "add"
+                    ? t("admin.settings.features.affiliate.modal.addTitle")
+                    : t("admin.settings.features.affiliate.modal.editTitle")
+                }}
+              </h3>
+              <div class="space-y-4">
+                <div v-if="affiliateModal.mode === 'add'">
+                  <label class="input-label">{{
+                    t("admin.settings.features.affiliate.modal.userLabel")
+                  }}</label>
+                  <!-- Chip showing the picked user; clicking it re-opens the search -->
+                  <div
+                    v-if="affiliateModal.selectedUser"
+                    class="flex items-center justify-between rounded-md border border-primary-200 bg-primary-50 px-3 py-2 dark:border-primary-700/50 dark:bg-primary-900/20"
+                  >
+                    <div class="text-sm">
+                      <span class="font-medium text-gray-900 dark:text-white">{{
+                        affiliateModal.selectedUser.email
+                      }}</span>
+                      <span class="ml-1 text-xs text-gray-500"
+                        >({{ affiliateModal.selectedUser.username }})</span
+                      >
+                    </div>
+                    <button
+                      type="button"
+                      class="text-lg leading-none text-gray-400 hover:text-red-600"
+                      :title="
+                        t('admin.settings.features.affiliate.modal.changeUser')
+                      "
+                      @click="clearSelectedAffiliateUser"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  <!-- Search input + result dropdown — hidden once a selection is made -->
+                  <template v-else>
+                    <input
+                      v-model="affiliateModal.userQuery"
+                      type="text"
+                      class="input"
+                      :placeholder="
+                        t(
+                          'admin.settings.features.affiliate.modal.userPlaceholder',
+                        )
+                      "
+                      @input="onAffiliateUserSearchInput"
+                    />
+                    <div
+                      v-if="affiliateModal.userResults.length > 0"
+                      class="mt-1 max-h-40 overflow-y-auto rounded border border-gray-200 dark:border-dark-700"
+                    >
+                      <button
+                        v-for="u in affiliateModal.userResults"
+                        :key="u.id"
+                        type="button"
+                        class="w-full px-3 py-1.5 text-left text-sm hover:bg-gray-100 dark:hover:bg-dark-800"
+                        @click="selectAffiliateUser(u)"
+                      >
+                        {{ u.email }}
+                        <span class="text-xs text-gray-500"
+                          >({{ u.username }})</span
+                        >
+                      </button>
+                    </div>
+                  </template>
+                </div>
+                <div v-else>
+                  <label class="input-label">{{
+                    t("admin.settings.features.affiliate.modal.userLabel")
+                  }}</label>
+                  <input
+                    type="text"
+                    class="input"
+                    :value="
+                      affiliateModal.editingEntry
+                        ? affiliateModal.editingEntry.email
+                        : ''
+                    "
+                    disabled
+                  />
+                </div>
+
+                <div>
+                  <label class="input-label">{{
+                    t("admin.settings.features.affiliate.modal.codeLabel")
+                  }}</label>
+                  <input
+                    v-model="affiliateModal.code"
+                    type="text"
+                    class="input font-mono"
+                    :placeholder="
+                      t(
+                        'admin.settings.features.affiliate.modal.codePlaceholder',
+                      )
+                    "
+                    maxlength="32"
+                  />
+                  <p class="mt-1 text-xs text-gray-400">
+                    {{ t("admin.settings.features.affiliate.modal.codeHint") }}
+                  </p>
+                </div>
+
+                <div>
+                  <label class="input-label">{{
+                    t("admin.settings.features.affiliate.modal.rateLabel")
+                  }}</label>
+                  <div class="relative">
+                    <input
+                      v-model="affiliateModal.rate"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      max="100"
+                      class="input pr-8"
+                      :placeholder="
+                        t(
+                          'admin.settings.features.affiliate.modal.ratePlaceholder',
+                        )
+                      "
+                    />
+                    <span
+                      class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                      >%</span
+                    >
+                  </div>
+                  <p class="mt-1 text-xs text-gray-400">
+                    {{ t("admin.settings.features.affiliate.modal.rateHint") }}
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <label class="input-label">
-                  {{ t('admin.settings.features.affiliate.freezeHours') }}
-                </label>
-                <input
-                  v-model.number="form.affiliate_rebate_freeze_hours"
-                  type="number"
-                  step="1"
-                  min="0"
-                  max="720"
-                  class="input"
-                />
-                <p class="mt-1 text-xs text-gray-400">
-                  {{ t('admin.settings.features.affiliate.freezeHoursDesc') }}
+              <div class="mt-6 flex items-center justify-between gap-3">
+                <p
+                  v-if="!affiliateModalCanSubmit"
+                  class="text-xs text-gray-500 dark:text-gray-400"
+                >
+                  {{ t("admin.settings.features.affiliate.modal.errorEmpty") }}
                 </p>
+                <span v-else></span>
+                <div class="flex gap-2">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    @click="closeAffiliateModal"
+                  >
+                    {{ t("common.cancel") }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    :disabled="
+                      affiliateModal.saving || !affiliateModalCanSubmit
+                    "
+                    @click="submitAffiliateModal"
+                  >
+                    {{
+                      affiliateModal.saving
+                        ? t("common.saving")
+                        : t("common.save")
+                    }}
+                  </button>
+                </div>
               </div>
+            </div>
+          </div>
 
-              <div>
-                <label class="input-label">
-                  {{ t('admin.settings.features.affiliate.durationDays') }}
-                </label>
+          <!-- Affiliate batch rate modal -->
+          <div
+            v-if="affiliateBatchModal.open"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+            @click.self="affiliateBatchModal.open = false"
+          >
+            <div
+              class="w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-dark-900"
+            >
+              <h3 class="mb-4 text-lg font-semibold">
+                {{
+                  t("admin.settings.features.affiliate.batchModal.title", {
+                    count: affiliateState.selected.length,
+                  })
+                }}
+              </h3>
+              <p class="mb-4 text-sm text-gray-500">
+                {{ t("admin.settings.features.affiliate.batchModal.hint") }}
+              </p>
+              <div class="relative">
                 <input
-                  v-model.number="form.affiliate_rebate_duration_days"
-                  type="number"
-                  step="1"
-                  min="0"
-                  max="3650"
-                  class="input"
-                />
-                <p class="mt-1 text-xs text-gray-400">
-                  {{ t('admin.settings.features.affiliate.durationDaysDesc') }}
-                </p>
-              </div>
-
-              <div>
-                <label class="input-label">
-                  {{ t('admin.settings.features.affiliate.perInviteeCap') }}
-                </label>
-                <input
-                  v-model.number="form.affiliate_rebate_per_invitee_cap"
+                  v-model="affiliateBatchModal.rate"
                   type="number"
                   step="0.01"
                   min="0"
-                  class="input"
+                  max="100"
+                  class="input pr-8"
+                  :placeholder="
+                    t(
+                      'admin.settings.features.affiliate.batchModal.placeholder',
+                    )
+                  "
                 />
-                <p class="mt-1 text-xs text-gray-400">
-                  {{ t('admin.settings.features.affiliate.perInviteeCapDesc') }}
-                </p>
-              </div>
-
-              <!-- 专属用户管理 -->
-              <div class="border-t border-gray-100 pt-6 dark:border-dark-700">
-                <div class="mb-3 flex items-center justify-between">
-                  <div>
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
-                      {{ t('admin.settings.features.affiliate.customUsers.title') }}
-                    </h3>
-                    <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
-                      {{ t('admin.settings.features.affiliate.customUsers.description') }}
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-sm"
-                    @click="openAffiliateModal(null)"
-                  >
-                    + {{ t('admin.settings.features.affiliate.customUsers.addButton') }}
-                  </button>
-                </div>
-
-                <div class="mb-3 flex items-center gap-2">
-                  <input
-                    v-model="affiliateState.search"
-                    type="text"
-                    class="input flex-1"
-                    :placeholder="t('admin.settings.features.affiliate.customUsers.searchPlaceholder')"
-                    @input="onAffiliateSearchInput"
-                  />
-                  <button
-                    v-if="affiliateState.selected.length > 0"
-                    type="button"
-                    class="btn btn-secondary btn-sm"
-                    @click="openAffiliateBatchModal"
-                  >
-                    {{ t('admin.settings.features.affiliate.customUsers.batchButton', { count: affiliateState.selected.length }) }}
-                  </button>
-                </div>
-
-                <div class="overflow-hidden rounded-lg border border-gray-200 dark:border-dark-700">
-                  <table class="min-w-full divide-y divide-gray-200 dark:divide-dark-700">
-                    <thead class="bg-gray-50 dark:bg-dark-800">
-                      <tr>
-                        <th class="px-3 py-2 text-left">
-                          <input
-                            type="checkbox"
-                            :checked="affiliateState.entries.length > 0 && affiliateState.selected.length === affiliateState.entries.length"
-                            @change="toggleAffiliateSelectAll"
-                          />
-                        </th>
-                        <th class="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">{{ t('admin.settings.features.affiliate.customUsers.col.email') }}</th>
-                        <th class="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">{{ t('admin.settings.features.affiliate.customUsers.col.username') }}</th>
-                        <th class="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">{{ t('admin.settings.features.affiliate.customUsers.col.code') }}</th>
-                        <th class="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">{{ t('admin.settings.features.affiliate.customUsers.col.rate') }}</th>
-                        <th class="px-3 py-2 text-left text-xs font-medium uppercase text-gray-500">{{ t('admin.settings.features.affiliate.customUsers.col.actions') }}</th>
-                      </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200 bg-white dark:divide-dark-700 dark:bg-dark-900">
-                      <tr v-if="affiliateState.loading">
-                        <td colspan="6" class="px-3 py-6 text-center text-sm text-gray-500">
-                          {{ t('common.loading') }}
-                        </td>
-                      </tr>
-                      <tr v-else-if="affiliateState.entries.length === 0">
-                        <td colspan="6" class="px-3 py-6 text-center text-sm text-gray-500">
-                          {{ t('admin.settings.features.affiliate.customUsers.empty') }}
-                        </td>
-                      </tr>
-                      <tr v-for="entry in affiliateState.entries" :key="entry.user_id">
-                        <td class="px-3 py-2">
-                          <input
-                            type="checkbox"
-                            :checked="affiliateState.selected.includes(entry.user_id)"
-                            @change="toggleAffiliateSelect(entry.user_id)"
-                          />
-                        </td>
-                        <td class="px-3 py-2 text-sm text-gray-900 dark:text-white">{{ entry.email }}</td>
-                        <td class="px-3 py-2 text-sm text-gray-600 dark:text-gray-300">{{ entry.username }}</td>
-                        <td class="px-3 py-2 text-sm font-mono">
-                          {{ entry.aff_code }}
-                          <span
-                            v-if="entry.aff_code_custom"
-                            class="ml-1 inline-block rounded bg-primary-100 px-1.5 py-0.5 text-[10px] font-medium text-primary-700 dark:bg-primary-900/30 dark:text-primary-300"
-                          >{{ t('admin.settings.features.affiliate.customUsers.customBadge') }}</span>
-                        </td>
-                        <td class="px-3 py-2 text-sm">
-                          <span v-if="entry.aff_rebate_rate_percent != null">{{ entry.aff_rebate_rate_percent }}%</span>
-                          <span v-else class="text-gray-400">{{ t('admin.settings.features.affiliate.customUsers.useGlobal') }}</span>
-                        </td>
-                        <td class="px-3 py-2 text-sm">
-                          <div class="flex items-center gap-2">
-                            <button type="button" class="text-primary-600 hover:underline" @click="openAffiliateModal(entry)">
-                              {{ t('common.edit') }}
-                            </button>
-                            <button
-                              type="button"
-                              class="text-red-600 hover:underline"
-                              @click="askResetAffiliateUser(entry)"
-                            >
-                              {{ t('common.delete') }}
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <div v-if="affiliateState.total > affiliateState.pageSize" class="mt-3 flex items-center justify-between text-sm">
-                  <span class="text-gray-500">
-                    {{ t('admin.settings.features.affiliate.customUsers.totalLabel', { total: affiliateState.total }) }}
-                  </span>
-                  <div class="flex items-center gap-2">
-                    <button
-                      type="button"
-                      class="btn btn-secondary btn-sm"
-                      :disabled="affiliateState.page <= 1"
-                      @click="changeAffiliatePage(affiliateState.page - 1)"
-                    >
-                      {{ t('pagination.previous') }}
-                    </button>
-                    <span class="text-gray-500">{{ affiliateState.page }} / {{ Math.max(1, Math.ceil(affiliateState.total / affiliateState.pageSize)) }}</span>
-                    <button
-                      type="button"
-                      class="btn btn-secondary btn-sm"
-                      :disabled="affiliateState.page >= Math.ceil(affiliateState.total / affiliateState.pageSize)"
-                      @click="changeAffiliatePage(affiliateState.page + 1)"
-                    >
-                      {{ t('pagination.next') }}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Affiliate add/edit modal -->
-        <div
-          v-if="affiliateModal.open"
-          class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-          @click.self="closeAffiliateModal"
-        >
-          <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-dark-900">
-            <h3 class="mb-4 text-lg font-semibold">
-              {{ affiliateModal.mode === 'add' ? t('admin.settings.features.affiliate.modal.addTitle') : t('admin.settings.features.affiliate.modal.editTitle') }}
-            </h3>
-            <div class="space-y-4">
-              <div v-if="affiliateModal.mode === 'add'">
-                <label class="input-label">{{ t('admin.settings.features.affiliate.modal.userLabel') }}</label>
-                <!-- Chip showing the picked user; clicking it re-opens the search -->
-                <div
-                  v-if="affiliateModal.selectedUser"
-                  class="flex items-center justify-between rounded-md border border-primary-200 bg-primary-50 px-3 py-2 dark:border-primary-700/50 dark:bg-primary-900/20"
+                <span
+                  class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  >%</span
                 >
-                  <div class="text-sm">
-                    <span class="font-medium text-gray-900 dark:text-white">{{ affiliateModal.selectedUser.email }}</span>
-                    <span class="ml-1 text-xs text-gray-500">({{ affiliateModal.selectedUser.username }})</span>
-                  </div>
-                  <button
-                    type="button"
-                    class="text-lg leading-none text-gray-400 hover:text-red-600"
-                    :title="t('admin.settings.features.affiliate.modal.changeUser')"
-                    @click="clearSelectedAffiliateUser"
-                  >
-                    ×
-                  </button>
-                </div>
-                <!-- Search input + result dropdown — hidden once a selection is made -->
-                <template v-else>
-                  <input
-                    v-model="affiliateModal.userQuery"
-                    type="text"
-                    class="input"
-                    :placeholder="t('admin.settings.features.affiliate.modal.userPlaceholder')"
-                    @input="onAffiliateUserSearchInput"
-                  />
-                  <div
-                    v-if="affiliateModal.userResults.length > 0"
-                    class="mt-1 max-h-40 overflow-y-auto rounded border border-gray-200 dark:border-dark-700"
-                  >
-                    <button
-                      v-for="u in affiliateModal.userResults"
-                      :key="u.id"
-                      type="button"
-                      class="w-full px-3 py-1.5 text-left text-sm hover:bg-gray-100 dark:hover:bg-dark-800"
-                      @click="selectAffiliateUser(u)"
-                    >
-                      {{ u.email }} <span class="text-xs text-gray-500">({{ u.username }})</span>
-                    </button>
-                  </div>
-                </template>
               </div>
-              <div v-else>
-                <label class="input-label">{{ t('admin.settings.features.affiliate.modal.userLabel') }}</label>
-                <input
-                  type="text"
-                  class="input"
-                  :value="affiliateModal.editingEntry ? affiliateModal.editingEntry.email : ''"
-                  disabled
-                />
-              </div>
-
-              <div>
-                <label class="input-label">{{ t('admin.settings.features.affiliate.modal.codeLabel') }}</label>
-                <input
-                  v-model="affiliateModal.code"
-                  type="text"
-                  class="input font-mono"
-                  :placeholder="t('admin.settings.features.affiliate.modal.codePlaceholder')"
-                  maxlength="32"
-                />
-                <p class="mt-1 text-xs text-gray-400">
-                  {{ t('admin.settings.features.affiliate.modal.codeHint') }}
-                </p>
-              </div>
-
-              <div>
-                <label class="input-label">{{ t('admin.settings.features.affiliate.modal.rateLabel') }}</label>
-                <div class="relative">
-                  <input
-                    v-model="affiliateModal.rate"
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    max="100"
-                    class="input pr-8"
-                    :placeholder="t('admin.settings.features.affiliate.modal.ratePlaceholder')"
-                  />
-                  <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span>
-                </div>
-                <p class="mt-1 text-xs text-gray-400">
-                  {{ t('admin.settings.features.affiliate.modal.rateHint') }}
-                </p>
-              </div>
-            </div>
-
-            <div class="mt-6 flex items-center justify-between gap-3">
-              <p
-                v-if="!affiliateModalCanSubmit"
-                class="text-xs text-gray-500 dark:text-gray-400"
-              >
-                {{ t('admin.settings.features.affiliate.modal.errorEmpty') }}
+              <p class="mt-2 text-xs text-gray-400">
+                {{
+                  t("admin.settings.features.affiliate.batchModal.clearHint")
+                }}
               </p>
-              <span v-else></span>
-              <div class="flex gap-2">
-                <button type="button" class="btn btn-secondary" @click="closeAffiliateModal">
-                  {{ t('common.cancel') }}
+              <div class="mt-6 flex justify-end gap-2">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  @click="affiliateBatchModal.open = false"
+                >
+                  {{ t("common.cancel") }}
                 </button>
                 <button
                   type="button"
                   class="btn btn-primary"
-                  :disabled="affiliateModal.saving || !affiliateModalCanSubmit"
-                  @click="submitAffiliateModal"
+                  :disabled="affiliateBatchModal.saving"
+                  @click="submitAffiliateBatchModal"
                 >
-                  {{ affiliateModal.saving ? t('common.saving') : t('common.save') }}
+                  {{
+                    affiliateBatchModal.saving
+                      ? t("common.saving")
+                      : t("common.save")
+                  }}
                 </button>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Affiliate batch rate modal -->
-        <div
-          v-if="affiliateBatchModal.open"
-          class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-          @click.self="affiliateBatchModal.open = false"
-        >
-          <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-dark-900">
-            <h3 class="mb-4 text-lg font-semibold">
-              {{ t('admin.settings.features.affiliate.batchModal.title', { count: affiliateState.selected.length }) }}
-            </h3>
-            <p class="mb-4 text-sm text-gray-500">
-              {{ t('admin.settings.features.affiliate.batchModal.hint') }}
-            </p>
-            <div class="relative">
-              <input
-                v-model="affiliateBatchModal.rate"
-                type="number"
-                step="0.01"
-                min="0"
-                max="100"
-                class="input pr-8"
-                :placeholder="t('admin.settings.features.affiliate.batchModal.placeholder')"
-              />
-              <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span>
-            </div>
-            <p class="mt-2 text-xs text-gray-400">
-              {{ t('admin.settings.features.affiliate.batchModal.clearHint') }}
-            </p>
-            <div class="mt-6 flex justify-end gap-2">
-              <button type="button" class="btn btn-secondary" @click="affiliateBatchModal.open = false">
-                {{ t('common.cancel') }}
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                :disabled="affiliateBatchModal.saving"
-                @click="submitAffiliateBatchModal"
-              >
-                {{ affiliateBatchModal.saving ? t('common.saving') : t('common.save') }}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        </div><!-- /Tab: Features -->
+        <!-- /Tab: Features -->
 
         <!-- Tab: Email -->
         <!-- Tab: Payment -->
@@ -6163,8 +6547,15 @@ import ProxySelector from "@/components/common/ProxySelector.vue";
 import ImageUpload from "@/components/common/ImageUpload.vue";
 import BackupSettings from "@/views/admin/BackupView.vue";
 import { useClipboard } from "@/composables/useClipboard";
-import { affiliatesAPI, type AffiliateAdminEntry, type SimpleUser as AffiliateSimpleUser } from "@/api/admin/affiliates";
-import { extractApiErrorMessage, extractI18nErrorMessage } from "@/utils/apiError";
+import {
+  affiliatesAPI,
+  type AffiliateAdminEntry,
+  type SimpleUser as AffiliateSimpleUser,
+} from "@/api/admin/affiliates";
+import {
+  extractApiErrorMessage,
+  extractI18nErrorMessage,
+} from "@/utils/apiError";
 import { useAppStore } from "@/stores";
 import { useAdminSettingsStore } from "@/stores/adminSettings";
 import { normalizeVisibleMethod } from "@/components/payment/paymentFlow";
@@ -6182,38 +6573,43 @@ const isZhLocale = computed(() => locale.value.startsWith("zh"));
 const isViLocale = computed(() => locale.value.startsWith("vi"));
 
 const VI_LOCAL_TEXT_MAP: Record<string, string> = {
-  'Add document': 'Thêm tài liệu',
-  'Agreement documents': 'Tài liệu thỏa thuận',
-  'Backend Callback URL': 'URL callback backend',
-  'Callback URL set and copied.': 'Đã điền và sao chép URL callback.',
-  'Changing the date or content requires fresh consent.': 'Khi đổi ngày hoặc nội dung, người dùng phải đồng ý lại.',
-  Checkbox: 'Hộp kiểm',
-  Disabled: 'Tắt',
-  'Display mode': 'Kiểu hiển thị',
-  'Document title': 'Tên tài liệu',
-  'Email OAuth Sign-in': 'Đăng nhập Email OAuth',
-  Enabled: 'Bật',
-  'Example: Terms of Service': 'Ví dụ: Điều khoản dịch vụ',
-  'Frontend Callback URL': 'URL callback frontend',
-  'Generate and copy': 'Tạo và sao chép',
-  'Login agreement': 'Điều khoản đăng nhập',
-  'Markdown content': 'Nội dung Markdown',
-  'Mobile App': 'Ứng dụng di động',
-  'Mobile App ID': 'ID ứng dụng di động',
-  'Mobile App Secret': 'Mã bí mật ứng dụng di động',
-  Modal: 'Hộp thoại',
-  'Official Account': 'Tài khoản chính thức',
-  'Official Account App ID': 'ID ứng dụng tài khoản chính thức',
-  'PC App': 'Ứng dụng PC',
-  'PC App ID': 'ID ứng dụng PC',
-  'PC App Secret': 'Mã bí mật ứng dụng PC',
-  'Route slug': 'Slug đường dẫn',
-  'Secret configured. Leave empty to keep the current value.': 'Đã có mã bí mật. Để trống nếu muốn giữ giá trị hiện tại.',
-  'The checkbox appears below the login button and gates all login actions.': 'Hộp kiểm sẽ hiện dưới nút đăng nhập và chặn mọi cách đăng nhập cho tới khi người dùng đồng ý.',
-  'The modal opens on the login page and gates all login actions until accepted.': 'Hộp thoại sẽ bật lên ở trang đăng nhập và chặn mọi cách đăng nhập cho tới khi người dùng đồng ý.',
-  'Untitled document': 'Tài liệu chưa có tên',
-  'Updated date': 'Ngày cập nhật',
-  'Write the final Markdown content here.': 'Nhập nội dung Markdown hoàn chỉnh tại đây.',
+  "Add document": "Thêm tài liệu",
+  "Agreement documents": "Tài liệu thỏa thuận",
+  "Backend Callback URL": "URL callback backend",
+  "Callback URL set and copied.": "Đã điền và sao chép URL callback.",
+  "Changing the date or content requires fresh consent.":
+    "Khi đổi ngày hoặc nội dung, người dùng phải đồng ý lại.",
+  Checkbox: "Hộp kiểm",
+  Disabled: "Tắt",
+  "Display mode": "Kiểu hiển thị",
+  "Document title": "Tên tài liệu",
+  "Email OAuth Sign-in": "Đăng nhập Email OAuth",
+  Enabled: "Bật",
+  "Example: Terms of Service": "Ví dụ: Điều khoản dịch vụ",
+  "Frontend Callback URL": "URL callback frontend",
+  "Generate and copy": "Tạo và sao chép",
+  "Login agreement": "Điều khoản đăng nhập",
+  "Markdown content": "Nội dung Markdown",
+  "Mobile App": "Ứng dụng di động",
+  "Mobile App ID": "ID ứng dụng di động",
+  "Mobile App Secret": "Mã bí mật ứng dụng di động",
+  Modal: "Hộp thoại",
+  "Official Account": "Tài khoản chính thức",
+  "Official Account App ID": "ID ứng dụng tài khoản chính thức",
+  "PC App": "Ứng dụng PC",
+  "PC App ID": "ID ứng dụng PC",
+  "PC App Secret": "Mã bí mật ứng dụng PC",
+  "Route slug": "Slug đường dẫn",
+  "Secret configured. Leave empty to keep the current value.":
+    "Đã có mã bí mật. Để trống nếu muốn giữ giá trị hiện tại.",
+  "The checkbox appears below the login button and gates all login actions.":
+    "Hộp kiểm sẽ hiện dưới nút đăng nhập và chặn mọi cách đăng nhập cho tới khi người dùng đồng ý.",
+  "The modal opens on the login page and gates all login actions until accepted.":
+    "Hộp thoại sẽ bật lên ở trang đăng nhập và chặn mọi cách đăng nhập cho tới khi người dùng đồng ý.",
+  "Untitled document": "Tài liệu chưa có tên",
+  "Updated date": "Ngày cập nhật",
+  "Write the final Markdown content here.":
+    "Nhập nội dung Markdown hoàn chỉnh tại đây.",
 };
 
 function localText(zh: string, en: string): string {
@@ -6280,7 +6676,10 @@ function focusSettingsTab(tab: SettingsTab): void {
   });
 }
 
-function handleSettingsTabKeydown(event: KeyboardEvent, tab: SettingsTab): void {
+function handleSettingsTabKeydown(
+  event: KeyboardEvent,
+  tab: SettingsTab,
+): void {
   const action =
     settingsTabKeyboardActions[
       event.key as keyof typeof settingsTabKeyboardActions
@@ -6436,7 +6835,8 @@ function loginAgreementRoutePath(
   index: number,
 ): string {
   const id =
-    normalizeLoginAgreementDocumentId(doc.id || doc.title) || `doc-${index + 1}`;
+    normalizeLoginAgreementDocumentId(doc.id || doc.title) ||
+    `doc-${index + 1}`;
   return `/legal/${id}`;
 }
 
@@ -6667,22 +7067,30 @@ const authSourceDefaultsMeta = computed(() => [
   {
     source: "email" as AuthSourceType,
     title: t("admin.settings.authSourceDefaults.sources.email.title"),
-    description: t("admin.settings.authSourceDefaults.sources.email.description"),
+    description: t(
+      "admin.settings.authSourceDefaults.sources.email.description",
+    ),
   },
   {
     source: "linuxdo" as AuthSourceType,
     title: t("admin.settings.authSourceDefaults.sources.linuxdo.title"),
-    description: t("admin.settings.authSourceDefaults.sources.linuxdo.description"),
+    description: t(
+      "admin.settings.authSourceDefaults.sources.linuxdo.description",
+    ),
   },
   {
     source: "oidc" as AuthSourceType,
     title: t("admin.settings.authSourceDefaults.sources.oidc.title"),
-    description: t("admin.settings.authSourceDefaults.sources.oidc.description"),
+    description: t(
+      "admin.settings.authSourceDefaults.sources.oidc.description",
+    ),
   },
   {
     source: "wechat" as AuthSourceType,
     title: t("admin.settings.authSourceDefaults.sources.wechat.title"),
-    description: t("admin.settings.authSourceDefaults.sources.wechat.description"),
+    description: t(
+      "admin.settings.authSourceDefaults.sources.wechat.description",
+    ),
   },
   {
     source: "github" as AuthSourceType,
@@ -7304,7 +7712,9 @@ async function loadSettings() {
       wechatCapabilities.mobileEnabled,
       settings.wechat_connect_mode,
     );
-    const legacyWeChatAppID = String(settings.wechat_connect_app_id || "").trim();
+    const legacyWeChatAppID = String(
+      settings.wechat_connect_app_id || "",
+    ).trim();
     const legacyWeChatSecretConfigured = Boolean(
       settings.wechat_connect_app_secret_configured,
     );
@@ -7314,7 +7724,10 @@ async function loadSettings() {
     if (!form.wechat_connect_mp_app_id && wechatCapabilities.mpEnabled) {
       form.wechat_connect_mp_app_id = legacyWeChatAppID;
     }
-    if (!form.wechat_connect_mobile_app_id && wechatCapabilities.mobileEnabled) {
+    if (
+      !form.wechat_connect_mobile_app_id &&
+      wechatCapabilities.mobileEnabled
+    ) {
       form.wechat_connect_mobile_app_id = legacyWeChatAppID;
     }
     if (
@@ -7328,7 +7741,8 @@ async function loadSettings() {
       !form.wechat_connect_mp_app_secret_configured &&
       wechatCapabilities.mpEnabled
     ) {
-      form.wechat_connect_mp_app_secret_configured = legacyWeChatSecretConfigured;
+      form.wechat_connect_mp_app_secret_configured =
+        legacyWeChatSecretConfigured;
     }
     if (
       !form.wechat_connect_mobile_app_secret_configured &&
@@ -7477,7 +7891,10 @@ async function saveSettings() {
 
     const normalizedLoginAgreementDocuments =
       normalizeLoginAgreementDocumentsForSave();
-    if (form.login_agreement_enabled && normalizedLoginAgreementDocuments.length === 0) {
+    if (
+      form.login_agreement_enabled &&
+      normalizedLoginAgreementDocuments.length === 0
+    ) {
       appStore.showError(
         localText(
           "启用登录条款确认时，至少需要保留一份文档。",
@@ -7599,9 +8016,21 @@ async function saveSettings() {
         100,
         Math.max(0, Number(form.affiliate_rebate_rate) || 0),
       ),
-      affiliate_rebate_freeze_hours: Math.max(0, Math.min(720, Number(form.affiliate_rebate_freeze_hours) || 0)),
-      affiliate_rebate_duration_days: Math.max(0, Math.min(3650, Math.floor(Number(form.affiliate_rebate_duration_days) || 0))),
-      affiliate_rebate_per_invitee_cap: Math.max(0, Number(form.affiliate_rebate_per_invitee_cap) || 0),
+      affiliate_rebate_freeze_hours: Math.max(
+        0,
+        Math.min(720, Number(form.affiliate_rebate_freeze_hours) || 0),
+      ),
+      affiliate_rebate_duration_days: Math.max(
+        0,
+        Math.min(
+          3650,
+          Math.floor(Number(form.affiliate_rebate_duration_days) || 0),
+        ),
+      ),
+      affiliate_rebate_per_invitee_cap: Math.max(
+        0,
+        Number(form.affiliate_rebate_per_invitee_cap) || 0,
+      ),
       default_concurrency: form.default_concurrency,
       default_subscriptions: normalizedDefaultSubscriptions,
       force_email_on_third_party_signup: form.force_email_on_third_party_signup,
@@ -7687,15 +8116,13 @@ async function saveSettings() {
         form.oidc_connect_userinfo_username_path,
       github_oauth_enabled: form.github_oauth_enabled,
       github_oauth_client_id: form.github_oauth_client_id,
-      github_oauth_client_secret:
-        form.github_oauth_client_secret || undefined,
+      github_oauth_client_secret: form.github_oauth_client_secret || undefined,
       github_oauth_redirect_url: form.github_oauth_redirect_url,
       github_oauth_frontend_redirect_url:
         form.github_oauth_frontend_redirect_url,
       google_oauth_enabled: form.google_oauth_enabled,
       google_oauth_client_id: form.google_oauth_client_id,
-      google_oauth_client_secret:
-        form.google_oauth_client_secret || undefined,
+      google_oauth_client_secret: form.google_oauth_client_secret || undefined,
       google_oauth_redirect_url: form.google_oauth_redirect_url,
       google_oauth_frontend_redirect_url:
         form.google_oauth_frontend_redirect_url,
@@ -8502,9 +8929,10 @@ function findProviderEnablementConflict(
   return null;
 }
 
-function showProviderEnablementConflict(
-  conflict: { method: "alipay" | "wxpay"; conflicting: ProviderInstance },
-) {
+function showProviderEnablementConflict(conflict: {
+  method: "alipay" | "wxpay";
+  conflicting: ProviderInstance;
+}) {
   appStore.showError(
     t("admin.settings.payment.enableConflict", {
       method: t(`payment.methods.${conflict.method}`),
@@ -8519,7 +8947,9 @@ async function loadProviders() {
     const res = await adminAPI.payment.getProviders();
     providers.value = res.data || [];
   } catch (err: unknown) {
-    appStore.showError(extractI18nErrorMessage(err, t, "payment.errors", t("common.error")));
+    appStore.showError(
+      extractI18nErrorMessage(err, t, "payment.errors", t("common.error")),
+    );
   } finally {
     providersLoading.value = false;
   }
@@ -8568,7 +8998,9 @@ async function handleSaveProvider(payload: Partial<ProviderInstance>) {
     // Auto-save settings so provider changes take effect immediately
     await saveSettings();
   } catch (err: unknown) {
-    appStore.showError(extractI18nErrorMessage(err, t, "payment.errors", t("common.error")));
+    appStore.showError(
+      extractI18nErrorMessage(err, t, "payment.errors", t("common.error")),
+    );
   } finally {
     providerSaving.value = false;
   }
@@ -8606,7 +9038,9 @@ async function handleToggleField(
     await adminAPI.payment.updateProvider(provider.id, payload);
     await loadProviders();
   } catch (err: unknown) {
-    appStore.showError(extractI18nErrorMessage(err, t, "payment.errors", t("common.error")));
+    appStore.showError(
+      extractI18nErrorMessage(err, t, "payment.errors", t("common.error")),
+    );
   }
 }
 
@@ -8631,7 +9065,9 @@ async function handleToggleType(provider: ProviderInstance, type: string) {
     } as any);
     await loadProviders();
   } catch (err: unknown) {
-    appStore.showError(extractI18nErrorMessage(err, t, "payment.errors", t("common.error")));
+    appStore.showError(
+      extractI18nErrorMessage(err, t, "payment.errors", t("common.error")),
+    );
   }
 }
 
@@ -8653,7 +9089,9 @@ async function handleReorderProviders(
     );
     await loadProviders();
   } catch (err: unknown) {
-    appStore.showError(extractI18nErrorMessage(err, t, "payment.errors", t("common.error")));
+    appStore.showError(
+      extractI18nErrorMessage(err, t, "payment.errors", t("common.error")),
+    );
     loadProviders();
   }
 }
@@ -8666,7 +9104,9 @@ async function handleDeleteProvider() {
     showDeleteProviderDialog.value = false;
     loadProviders();
   } catch (err: unknown) {
-    appStore.showError(extractI18nErrorMessage(err, t, "payment.errors", t("common.error")));
+    appStore.showError(
+      extractI18nErrorMessage(err, t, "payment.errors", t("common.error")),
+    );
   }
 }
 
@@ -8799,7 +9239,11 @@ function cancelAffiliateConfirm() {
 
 // debounceTimer wires a single timer slot to a callback with a delay,
 // canceling any pending invocation. Used for type-as-you-go search inputs.
-function debounceTimer(slot: { searchTimer: number | null }, delayMs: number, run: () => void) {
+function debounceTimer(
+  slot: { searchTimer: number | null },
+  delayMs: number,
+  run: () => void,
+) {
   if (slot.searchTimer != null) window.clearTimeout(slot.searchTimer);
   slot.searchTimer = window.setTimeout(run, delayMs);
 }
@@ -8817,7 +9261,9 @@ function parseRebateRate(raw: unknown): number | null | undefined {
   if (s === "") return null;
   const parsed = Number(s);
   if (Number.isNaN(parsed) || parsed < 0 || parsed > 100) {
-    appStore.showError(t("admin.settings.features.affiliate.modal.errorBadRate"));
+    appStore.showError(
+      t("admin.settings.features.affiliate.modal.errorBadRate"),
+    );
     return undefined;
   }
   return parsed;
@@ -8835,7 +9281,9 @@ async function loadAffiliateUsers() {
     affiliateState.total = res.total ?? 0;
     // Drop selections that are no longer visible.
     const visibleIds = new Set(affiliateState.entries.map((e) => e.user_id));
-    affiliateState.selected = affiliateState.selected.filter((id) => visibleIds.has(id));
+    affiliateState.selected = affiliateState.selected.filter((id) =>
+      visibleIds.has(id),
+    );
   } catch (err) {
     appStore.showError(extractApiErrorMessage(err, t("common.error")));
   } finally {
@@ -8858,7 +9306,9 @@ function changeAffiliatePage(page: number) {
 
 function toggleAffiliateSelectAll(e: Event) {
   const checked = (e.target as HTMLInputElement).checked;
-  affiliateState.selected = checked ? affiliateState.entries.map((entry) => entry.user_id) : [];
+  affiliateState.selected = checked
+    ? affiliateState.entries.map((entry) => entry.user_id)
+    : [];
 }
 
 function toggleAffiliateSelect(userId: number) {
@@ -8878,7 +9328,9 @@ function openAffiliateModal(entry: AffiliateAdminEntry | null) {
   affiliateModal.editingEntry = entry;
   affiliateModal.code = entry?.aff_code_custom ? entry.aff_code : "";
   affiliateModal.rate =
-    entry?.aff_rebate_rate_percent != null ? String(entry.aff_rebate_rate_percent) : "";
+    entry?.aff_rebate_rate_percent != null
+      ? String(entry.aff_rebate_rate_percent)
+      : "";
 }
 
 function closeAffiliateModal() {
@@ -8958,7 +9410,10 @@ async function submitAffiliateModal() {
   const rateInput = parseRebateRate(affiliateModal.rate);
   if (rateInput === undefined) return; // toast already shown
   if (rateInput === null) {
-    if (affiliateModal.mode === "edit" && affiliateModal.editingEntry?.aff_rebate_rate_percent != null) {
+    if (
+      affiliateModal.mode === "edit" &&
+      affiliateModal.editingEntry?.aff_rebate_rate_percent != null
+    ) {
       payload.clear_rebate_rate = true;
     }
   } else {
@@ -9047,16 +9502,19 @@ watch(
 
 /* ============ 系统设置 Tab 导航 ============ */
 .settings-tabs-shell {
-  @apply sticky z-20 -mx-1 rounded-2xl border border-white/80 bg-white/90 p-1.5 backdrop-blur-xl;
+  @apply sticky z-20 -mx-1 rounded-2xl p-1.5 backdrop-blur-xl;
   top: 4.75rem;
+  border-color: rgb(255 255 255 / 0.8);
+  background: rgb(255 255 255 / 0.9);
   box-shadow:
     0 12px 28px rgb(15 23 42 / 0.07),
     0 1px 0 rgb(255 255 255 / 0.9) inset;
 }
 
+html.dark .settings-tabs-shell,
 :global(.dark) .settings-tabs-shell {
   border-color: rgb(51 65 85 / 0.65);
-  background: rgb(15 23 42 / 0.86);
+  background: rgb(15 23 42 / 0.86) !important;
   box-shadow:
     0 16px 36px rgb(0 0 0 / 0.28),
     0 1px 0 rgb(255 255 255 / 0.06) inset;
@@ -9097,7 +9555,11 @@ watch(
 .settings-tab::before {
   @apply absolute inset-0 -z-10 rounded-xl opacity-0 transition-opacity duration-200;
   content: "";
-  background: linear-gradient(135deg, rgb(248 250 252 / 0.95), rgb(241 245 249 / 0.8));
+  background: linear-gradient(
+    135deg,
+    rgb(248 250 252 / 0.95),
+    rgb(241 245 249 / 0.8)
+  );
 }
 
 .settings-tab:hover::before,
@@ -9106,7 +9568,11 @@ watch(
 }
 
 :global(.dark) .settings-tab::before {
-  background: linear-gradient(135deg, rgb(30 41 59 / 0.9), rgb(51 65 85 / 0.62));
+  background: linear-gradient(
+    135deg,
+    rgb(30 41 59 / 0.9),
+    rgb(51 65 85 / 0.62)
+  );
 }
 
 .settings-tab:focus-visible {
@@ -9123,7 +9589,7 @@ watch(
 :global(.dark) .settings-tab-active {
   box-shadow:
     0 12px 26px rgb(0 0 0 / 0.22),
-    0 1px 0 rgb(255 255 255 / 0.08) inset;
+    0 1px 0 rgb(0 0 0 / 0.3) inset;
 }
 
 .settings-tab-active::before {
@@ -9156,5 +9622,24 @@ watch(
 
 .settings-tab-label {
   @apply min-w-0 overflow-hidden text-ellipsis whitespace-nowrap leading-none;
+}
+</style>
+
+<style>
+/* Non-scoped dark mode override for settings tabs */
+html.dark .settings-tabs-shell {
+  border-color: rgb(51 65 85 / 0.65) !important;
+  background: rgb(15 23 42 / 0.86) !important;
+  box-shadow:
+    0 16px 36px rgb(0 0 0 / 0.28),
+    0 1px 0 rgb(255 255 255 / 0.06) inset !important;
+}
+
+html.dark .settings-tab::before {
+  background: linear-gradient(
+    135deg,
+    rgb(30 41 59 / 0.9),
+    rgb(51 65 85 / 0.62)
+  ) !important;
 }
 </style>

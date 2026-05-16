@@ -65,6 +65,11 @@ runner = "green"
 
 [misc]
 clean_on_exit = false
+
+# Use polling for better Docker/Windows compatibility
+[watcher]
+polling = true
+interval = 1000
 EOF
 fi
 
