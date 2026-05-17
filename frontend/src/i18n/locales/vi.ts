@@ -5974,6 +5974,7 @@ export default {
         providerWxpay: "WeChat Thanh toán (Trực tiếp)",
         providerStripe: "Stripe",
         providerAirwallex: "Airwallex",
+        providerPay2S: "Pay2S",
         typeDisabled: "loại bị vô hiệu hóa",
         enableTypesFirst:
           "Trước tiên hãy bật ít nhất một loại thanh toán ở trên",
@@ -6976,6 +6977,10 @@ export default {
     paymentMethod: "Phương thức thanh toán",
     fee: "Phí",
     actualPay: "Thanh toán thực tế",
+    pay2sVndEquivalent: "Tương đương VND",
+    pay2sVndEquivalentTopup: "Nạp tiền tương đương VND",
+    pay2sVndEquivalentSubscribe: "Đăng ký tương đương VND",
+    pay2sExchangeRate: "Tỷ giá: 27.000 VND = 1 USD",
     createOrder: "Xác nhận thanh toán",
     methods: {
       easypay: "EasyPay",
@@ -6983,6 +6988,7 @@ export default {
       wxpay: "WeChat Thanh toán",
       stripe: "Stripe",
       airwallex: "Airwallex",
+      pay2s: "Pay2S",
       card: "Thẻ",
       link: "Liên kết",
       alipay_direct: "Alipay (Trực tiếp)",

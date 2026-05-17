@@ -184,6 +184,7 @@ vi.mock("vue-i18n", async () => {
       "{title} 已启用，请先选择支付来源。",
     "admin.settings.payment.configGuide": "查看支付配置说明",
     "admin.settings.payment.findProvider": "查看支持的支付方式",
+    "payment.methods.pay2s": "Pay2S",
     "admin.settings.openaiExperimentalScheduler.title": "OpenAI 实验调度策略",
     "admin.settings.openaiExperimentalScheduler.description":
       "默认关闭。开启后仅影响本网关在 OpenAI 账号间的实验性调度选择逻辑，不代表上游 OpenAI 官方能力。",
@@ -572,6 +573,15 @@ describe("admin SettingsView payment visible method controls", () => {
 
     expect(wrapper.text()).not.toContain("可见方式");
     expect(wrapper.text()).not.toContain("支付来源");
+  });
+
+  it("renders Pay2S as an enabled payment type option", async () => {
+    const wrapper = mountView();
+
+    await flushPromises();
+    await openPaymentTab(wrapper);
+
+    expect(wrapper.text()).toContain("Pay2S");
   });
 
   it("does not submit legacy visible payment method settings", async () => {

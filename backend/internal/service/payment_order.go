@@ -160,6 +160,10 @@ func (s *PaymentService) createOrderInTx(ctx context.Context, req CreateOrderReq
 	if tm <= 0 {
 		tm = defaultOrderTimeoutMin
 	}
+	// Pay2S orders expire after 10 minutes on the gateway side.
+	if sel != nil && sel.ProviderKey == payment.TypePay2S && tm > 10 {
+		tm = 10
+	}
 	exp := time.Now().Add(time.Duration(tm) * time.Minute)
 	outTradeNo, err := s.allocateOutTradeNo(ctx, tx)
 	if err != nil {

@@ -52,6 +52,13 @@ func TestValidateProviderRequest(t *testing.T) {
 			wantErr:        false,
 		},
 		{
+			name:           "valid pay2s provider",
+			providerKey:    payment.TypePay2S,
+			providerName:   "Pay2S Provider",
+			supportedTypes: payment.TypePay2S,
+			wantErr:        false,
+		},
+		{
 			name:           "valid alipay provider",
 			providerKey:    "alipay",
 			providerName:   "Alipay Direct",
@@ -157,6 +164,13 @@ func TestIsSensitiveProviderConfigField(t *testing.T) {
 		{payment.TypeAirwallex, "apiBase", false},
 		{payment.TypeAirwallex, "accountId", false},
 		{payment.TypeAirwallex, "currency", false},
+
+		// Pay2S
+		{payment.TypePay2S, "accessKey", true},
+		{payment.TypePay2S, "secretKey", true},
+		{payment.TypePay2S, "partnerCode", false},
+		{payment.TypePay2S, "environment", false},
+		{payment.TypePay2S, "bankAccounts", false},
 
 		// Unknown provider: never sensitive
 		{"unknown", "secretKey", false},
