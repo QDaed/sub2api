@@ -9,6 +9,7 @@ import (
 	"log/slog"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 
 	"github.com/Wei-Shaw/sub2api/internal/payment"
@@ -65,6 +66,95 @@ func (h *PaymentWebhookHandler) StripeWebhook(c *gin.Context) {
 // POST /api/v1/payment/webhook/airwallex
 func (h *PaymentWebhookHandler) AirwallexWebhook(c *gin.Context) {
 	h.handleNotify(c, payment.TypeAirwallex)
+}
+
+// Pay2SNotify handles Pay2S payment notifications.
+// POST /api/v1/payment/webhook/pay2s
+func (h *PaymentWebhookHandler) Pay2SNotify(c *gin.Context) {
+	h.handleNotify(c, payment.TypePay2S)
+}
+
+// Pay2SReturn handles Pay2S browser redirect after payment.
+// Pay2S sends payment result params in the return URL query string.
+// GET /api/v1/payment/public/pay2s/return
+func (h *PaymentWebhookHandler) Pay2SReturn(c *gin.Context) {
+	q := c.Request.URL.Query()
+
+	// Build synthetic IPN JSON from query params so we can reuse VerifyNotification.
+	notificationMap := map[string]any{
+		"partnerCode":  q.Get("partnerCode"),
+		"orderId":      q.Get("orderId"),
+		"requestId":    q.Get("requestId"),
+		"amount":       parseInt64(q.Get("amount")),
+		"orderInfo":    q.Get("orderInfo"),
+		"orderType":    q.Get("orderType"),
+		"transId":      parseInt64(q.Get("transId")),
+		"resultCode":   parseInt(q.Get("resultCode")),
+		"message":      q.Get("message"),
+		"payType":      q.Get("payType"),
+		"responseTime": q.Get("responseTime"),
+		"extraData":    q.Get("extraData"),
+		"m2signature":  q.Get("m2signature"),
+	}
+
+	rawBody, err := json.Marshal(notificationMap)
+	if err != nil {
+		slog.Error("[Pay2S Return] failed to marshal notification", "error", err)
+		c.JSON(http.StatusBadRequest, gin.H{"code": "INVALID_PARAMS", "message": "failed to marshal notification"})
+		return
+	}
+
+	outTradeNo := strings.TrimSpace(q.Get("orderId"))
+	if outTradeNo == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"code": "INVALID_PARAMS", "message": "missing orderId"})
+		return
+	}
+
+	providers, err := h.paymentService.GetWebhookProviders(c.Request.Context(), payment.TypePay2S, outTradeNo)
+	if err != nil {
+		slog.Warn("[Pay2S Return] provider not found", "outTradeNo", outTradeNo, "error", err)
+		c.JSON(http.StatusBadRequest, gin.H{"code": "PROVIDER_NOT_FOUND", "message": "provider not found"})
+		return
+	}
+
+	headers := make(map[string]string)
+	for k := range c.Request.Header {
+		headers[strings.ToLower(k)] = c.GetHeader(k)
+	}
+
+	_, notification, err := verifyNotificationWithProviders(c.Request.Context(), providers, string(rawBody), headers)
+	if err != nil {
+		slog.Error("[Pay2S Return] verify failed", "error", err, "rawBody", string(rawBody))
+		c.JSON(http.StatusBadRequest, gin.H{"code": "VERIFY_FAILED", "message": "signature verification failed"})
+		return
+	}
+
+	if notification == nil {
+		c.JSON(http.StatusOK, gin.H{"success": true})
+		return
+	}
+
+	if err := h.paymentService.HandlePaymentNotification(c.Request.Context(), notification, payment.TypePay2S); err != nil {
+		if errors.Is(err, service.ErrOrderNotFound) {
+			c.JSON(http.StatusOK, gin.H{"success": true, "note": "order not found"})
+			return
+		}
+		slog.Error("[Pay2S Return] handle notification failed", "error", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"code": "HANDLE_FAILED", "message": "failed to process payment"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"success": true})
+}
+
+func parseInt64(s string) int64 {
+	v, _ := strconv.ParseInt(s, 10, 64)
+	return v
+}
+
+func parseInt(s string) int {
+	v, _ := strconv.Atoi(s)
+	return v
 }
 
 // handleNotify is the shared logic for all provider webhook handlers.
@@ -164,6 +254,13 @@ func extractOutTradeNo(rawBody, providerKey string) string {
 		if err := json.Unmarshal([]byte(rawBody), &payload); err == nil {
 			return strings.TrimSpace(payload.Data.Object.MerchantOrderID)
 		}
+	case payment.TypePay2S:
+		var payload struct {
+			OrderID string `json:"orderId"`
+		}
+		if err := json.Unmarshal([]byte(rawBody), &payload); err == nil {
+			return strings.TrimSpace(payload.OrderID)
+		}
 	}
 	// For other providers (Stripe, Alipay direct, WxPay direct), the registry
 	// typically has only one instance, so no instance lookup is needed.
@@ -203,11 +300,14 @@ const (
 
 // writeSuccessResponse 返回各支付服务商要求的成功响应。
 // 微信支付需要 JSON {"code":"SUCCESS","message":"成功"}；
+// Pay2S 需要 JSON {"success": true}；
 // Stripe 和空中云汇接受空 200，其它服务商接受纯文本 "success"。
 func writeSuccessResponse(c *gin.Context, providerKey string) {
 	switch providerKey {
 	case payment.TypeWxpay:
 		c.JSON(http.StatusOK, wxpaySuccessResponse{Code: wxpaySuccessCode, Message: wxpaySuccessMessage})
+	case payment.TypePay2S:
+		c.JSON(http.StatusOK, gin.H{"success": true})
 	case payment.TypeStripe, payment.TypeAirwallex:
 		c.String(http.StatusOK, "")
 	default:

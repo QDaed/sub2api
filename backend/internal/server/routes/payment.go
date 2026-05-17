@@ -51,6 +51,8 @@ func RegisterPaymentRoutes(
 	{
 		public.POST("/orders/verify", paymentHandler.VerifyOrderPublic)
 		public.POST("/orders/resolve", paymentHandler.ResolveOrderPublicByResumeToken)
+		// Pay2S browser redirect callback: Pay2S sends payment result in return URL query params.
+		public.GET("/pay2s/return", webhookHandler.Pay2SReturn)
 	}
 
 	// --- Webhook endpoints (no auth) ---
@@ -63,6 +65,7 @@ func RegisterPaymentRoutes(
 		webhook.POST("/wxpay", webhookHandler.WxpayNotify)
 		webhook.POST("/stripe", webhookHandler.StripeWebhook)
 		webhook.POST("/airwallex", webhookHandler.AirwallexWebhook)
+		webhook.POST("/pay2s", webhookHandler.Pay2SNotify)
 	}
 
 	// --- Admin payment endpoints (admin auth) ---
