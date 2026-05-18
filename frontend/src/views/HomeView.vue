@@ -36,87 +36,6 @@
       ></div>
     </div>
 
-<<<<<<< Updated upstream
-    <!-- Header -->
-    <header class="relative z-20 px-6 py-4">
-      <nav class="mx-auto flex max-w-6xl items-center justify-between">
-        <!-- Logo -->
-        <div class="flex items-center">
-          <div class="h-10 w-10 overflow-hidden rounded-xl shadow-md">
-            <img
-              :src="siteLogo || '/logo.png'"
-              alt="Logo"
-              class="h-full w-full object-contain"
-            />
-          </div>
-        </div>
-
-        <!-- Nav Actions -->
-        <div class="flex items-center gap-3">
-          <!-- Language Switcher -->
-          <LocaleSwitcher />
-
-          <!-- Doc Link -->
-          <a
-            v-if="docUrl"
-            :href="docUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="rounded-lg p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-dark-400 dark:hover:bg-dark-800 dark:hover:text-white"
-            :title="t('home.viewDocs')"
-          >
-            <Icon name="book" size="md" />
-          </a>
-
-          <!-- Theme Toggle -->
-          <button
-            @click="toggleTheme"
-            class="rounded-lg p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-dark-400 dark:hover:bg-dark-800 dark:hover:text-white"
-            :title="isDark ? t('home.switchToLight') : t('home.switchToDark')"
-          >
-            <Icon v-if="isDark" name="sun" size="md" />
-            <Icon v-else name="moon" size="md" />
-          </button>
-
-          <!-- Login / Dashboard Button -->
-          <router-link
-            v-if="isAuthenticated"
-            :to="dashboardPath"
-            class="inline-flex items-center gap-1.5 rounded-full bg-gray-900 py-1 pl-1 pr-2.5 transition-colors hover:bg-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700"
-          >
-            <span
-              class="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-[10px] font-semibold text-white"
-            >
-              {{ userInitial }}
-            </span>
-            <span class="text-xs font-medium text-white">{{
-              t("home.dashboard")
-            }}</span>
-            <svg
-              class="h-3 w-3 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-              />
-            </svg>
-          </router-link>
-          <router-link
-            v-else
-            to="/login"
-            class="inline-flex items-center rounded-full bg-gray-900 px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700"
-          >
-            {{ t("home.login") }}
-          </router-link>
-        </div>
-      </nav>
-    </header>
-=======
     <PublicNavbar
       :site-name="siteName"
       :site-logo="siteLogo"
@@ -126,7 +45,6 @@
       :user-initial="userInitial"
       @toggle-theme="toggleTheme"
     />
->>>>>>> Stashed changes
 
     <!-- Main Content -->
     <main class="relative z-10 flex-1 px-6 py-16">
@@ -442,25 +360,8 @@
             to="/docs"
             class="text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-dark-400 dark:hover:text-white"
           >
-<<<<<<< Updated upstream
-            {{ t("home.docs") }}
-=======
-<<<<<<< Updated upstream
-            {{ t('home.docs') }}
-          </a>
-          <a
-            :href="githubUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-dark-400 dark:hover:text-white"
-          >
-            GitHub
->>>>>>> Stashed changes
-          </a>
-=======
             {{ t("home.docs") }}
           </router-link>
->>>>>>> Stashed changes
         </div>
       </div>
     </footer>
@@ -468,27 +369,11 @@
 </template>
 
 <script setup lang="ts">
-<<<<<<< Updated upstream
-import { ref, computed, onMounted } from "vue";
-import { useI18n } from "vue-i18n";
-import { useAuthStore, useAppStore } from "@/stores";
-import LocaleSwitcher from "@/components/common/LocaleSwitcher.vue";
-import Icon from "@/components/icons/Icon.vue";
-=======
-<<<<<<< Updated upstream
-import { ref, computed, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useAuthStore, useAppStore } from '@/stores'
-import LocaleSwitcher from '@/components/common/LocaleSwitcher.vue'
-import Icon from '@/components/icons/Icon.vue'
-=======
 import { ref, computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAuthStore, useAppStore } from "@/stores";
 import Icon from "@/components/icons/Icon.vue";
 import PublicNavbar from "@/components/layout/PublicNavbar.vue";
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
 const { t } = useI18n();
 
@@ -496,16 +381,6 @@ const authStore = useAuthStore();
 const appStore = useAppStore();
 
 // Site settings - directly from appStore (already initialized from injected config)
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-const siteName = computed(() => appStore.cachedPublicSettings?.site_name || appStore.siteName || 'Sub2API')
-const siteLogo = computed(() => appStore.cachedPublicSettings?.site_logo || appStore.siteLogo || '')
-const siteSubtitle = computed(() => appStore.cachedPublicSettings?.site_subtitle || 'AI API Gateway Platform')
-const docUrl = computed(() => appStore.cachedPublicSettings?.doc_url || appStore.docUrl || '')
-const homeContent = computed(() => appStore.cachedPublicSettings?.home_content || '')
-=======
->>>>>>> Stashed changes
 const siteName = computed(
   () =>
     appStore.cachedPublicSettings?.site_name || appStore.siteName || "Sub2API",
@@ -517,19 +392,9 @@ const siteSubtitle = computed(
   () =>
     appStore.cachedPublicSettings?.site_subtitle || "AI API Gateway Platform",
 );
-<<<<<<< Updated upstream
-const docUrl = computed(
-  () => appStore.cachedPublicSettings?.doc_url || appStore.docUrl || "",
-);
 const homeContent = computed(
   () => appStore.cachedPublicSettings?.home_content || "",
 );
-=======
-const homeContent = computed(
-  () => appStore.cachedPublicSettings?.home_content || "",
-);
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
 // Check if homeContent is a URL (for iframe display)
 const isHomeContentUrl = computed(() => {
