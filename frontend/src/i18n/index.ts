@@ -1,37 +1,40 @@
-import { createI18n } from 'vue-i18n'
+import { createI18n } from "vue-i18n";
 
-export type LocaleCode = 'en' | 'zh' | 'vi'
+export type LocaleCode = "en" | "zh" | "vi";
 
-type LocaleMessages = Record<string, any>
+type LocaleMessages = Record<string, any>;
 
-const LOCALE_KEY = 'sub2api_locale'
-const DEFAULT_LOCALE: LocaleCode = 'en'
+const LOCALE_KEY = "sub2api_locale";
+const DEFAULT_LOCALE: LocaleCode = "en";
 
-const localeLoaders: Record<LocaleCode, () => Promise<{ default: LocaleMessages }>> = {
-  en: () => import('./locales/en'),
-  zh: () => import('./locales/zh'),
-  vi: () => import('./locales/vi')
-}
+const localeLoaders: Record<
+  LocaleCode,
+  () => Promise<{ default: LocaleMessages }>
+> = {
+  en: () => import("./locales/en"),
+  zh: () => import("./locales/zh"),
+  vi: () => import("./locales/vi"),
+};
 
 function isLocaleCode(value: string): value is LocaleCode {
-  return value === 'en' || value === 'zh' || value === 'vi'
+  return value === "en" || value === "zh" || value === "vi";
 }
 
 function getDefaultLocale(): LocaleCode {
-  const saved = localStorage.getItem(LOCALE_KEY)
+  const saved = localStorage.getItem(LOCALE_KEY);
   if (saved && isLocaleCode(saved)) {
-    return saved
+    return saved;
   }
 
-  const browserLang = navigator.language.toLowerCase()
-  if (browserLang.startsWith('zh')) {
-    return 'zh'
+  const browserLang = navigator.language.toLowerCase();
+  if (browserLang.startsWith("zh")) {
+    return "zh";
   }
-  if (browserLang.startsWith('vi')) {
-    return 'vi'
+  if (browserLang.startsWith("vi")) {
+    return "vi";
   }
 
-  return DEFAULT_LOCALE
+  return DEFAULT_LOCALE;
 }
 
 export const i18n = createI18n({
@@ -41,71 +44,76 @@ export const i18n = createI18n({
   messages: {},
   // 禁用 HTML 消息警告 - 引导步骤使用富文本内容（driver.js 支持 HTML）
   // 这些内容是内部定义的，不存在 XSS 风险
-  warnHtmlMessage: false
-})
+  warnHtmlMessage: false,
+});
 
-const loadedLocales = new Set<LocaleCode>()
+const loadedLocales = new Set<LocaleCode>();
 
 export async function loadLocaleMessages(locale: LocaleCode): Promise<void> {
   if (loadedLocales.has(locale)) {
-    return
+    return;
   }
 
-  const loader = localeLoaders[locale]
-  const module = await loader()
-  i18n.global.setLocaleMessage(locale, module.default)
-  loadedLocales.add(locale)
+  const loader = localeLoaders[locale];
+  const module = await loader();
+  i18n.global.setLocaleMessage(locale, module.default);
+  loadedLocales.add(locale);
 }
 
 export async function initI18n(): Promise<void> {
-  const current = getLocale()
-  await loadLocaleMessages(current)
-  document.documentElement.setAttribute('lang', current)
+  const current = getLocale();
+  await loadLocaleMessages(current);
+  document.documentElement.setAttribute("lang", current);
 }
 
 export async function setLocale(locale: string): Promise<void> {
   if (!isLocaleCode(locale)) {
-    return
+    return;
   }
 
-  await loadLocaleMessages(locale)
-  i18n.global.locale.value = locale
-  localStorage.setItem(LOCALE_KEY, locale)
-  document.documentElement.setAttribute('lang', locale)
+  await loadLocaleMessages(locale);
+  i18n.global.locale.value = locale;
+  localStorage.setItem(LOCALE_KEY, locale);
+  document.documentElement.setAttribute("lang", locale);
 
   // 同步更新浏览器页签标题，使其跟随语言切换
-  const { resolveDocumentTitle } = await import('@/router/title')
-  const { default: router } = await import('@/router')
-  const { useAppStore } = await import('@/stores/app')
-  const route = router.currentRoute.value
-  const appStore = useAppStore()
-  document.title = resolveDocumentTitle(route.meta.title, appStore.siteName, route.meta.titleKey as string)
+  const { resolveDocumentTitle } = await import("@/router/title");
+  const { default: router } = await import("@/router");
+  const { useAppStore } = await import("@/stores/app");
+  const route = router.currentRoute.value;
+  const appStore = useAppStore();
+  document.title = resolveDocumentTitle(
+    route.meta.title,
+    appStore.siteName,
+    route.meta.titleKey as string,
+  );
 }
 
 export function getLocale(): LocaleCode {
-  const current = i18n.global.locale.value
-  return isLocaleCode(current) ? current : DEFAULT_LOCALE
+  const current = i18n.global.locale.value;
+  return isLocaleCode(current) ? current : DEFAULT_LOCALE;
 }
 
 export function resolveBrowserLocale(locale: string = getLocale()): string {
-  const normalized = locale.toLowerCase()
-  if (normalized.startsWith('zh')) {
-    return 'zh-CN'
+  const normalized = locale.toLowerCase();
+  if (normalized.startsWith("zh")) {
+    return "zh-CN";
   }
-  if (normalized.startsWith('vi')) {
-    return 'vi-VN'
+  if (normalized.startsWith("vi")) {
+    return "vi-VN";
   }
-  return 'en-US'
+  return "en-US";
 }
 
-export function resolveAirwallexLocale(locale: string = getLocale()): 'zh' | 'en' {
-  return locale.toLowerCase().startsWith('zh') ? 'zh' : 'en'
+export function resolveAirwallexLocale(
+  locale: string = getLocale(),
+): "zh" | "en" {
+  return locale.toLowerCase().startsWith("zh") ? "zh" : "en";
 }
 
 export const availableLocales = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'zh', name: '中文', flag: '🇨🇳' },
-  { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' }
-] as const
+  { code: "en", name: "English", flag: "🇺🇸" },
+  { code: "vi", name: "Tiếng Việt", flag: "🇻🇳" },
+] as const;
 
-export default i18n
+export default i18n;
