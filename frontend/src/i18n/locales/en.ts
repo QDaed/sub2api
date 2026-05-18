@@ -114,6 +114,53 @@ export default {
       allRightsReserved: "All rights reserved.",
     },
   },
+  docs: {
+    badge: "Documentation",
+    title: "Sub2API Docs",
+    subtitle:
+      "A quick guide to create API keys, configure clients, and monitor usage in the same familiar interface.",
+    backHome: "Back home",
+    openExternal: "Open full docs",
+    embedded: {
+      title: "Full documentation",
+      description: "Documentation content from your website configuration.",
+    },
+    quickStart: {
+      title: "Quick start",
+      description: "The three most common steps for using Sub2API.",
+      createKey: {
+        title: "Create an API key",
+        description:
+          "Sign in to the dashboard and create a new key from API Keys.",
+      },
+      configureClient: {
+        title: "Configure your client",
+        description:
+          "Use the OpenAI/Anthropic-compatible endpoint in your app.",
+      },
+      monitorUsage: {
+        title: "Monitor usage",
+        description: "Check quota, costs, and API request logs in real time.",
+      },
+    },
+    cards: {
+      apiKeys: {
+        title: "API Keys",
+        description:
+          "Manage access keys, quota limits, and usage scope for each user.",
+      },
+      routing: {
+        title: "Model routing",
+        description:
+          "Call multiple AI providers through one unified API with flexible failover.",
+      },
+      billing: {
+        title: "Usage & billing",
+        description:
+          "Track costs, requests, and consumed tokens to keep budgets under control.",
+      },
+    },
+  },
 
   // Key Usage Query Page
   keyUsage: {

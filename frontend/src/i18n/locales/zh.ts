@@ -113,6 +113,48 @@ export default {
       allRightsReserved: "保留所有权利。",
     },
   },
+  docs: {
+    badge: "文档",
+    title: "Sub2API 文档",
+    subtitle:
+      "使用同样熟悉的界面快速了解如何创建 API 密钥、配置客户端并查看用量。",
+    backHome: "返回首页",
+    openExternal: "打开完整文档",
+    embedded: {
+      title: "完整文档",
+      description: "来自站点配置的文档内容。",
+    },
+    quickStart: {
+      title: "快速开始",
+      description: "使用 Sub2API 最常见的三个步骤。",
+      createKey: {
+        title: "创建 API 密钥",
+        description: "登录控制台，在 API Keys 页面创建新的访问密钥。",
+      },
+      configureClient: {
+        title: "配置客户端",
+        description: "在应用中使用兼容 OpenAI/Anthropic 的接口地址。",
+      },
+      monitorUsage: {
+        title: "查看用量",
+        description: "实时查看配额、费用和 API 请求日志。",
+      },
+    },
+    cards: {
+      apiKeys: {
+        title: "API 密钥",
+        description: "管理每个用户的访问密钥、配额限制和使用范围。",
+      },
+      routing: {
+        title: "模型路由",
+        description: "通过统一 API 调用多个 AI 服务商，并支持灵活切换。",
+      },
+      billing: {
+        title: "用量与计费",
+        description: "追踪费用、请求次数和 Token 消耗，便于控制预算。",
+      },
+    },
+  },
 
   // Key Usage Query Page
   keyUsage: {

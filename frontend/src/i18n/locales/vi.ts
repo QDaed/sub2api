@@ -60,6 +60,7 @@ export default {
         official: "Đăng ký chính thức",
         us: "Nền tảng của chúng tôi",
       },
+<<<<<<< Updated upstream
       items: {
         pricing: {
           feature: "Giá cả",
@@ -86,6 +87,170 @@ export default {
           official: "Không có sẵn",
           us: "Hạn mức và phân tích chi tiết",
         },
+=======
+<<<<<<< Updated upstream
+      "cliTabs": {
+        "claudeCode": "Mã Claude",
+        "geminiCli": "Gemini CLI",
+        "codexCli": "Codex CLI",
+        "codexCliWs": "Codex CLI (WebSocket)",
+        "opencode": "OpenCode"
+=======
+    },
+    providers: {
+      title: "Mô hình AI được hỗ trợ",
+      description: "Một API, nhiều lựa chọn",
+      supported: "Được hỗ trợ",
+      soon: "Sắp",
+      claude: "Claude",
+      gemini: "Gemini",
+      antigravity: "Antigravity",
+      more: "Thêm",
+    },
+    cta: {
+      title: "Sẵn sàng bắt đầu?",
+      description:
+        "Đăng ký ngay để nhận lượt dùng thử miễn phí và trải nghiệm AI thuận tiện hơn",
+      button: "Đăng ký miễn phí",
+    },
+    footer: {
+      allRightsReserved: "Mọi quyền được bảo lưu.",
+    },
+  },
+  docs: {
+    badge: "Tài liệu",
+    title: "Tài liệu Sub2API",
+    subtitle:
+      "Hướng dẫn nhanh để tạo API Key, cấu hình client và theo dõi mức sử dụng trên cùng một giao diện quen thuộc.",
+    backHome: "Về trang chủ",
+    openExternal: "Mở tài liệu đầy đủ",
+    embedded: {
+      title: "Tài liệu đầy đủ",
+      description: "Nội dung tài liệu từ cấu hình website của bạn.",
+    },
+    quickStart: {
+      title: "Bắt đầu nhanh",
+      description: "Ba bước phổ biến nhất để sử dụng Sub2API.",
+      createKey: {
+        title: "Tạo API Key",
+        description: "Đăng nhập dashboard và tạo khóa mới trong mục API Keys.",
+      },
+      configureClient: {
+        title: "Cấu hình client",
+        description:
+          "Dùng endpoint tương thích OpenAI/Anthropic trong ứng dụng của bạn.",
+      },
+      monitorUsage: {
+        title: "Theo dõi sử dụng",
+        description:
+          "Kiểm tra quota, chi phí và nhật ký gọi API theo thời gian thực.",
+      },
+    },
+    cards: {
+      apiKeys: {
+        title: "API Keys",
+        description:
+          "Quản lý khóa truy cập, giới hạn quota và phạm vi sử dụng cho từng người dùng.",
+      },
+      routing: {
+        title: "Định tuyến mô hình",
+        description:
+          "Gọi nhiều nhà cung cấp AI qua một API thống nhất với cơ chế chuyển đổi linh hoạt.",
+      },
+      billing: {
+        title: "Sử dụng & thanh toán",
+        description:
+          "Theo dõi chi phí, lượt gọi và token đã dùng để kiểm soát ngân sách tốt hơn.",
+      },
+    },
+  },
+  keyUsage: {
+    title: "Tra cứu sử dụng API Key",
+    subtitle:
+      "Nhập Khóa API của bạn để xem trạng thái sử dụng và chi tiêu theo thời gian thực",
+    placeholder: "sk-ant-mirror-xxxxxxxxxxxx",
+    query: "Truy vấn",
+    querying: "Truy vấn...",
+    privacyNote:
+      "API Key chỉ được xử lý trên trình duyệt của bạn và sẽ không bị lưu lại",
+    dateRange: "Phạm vi ngày:",
+    dateRangeToday: "Hôm nay",
+    dateRange7d: "7 ngày",
+    dateRange30d: "30 ngày",
+    dateRangeCustom: "Tùy chỉnh",
+    apply: "Áp dụng",
+    used: "Đã sử dụng",
+    detailInfo: "Thông tin chi tiết",
+    tokenStats: "Thống kê Token",
+    modelStats: "Thống kê sử dụng mô hình",
+    model: "Mô hình",
+    requests: "Yêu cầu",
+    inputTokens: "Nhập Token",
+    outputTokens: "Token đầu ra",
+    cacheCreationTokens: "Tạo bộ đệm",
+    cacheReadTokens: "Đọc bộ đệm",
+    totalTokens: "Tổng cộng Token",
+    cost: "Chi phí",
+    quotaMode: "Chế độ hạn mức của key",
+    walletBalance: "Số dư trên ví",
+    totalQuota: "Tổng hạn ngạch",
+    limit5h: "Giới hạn 5 giờ",
+    limitDaily: "Giới hạn hàng ngày",
+    limit7d: "Giới hạn 7 ngày",
+    limitWeekly: "Giới hạn hàng tuần",
+    limitMonthly: "Giới hạn hàng tháng",
+    remainingQuota: "Hạn ngạch còn lại",
+    expiresAt: "Hết hạn vào",
+    todayExpires: "(hết hạn hôm nay)",
+    daysLeft: "({days} ngày)",
+    usedQuota: "Hạn ngạch đã sử dụng",
+    resetNow: "Đặt lại sớm",
+    subscriptionType: "Loại đăng ký",
+    subscriptionExpires: "Gói hết hạn",
+    todayRequests: "Yêu cầu hôm nay",
+    todayInputTokens: "Đầu vào hôm nay",
+    todayOutputTokens: "Đầu ra hôm nay",
+    todayTokens: "Token hôm nay",
+    todayCacheCreation: "Tạo bộ nhớ đệm hôm nay",
+    todayCacheRead: "Đọc bộ nhớ đệm hôm nay",
+    todayCost: "Chi phí hôm nay",
+    rpmTpm: "RPM / TPM",
+    totalRequests: "Tổng số yêu cầu",
+    totalInputTokens: "Tổng đầu vào",
+    totalOutputTokens: "Tổng đầu ra",
+    totalTokensLabel: "Tổng token",
+    totalCacheCreation: "Tổng số lần tạo bộ nhớ đệm",
+    totalCacheRead: "Tổng đọc bộ nhớ đệm",
+    totalCost: "Tổng chi phí",
+    avgDuration: "Thời lượng trung bình",
+    dayShort: "Ngày",
+    weekShort: "Tuần",
+    monthShort: "Tháng",
+    enterApiKey: "Vui lòng nhập Khóa API",
+    querySuccess: "Truy vấn thành công",
+    queryFailed: "Truy vấn không thành công",
+    queryFailedRetry: "Truy vấn không thành công, vui lòng thử lại sau",
+  },
+  setup: {
+    title: "Thiết lập Sub2API",
+    description: "Định cấu hình phiên bản Sub2API của bạn",
+    database: {
+      title: "Cấu hình cơ sở dữ liệu",
+      description: "Kết nối tới cơ sở dữ liệu PostgreSQL của bạn",
+      host: "Máy chủ",
+      port: "Cổng",
+      username: "Tên người dùng",
+      password: "Mật khẩu",
+      databaseName: "Tên cơ sở dữ liệu",
+      sslMode: "Chế độ SSL",
+      passwordPlaceholder: "Mật khẩu",
+      ssl: {
+        disable: "Tắt",
+        require: "Yêu cầu",
+        verifyCa: "Xác minh CA",
+        verifyFull: "Xác minh đầy đủ",
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
       },
     },
     providers: {

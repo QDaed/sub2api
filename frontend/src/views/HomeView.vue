@@ -36,6 +36,7 @@
       ></div>
     </div>
 
+<<<<<<< Updated upstream
     <!-- Header -->
     <header class="relative z-20 px-6 py-4">
       <nav class="mx-auto flex max-w-6xl items-center justify-between">
@@ -115,6 +116,17 @@
         </div>
       </nav>
     </header>
+=======
+    <PublicNavbar
+      :site-name="siteName"
+      :site-logo="siteLogo"
+      :is-dark="isDark"
+      :is-authenticated="isAuthenticated"
+      :dashboard-path="dashboardPath"
+      :user-initial="userInitial"
+      @toggle-theme="toggleTheme"
+    />
+>>>>>>> Stashed changes
 
     <!-- Main Content -->
     <main class="relative z-10 flex-1 px-6 py-16">
@@ -426,15 +438,29 @@
           {{ t("home.footer.allRightsReserved") }}
         </p>
         <div class="flex items-center gap-4">
+          <router-link
+            to="/docs"
+            class="text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-dark-400 dark:hover:text-white"
+          >
+<<<<<<< Updated upstream
+            {{ t("home.docs") }}
+=======
+<<<<<<< Updated upstream
+            {{ t('home.docs') }}
+          </a>
           <a
-            v-if="docUrl"
-            :href="docUrl"
+            :href="githubUrl"
             target="_blank"
             rel="noopener noreferrer"
             class="text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-dark-400 dark:hover:text-white"
           >
-            {{ t("home.docs") }}
+            GitHub
+>>>>>>> Stashed changes
           </a>
+=======
+            {{ t("home.docs") }}
+          </router-link>
+>>>>>>> Stashed changes
         </div>
       </div>
     </footer>
@@ -442,11 +468,27 @@
 </template>
 
 <script setup lang="ts">
+<<<<<<< Updated upstream
 import { ref, computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAuthStore, useAppStore } from "@/stores";
 import LocaleSwitcher from "@/components/common/LocaleSwitcher.vue";
 import Icon from "@/components/icons/Icon.vue";
+=======
+<<<<<<< Updated upstream
+import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useAuthStore, useAppStore } from '@/stores'
+import LocaleSwitcher from '@/components/common/LocaleSwitcher.vue'
+import Icon from '@/components/icons/Icon.vue'
+=======
+import { ref, computed, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
+import { useAuthStore, useAppStore } from "@/stores";
+import Icon from "@/components/icons/Icon.vue";
+import PublicNavbar from "@/components/layout/PublicNavbar.vue";
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 const { t } = useI18n();
 
@@ -454,6 +496,16 @@ const authStore = useAuthStore();
 const appStore = useAppStore();
 
 // Site settings - directly from appStore (already initialized from injected config)
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+const siteName = computed(() => appStore.cachedPublicSettings?.site_name || appStore.siteName || 'Sub2API')
+const siteLogo = computed(() => appStore.cachedPublicSettings?.site_logo || appStore.siteLogo || '')
+const siteSubtitle = computed(() => appStore.cachedPublicSettings?.site_subtitle || 'AI API Gateway Platform')
+const docUrl = computed(() => appStore.cachedPublicSettings?.doc_url || appStore.docUrl || '')
+const homeContent = computed(() => appStore.cachedPublicSettings?.home_content || '')
+=======
+>>>>>>> Stashed changes
 const siteName = computed(
   () =>
     appStore.cachedPublicSettings?.site_name || appStore.siteName || "Sub2API",
@@ -465,12 +517,19 @@ const siteSubtitle = computed(
   () =>
     appStore.cachedPublicSettings?.site_subtitle || "AI API Gateway Platform",
 );
+<<<<<<< Updated upstream
 const docUrl = computed(
   () => appStore.cachedPublicSettings?.doc_url || appStore.docUrl || "",
 );
 const homeContent = computed(
   () => appStore.cachedPublicSettings?.home_content || "",
 );
+=======
+const homeContent = computed(
+  () => appStore.cachedPublicSettings?.home_content || "",
+);
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 // Check if homeContent is a URL (for iframe display)
 const isHomeContentUrl = computed(() => {
