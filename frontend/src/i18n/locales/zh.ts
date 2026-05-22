@@ -113,45 +113,637 @@ export default {
       allRightsReserved: "保留所有权利。",
     },
   },
+  // FAQ Page
+  faq: {
+    badge: "常见问题",
+    title: "常见问题",
+    subtitle: "关于 AISHOPACC 的一切你想知道的",
+    stillHaveQuestions: {
+      title: "还有其他问题？",
+      description: "我们的支持团队全天候为您提供帮助。",
+      telegram: "通过 Telegram 联系",
+      getStarted: "立即开始",
+    },
+    sections: {
+      general: {
+        title: "通用",
+        what: {
+          question: "AISHOPACC 是什么？",
+          answer: "AISHOPACC 是一个 AI API 网关平台，聚合多个 AI 服务提供商（Claude、GPT、Gemini 等）成为一个统一的 API。您只需一个 API 密钥即可访问所有已连接的模型，支持自动故障切换和实时使用量追踪。",
+        },
+        why: {
+          question: "为什么要用 AISHOPACC 而不是直接使用官方 API？",
+          answer: "三个主要原因：<strong>省钱</strong> — 按需付费，无固定月费。<strong>便捷</strong> — 一个密钥支持所有模型，无需管理多个订阅。<strong>可靠</strong> — 多账号池 + 自动故障切换，服务中断更少。",
+        },
+        security: {
+          question: "我的数据安全吗？",
+          answer: "安全。您的 API 请求通过网关路由，传输过程全程 TLS 加密。我们不存储您的提示词或回复内容，仅记录使用元数据（模型、token 数量、费用）用于计费。",
+        },
+      },
+      payment: {
+        title: "支付与计费",
+        pricing: {
+          question: "价格如何计算？",
+          answer: "按实际 token 用量计费。每个模型都有独立的 per-token 价格。您可以在价格页面查看完整的价格表。没有固定月费 — 您只需为实际使用量付费。",
+        },
+        expiry: {
+          question: "余额会过期吗？有月费吗？",
+          answer: "只要账户处于活跃状态，余额<strong>不会过期</strong>。没有月费。余额会一直保留在账户中，直到您通过 API 调用用完为止。",
+        },
+        refund: {
+          question: "退款政策是怎样的？",
+          answer: "如果您对服务不满意，请在购买后 7 天内联系我们的支持团队。我们会根据具体情况提供部分或全额退款。未使用的余额退款通常会被批准。",
+        },
+      },
+      usage: {
+        title: "使用与限制",
+        multiDevice: {
+          question: "一个 API 密钥可以在多个设备上使用吗？",
+          answer: "完全可以。一个 API 密钥可以在所有设备和环境同时使用 — 笔记本、服务器、CI/CD、Docker 容器等。没有设备数量限制。请妥善保管密钥，不要提交到公开的代码仓库。",
+        },
+        balance: {
+          question: "如何查看余额和使用量？",
+          answer: "您可以随时在仪表板查看余额。仪表板显示当前余额、使用历史、按模型分类的用量以及每日/每周图表。每次 API 调用也会在响应头中返回剩余配额。",
+        },
+        rateLimit: {
+          question: "有速率限制吗？",
+          answer: "速率限制取决于上游提供商和您的用量。大多数用户每分钟 100 个请求以内不会遇到问题。大量用户（>1000 req/min）可能会遇到上游速率限制。如需高吞吐量的专属服务，请联系我们的支持团队。",
+        },
+      },
+      integration: {
+        title: "集成",
+        sdk: {
+          question: "如何配置 Claude Code、Anthropic SDK 或 OpenAI SDK？",
+          answer: "只需将 <code>base_url</code> 设置为我们的网关端点，并使用您的 AISHOPACC 密钥作为 API key：<br><br><strong>Anthropic SDK：</strong><br><code>ANTHROPIC_BASE_URL=https://your-gateway.com</code><br><code>ANTHROPIC_AUTH_TOKEN=your_key</code><br><br><strong>OpenAI SDK：</strong><br><code>base_url = \"https://your-gateway.com/v1\"</code><br><code>api_key = \"your_key\"</code>",
+        },
+        compatible: {
+          question: "哪些工具和 IDE 与之兼容？",
+          answer: "任何允许配置 Anthropic 或 OpenAI 自定义 base URL 的工具都兼容。包括：Claude Code CLI、Cursor、Cline、Continue、Zed、OpenClaw、Roo Code，以及任何使用官方 Anthropic 或 OpenAI SDK 的应用程序。",
+        },
+        tools: {
+          question: "支持 function calling、vision 和 streaming 吗？",
+          answer: "支持，全部高级功能完整支持：tools/function calling、vision（图片输入）、streaming 响应、extended thinking（Claude）和 prompt caching。所有功能与官方 API 完全一致。",
+        },
+      },
+      support: {
+        title: "支持",
+        contact: {
+          question: "遇到问题如何获得帮助？",
+          answer: "首先，请在仪表板中查看错误消息和使用日志。常见错误：<code>401</code> = 密钥无效，<code>402</code> = 余额不足，<code>429</code> = 速率限制，<code>5xx</code> = 上游提供商问题。如果问题持续存在，请通过 Telegram联系我们并提供请求 ID（可在响应头中找到）。",
+        },
+        bulk: {
+          question: "大用量或企业用户有折扣吗？",
+          answer: "有！我们提供阶梯折扣，充值 500 美元起（5% bonus credit），1000 美元以上享 10%。如需企业级需求（专属吞吐量、SLA、白标），请通过 Telegram 联系我们获取定制报价。",
+        },
+      },
+    },
+  },
+  // Pricing Page
+  pricing: {
+    badge: "价格",
+    title: "简单透明的价格",
+    subtitle: "按需付费，无隐藏费用，无月最低消费。",
+    popular: "最受欢迎",
+    plans: {
+      free: {
+        name: "免费试用",
+        description: "新用户注册即得免费额度",
+        priceLabel: "0元",
+        priceNote: "",
+        f1: "5 美元免费额度",
+        f2: "访问所有模型",
+        f3: "基础用量仪表板",
+        button: "免费注册",
+      },
+      starter: {
+        name: "入门版",
+        description: "适合个人开发者",
+        priceLabel: "70元",
+        priceNote: "/ 月",
+        f1: "每月 10 美元额度",
+        f2: "优先路由",
+        f3: "完整用量分析",
+        f4: "邮件支持",
+        button: "立即开始",
+      },
+      pro: {
+        name: "专业版",
+        description: "适合团队和大用量用户",
+        priceLabel: "350元",
+        priceNote: "/ 月",
+        f1: "每月 50 美元额度",
+        f2: "包含入门版全部功能",
+        f3: "高级分析",
+        f4: "优先支持",
+        f5: "自定义速率限制",
+        button: "升级专业版",
+      },
+    },
+    payPerUse: {
+      title: "按量计费模型价格",
+      subtitle: "每个模型透明 per-token 价格",
+    },
+    table: {
+      model: "模型",
+      input: "输入（每 1M token）",
+      output: "输出（每 1M token）",
+      note: "价格仅供参考，实际费率可能有所变动。请在仪表板查看最新的模型定价。",
+    },
+    models: {
+      claude: "Anthropic Claude",
+      openai: "OpenAI",
+      gemini: "Google Gemini",
+      prices: {
+        claudeOpusInput: "¥18",
+        claudeOpusOutput: "¥90",
+        claudeSonnetInput: "¥11",
+        claudeSonnetOutput: "¥55",
+        claudeHaikuInput: "¥1.5",
+        claudeHaikuOutput: "¥7",
+        gpt45Input: "¥27",
+        gpt45Output: "¥108",
+        gpt4oInput: "¥11",
+        gpt4oOutput: "¥43",
+        o1Input: "¥72",
+        o1Output: "¥288",
+        geminiProInput: "¥7",
+        geminiProOutput: "¥28",
+        geminiFlashInput: "¥0.7",
+        geminiFlashOutput: "¥2.8",
+      },
+    },
+    cta: {
+      title: "准备好开始了吗？",
+      description: "立即注册，获取免费额度体验所有模型。",
+      signup: "免费注册",
+      dashboard: "进入仪表板",
+      faq: "查看常见问题",
+    },
+  },
   docs: {
     badge: "文档",
-    title: "Sub2API 文档",
+    title: "AISHOPACC API 文档",
     subtitle:
-      "使用同样熟悉的界面快速了解如何创建 API 密钥、配置客户端并查看用量。",
+      "全面的 AI API 使用指南，成本比直接从提供商购买节省高达 10 倍。",
     backHome: "返回首页",
-    openExternal: "打开完整文档",
-    embedded: {
-      title: "完整文档",
-      description: "来自站点配置的文档内容。",
+    openExternal: "在网站上查看",
+
+    // Categories
+    categories: {
+      introduction: "简介",
+      purchase: "购买与充值",
+      openai: "OpenAI SDK",
+      anthropic: "Anthropic SDK",
+      googleGenai: "Google GenAI SDK",
+      claudeCode: "Claude Code",
+      codex: "Codex CLI",
+      cursor: "Cursor IDE",
+      cline: "Cline",
+      opencode: "OpenCode",
+      openclaw: "OpenClaw",
+      geminiCli: "Gemini CLI",
+      nanoBanana: "Nano Banana",
+      suno: "Suno AI",
+      sellerApi: "Seller API",
     },
-    quickStart: {
-      title: "快速开始",
-      description: "使用 Sub2API 最常见的三个步骤。",
-      createKey: {
-        title: "创建 API 密钥",
-        description: "登录控制台，在 API Keys 页面创建新的访问密钥。",
+
+    // Introduction
+    introduction: {
+      title: "AISHOPACC 简介",
+      subtitle:
+        "AISHOPACC 是一个市场平台，以显著低于原始供应商的价格提供领先 AI 服务的 API 密钥。",
+      whyChoose: {
+        title: "为什么选择 AISHOPACC？",
+        costSavings: {
+          title: "卓越的成本节省",
+          description:
+            "您花费的每一美元都通过我们的积分系统翻倍放大，享有优惠汇率。此外还有层级促销 - 充值越多，折扣越高。",
+        },
+        compatibility: {
+          title: "99.99% API 兼容性",
+          description:
+            "作为完全兼容的代理运行。除 Base URL 和 API 密钥外无需更改任何代码。",
+        },
+        quickIntegration: {
+          title: "快速集成",
+          description: "只需 2 步即可开始使用 AI API。",
+        },
       },
-      configureClient: {
-        title: "配置客户端",
-        description: "在应用中使用兼容 OpenAI/Anthropic 的接口地址。",
+      features: {
+        streaming: "流式传输 (SSE)",
+        vision: "视觉/图像输入",
+        functionCalling: "函数调用/工具使用",
+        reasoning: "扩展思考/推理模式",
+        promptCaching: "提示缓存 (Anthropic)",
       },
-      monitorUsage: {
-        title: "查看用量",
-        description: "实时查看配额、费用和 API 请求日志。",
+      howItWorks: {
+        title: "工作原理",
+        step1: "选择购买方式 - 快速购买或登录长期管理",
+        step2: "选择适当的组 - 组决定可访问的模型/服务",
+        step3: "选择模型或服务 - 聊天、编码、图像、视频或 TTS",
+        step4: "选择积分套餐 - 最低 $10，$10 的倍数",
+        step5: "通过 VietQR 支付 - 扫描二维码并转入正确金额",
+        step6: "接收 API 密钥或余额 - 支付确认后创建密钥",
+      },
+      support: {
+        title: "支持",
+        telegramBot: "Telegram 机器人",
+        telegramSupport: "Telegram 支持",
+        email: "电子邮件",
       },
     },
-    cards: {
-      apiKeys: {
-        title: "API 密钥",
-        description: "管理每个用户的访问密钥、配额限制和使用范围。",
+
+    // Purchase
+    purchase: {
+      title: "购买与充值指南",
+      subtitle:
+        "了解如何在 AISHOPACC 购买 API 密钥和充值积分。",
+      quickBuy: {
+        title: "快速购买/充值",
+        description:
+          "无需创建账户即可快速购买密钥或充值积分。",
       },
-      routing: {
-        title: "模型路由",
-        description: "通过统一 API 调用多个 AI 服务商，并支持灵活切换。",
+      steps: {
+        buyKey: {
+          title: "如何购买密钥",
+          step1: "在网站上打开快速购买专区",
+          step2: "选择适合您需求的组",
+          step3: "选择积分金额或套餐",
+          step4: "如果需要，输入接收密钥的电子邮件",
+          step5: "扫描 VietQR 并转入正确金额和内容",
+          step6: "支付确认后将显示或发送密钥",
+        },
+        topup: {
+          title: "如何充值",
+          step1: "打开充值专区",
+          step2: "输入要充值的 API 密钥或密钥信息",
+          step3: "选择要充值的金额",
+          step4: "通过 VietQR 支付正确内容",
+        },
       },
-      billing: {
-        title: "用量与计费",
-        description: "追踪费用、请求次数和 Token 消耗，便于控制预算。",
+      groupGuide: {
+        title: "组选择指南",
+        description:
+          "组决定密钥可以访问的模型、服务和限制。",
+        howToChoose: {
+          title: "如何选择组",
+          multiModel: "多模型 API 使用：选择 OpenAI-compatible 组",
+          claude: "Claude Code 或 Anthropic SDK：选择 Claude 组",
+          gemini: "Gemini / Google GenAI SDK：选择 Google GenAI 组",
+          media: "图像、视频、TTS：选择具有媒体服务的组",
+        },
+      },
+    },
+
+    // OpenAI SDK
+    openai: {
+      title: "OpenAI SDK 指南",
+      subtitle: "使用 AISHOPACC API 密钥的 OpenAI SDK。",
+      installation: {
+        title: "安装",
+      },
+      setup: {
+        title: "设置",
+      },
+      chatCompletion: {
+        title: "聊天补全",
+      },
+      streaming: {
+        title: "流式响应",
+      },
+      vision: {
+        title: "视觉 API",
+      },
+      functionCalling: {
+        title: "函数调用",
+      },
+      endpoints: {
+        title: "API 端点",
+        method: "方法",
+        url: "URL",
+        description: "描述",
+        chatCompletion: "聊天补全",
+        imageGeneration: "图像生成",
+        tts: "文本转语音",
+        embeddings: "嵌入",
+        rerank: "重排序",
+        listModels: "列出模型",
+      },
+    },
+
+    // Anthropic SDK
+    anthropic: {
+      title: "Anthropic SDK 指南",
+      subtitle: "使用 AISHOPACC API 密钥的 Anthropic SDK。",
+      installation: {
+        title: "安装",
+      },
+      setup: {
+        title: "设置",
+      },
+      messages: {
+        title: "消息 API",
+      },
+      streaming: {
+        title: "流式响应",
+      },
+      vision: {
+        title: "视觉 API",
+      },
+      toolUse: {
+        title: "工具使用",
+      },
+      apiDetails: {
+        title: "API 详情",
+      },
+    },
+
+    // Google GenAI
+    googleGenai: {
+      title: "Google GenAI SDK 指南",
+      subtitle: "使用 AISHOPACC API 密钥的 Google GenAI SDK。",
+      installation: {
+        title: "安装",
+      },
+      setup: {
+        title: "设置",
+      },
+      generateContent: {
+        title: "生成内容",
+      },
+      streaming: {
+        title: "流式响应",
+      },
+      vision: {
+        title: "视觉 API",
+      },
+      functionCalling: {
+        title: "函数调用",
+      },
+      endpoints: {
+        title: "API 端点",
+      },
+    },
+
+    // Claude Code
+    claudeCode: {
+      title: "Claude Code CLI 指南",
+      subtitle:
+        "配置 Claude Code CLI 以使用 AISHOPACC API 密钥。",
+      installation: {
+        title: "安装",
+      },
+      setup: {
+        title: "配置",
+        description: "配置 Claude Code 以使用 AISHOPACC 端点。",
+      },
+      settingsFile: {
+        title: "设置文件",
+      },
+      envVars: {
+        title: "环境变量",
+      },
+      usage: {
+        title: "使用",
+      },
+    },
+
+    // Codex CLI
+    codex: {
+      title: "Codex CLI 指南",
+      subtitle:
+        "配置 Codex CLI 以使用 AISHOPACC API 密钥。",
+      installation: {
+        title: "安装",
+      },
+      configuration: {
+        title: "配置",
+      },
+      usage: {
+        title: "使用",
+      },
+      envVars: {
+        title: "环境变量",
+      },
+    },
+
+    // Cursor IDE
+    cursor: {
+      title: "Cursor IDE 指南",
+      subtitle:
+        "配置 Cursor IDE 以使用 AISHOPACC API 密钥。",
+      requirements: {
+        title: "要求",
+        cursorPro: "Cursor Pro 计划（用于 BYOK 功能）",
+        apiKey: "AISHOPACC 的 API 密钥",
+      },
+      configuration: {
+        title: "配置",
+        step1: "打开 Cursor Settings → Models (Cmd/Ctrl + ,)",
+        step2: "输入您的 AISHOPACC API 密钥",
+        step3: "将 Base URL 设置为 https://api.aishopacc.com/cursor",
+      },
+      openai: {
+        title: "OpenAI 设置",
+        apiKey: "输入您的 AISHOPACC API 密钥",
+        baseUrl: "Base URL 覆盖",
+      },
+      anthropic: {
+        title: "Anthropic 设置",
+        description: "使用与 OpenAI 相同的 API 密钥",
+      },
+      google: {
+        title: "Google 设置",
+        description: "使用与 OpenAI 相同的 API 密钥",
+      },
+      usage: {
+        title: "使用",
+        chat: "打开聊天面板",
+        inlineEdit: "内联代码编辑",
+      },
+    },
+
+    // Cline
+    cline: {
+      title: "Cline 指南",
+      subtitle:
+        "配置 VS Code 中的 Cline 以使用 AISHOPACC API 密钥。",
+      configuration: {
+        title: "配置",
+      },
+      settings: {
+        title: "设置",
+        field: "字段",
+        value: "值",
+        yourKey: "您的 AISHOPACC API 密钥",
+        exampleModel: "例如：gpt-5.2, claude-sonnet-4-5",
+      },
+      suggestedModels: {
+        title: "建议的模型",
+      },
+      usage: {
+        title: "使用",
+      },
+    },
+
+    // OpenCode
+    opencode: {
+      title: "OpenCode 指南",
+      subtitle:
+        "配置 OpenCode 以使用 AISHOPACC API 密钥。",
+      installation: {
+        title: "安装",
+      },
+      auth: {
+        title: "认证",
+      },
+      configFile: {
+        title: "配置文件",
+      },
+      usage: {
+        title: "使用",
+      },
+    },
+
+    // OpenClaw
+    openclaw: {
+      title: "OpenClaw 指南",
+      subtitle:
+        "配置 OpenClaw AI 代理框架以使用 AISHOPACC。",
+      endpoints: {
+        title: "端点",
+      },
+      config: {
+        title: "配置",
+      },
+      usage: {
+        title: "使用",
+        step1: "创建 openclaw.json 配置文件",
+        step2: "配置 API 密钥",
+        step3: "选择模型",
+        step4: "设置安全",
+        step5: "启动 OpenClaw",
+      },
+    },
+
+    // Gemini CLI
+    geminiCli: {
+      title: "Gemini CLI 指南",
+      subtitle:
+        "配置 Gemini CLI 以使用 AISHOPACC API 密钥。",
+      installation: {
+        title: "安装",
+      },
+      configuration: {
+        title: "配置",
+      },
+      envVars: {
+        title: "环境变量",
+      },
+      usage: {
+        title: "使用",
+      },
+    },
+
+    // Nano Banana
+    nanoBanana: {
+      title: "Nano Banana API 指南",
+      subtitle:
+        "通过 Nano Banana API 使用 Google Gemini Image 模型生成图像。",
+      endpoint: {
+        title: "端点",
+      },
+      authentication: {
+        title: "认证",
+      },
+      generate: {
+        title: "生成图像",
+      },
+      parameters: {
+        title: "参数",
+        name: "参数",
+        type: "类型",
+        required: "必需",
+        description: "描述",
+      },
+      models: {
+        title: "模型",
+        refImages: "参考图像",
+        sizes: "图像尺寸",
+      },
+    },
+
+    // Suno AI
+    suno: {
+      title: "Suno AI API 指南",
+      subtitle:
+        "通过 AISHOPACC API 使用 Suno AI 生成音乐和歌词。",
+      baseUrl: {
+        title: "Base URL",
+      },
+      workflow: {
+        title: "工作流程",
+      },
+      createMusic: {
+        title: "创建音乐",
+      },
+      fetchResult: {
+        title: "获取结果",
+      },
+      models: {
+        title: "支持的模型",
+        version: "版本",
+      },
+      status: {
+        title: "任务状态",
+        submitted: "已提交，等待排队",
+        queueing: "排队等待处理",
+        processing: "正在生成音乐/歌词",
+        success: "完成，结果就绪",
+        failed: "失败，查看 fail_reason",
+      },
+    },
+
+    // Seller API
+    sellerApi: {
+      title: "Seller API 指南",
+      subtitle:
+        "AISHOPACC 卖家的 API，用于以编程方式管理密钥和积分。",
+      baseUrl: {
+        title: "Base URL",
+      },
+      authentication: {
+        title: "认证",
+      },
+      warning: {
+        title: "安全警告",
+        message: "不要共享密钥。切勿提交到 git 或暴露在客户端代码中。",
+      },
+      quickStart: {
+        title: "快速开始",
+        getInfo: {
+          title: "获取卖家信息",
+        },
+        createKey: {
+          title: "创建 API 密钥",
+        },
+        listKeys: {
+          title: "列出密钥",
+        },
+      },
+      endpoints: {
+        title: "API 端点",
+        description: "描述",
+        getInfo: "获取卖家信息",
+        listKeys: "列出所有密钥",
+        createKey: "创建新密钥",
+        bulkCreate: "批量创建密钥",
+        topup: "为密钥充值",
+        deduct: "扣除密钥积分",
+        updateStatus: "更新密钥状态",
+        deleteKey: "删除密钥并退还积分",
+        stats: "获取使用统计",
+        transactions: "获取交易历史",
       },
     },
   },
@@ -231,8 +823,8 @@ export default {
 
   // Setup Wizard
   setup: {
-    title: "Sub2API 安装向导",
-    description: "配置您的 Sub2API 实例",
+    title: "AISHOPACC 安装向导",
+    description: "配置您的 AISHOPACC 实例",
     database: {
       title: "数据库配置",
       description: "连接到您的 PostgreSQL 数据库",
@@ -432,6 +1024,8 @@ export default {
     channelMonitor: "渠道监控",
     channelStatus: "渠道状态",
     riskControl: "风控中心",
+    pricing: "价格",
+    faq: "常见问题",
   },
 
   // Auth
@@ -5793,7 +6387,7 @@ export default {
           "禁用用户注册、公开页面和自助服务功能。仅管理员可以登录和管理平台。",
         siteName: "站点名称",
         siteNameHint: "显示在邮件和页面标题中",
-        siteNamePlaceholder: "Sub2API",
+        siteNamePlaceholder: "AISHOPACC",
         siteSubtitle: "站点副标题",
         siteSubtitleHint: "显示在登录和注册页面",
         siteSubtitlePlaceholder: "订阅转 API 转换平台",
@@ -6111,7 +6705,7 @@ export default {
         fromEmail: "发件人邮箱",
         fromEmailPlaceholder: "noreply{'@'}example.com",
         fromName: "发件人名称",
-        fromNamePlaceholder: "Sub2API",
+        fromNamePlaceholder: "AISHOPACC",
         useTls: "使用 TLS",
         useTlsHint: "为 SMTP 连接启用 TLS 加密",
       },

@@ -99,6 +99,16 @@ const navItems = computed<Array<{ to: string; icon: IconName; title: string }>>(
       title: t("docs.backHome"),
     },
     {
+      to: "/pricing",
+      icon: "creditCard",
+      title: t("nav.pricing"),
+    },
+    {
+      to: "/faq",
+      icon: "helpCircle",
+      title: t("nav.faq"),
+    },
+    {
       to: "/docs",
       icon: "book",
       title: t("home.viewDocs"),

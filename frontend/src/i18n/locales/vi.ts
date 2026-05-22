@@ -108,50 +108,637 @@ export default {
       allRightsReserved: "Mọi quyền được bảo lưu.",
     },
   },
+  // FAQ Page
+  faq: {
+    badge: "Câu hỏi thường gặp",
+    title: "Câu hỏi thường gặp",
+    subtitle: "Tất cả những gì bạn cần biết về AISHOPACC",
+    stillHaveQuestions: {
+      title: "Vẫn còn thắc mắc?",
+      description: "Đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng giúp đỡ bạn 24/7.",
+      telegram: "Liên hệ qua Telegram",
+      getStarted: "Bắt đầu ngay",
+    },
+    sections: {
+      general: {
+        title: "Tổng quan",
+        what: {
+          question: "AISHOPACC là gì?",
+          answer: "AISHOPACC là nền tảng gateway API AI, tổng hợp nhiều nhà cung cấp AI (Claude, GPT, Gemini...) thành một API thống nhất. Bạn chỉ cần một khóa API để truy cập tất cả các mô hình AI được kết nối, kèm khả năng chuyển đổi dự phòng tự động và theo dõi sử dụng theo thời gian thực.",
+        },
+        why: {
+          question: "Tại sao nên dùng AISHOPACC thay vì API chính thức?",
+          answer: "Ba lý do chính: <strong>Tiết kiệm chi phí</strong> — chỉ trả tiền cho những gì bạn sử dụng, không có phí cố định hàng tháng. <strong>Tiện lợi</strong> — một khóa cho tất cả các mô hình thay vì quản lý nhiều gói đăng ký. <strong>Độ tin cậy</strong> — nhóm nhiều tài khoản với chuyển đổi dự phòng tự động giúp giảm gián đoạn dịch vụ.",
+        },
+        security: {
+          question: "Dữ liệu của tôi có an toàn không?",
+          answer: "Có. Các yêu cầu API của bạn được định tuyến qua gateway với mã hóa TLS khi truyền tải. Chúng tôi không lưu trữ prompt hoặc phản hồi của bạn. Chỉ có siêu dữ liệu sử dụng (mô hình, số token, chi phí) được ghi log cho mục đích thanh toán.",
+        },
+      },
+      payment: {
+        title: "Thanh toán & Hóa đơn",
+        pricing: {
+          question: "Giá được tính như thế nào?",
+          answer: "Giá dựa trên việc sử dụng token thực tế. Mỗi mô hình có mức giá per-token riêng. Bạn có thể xem bảng giá đầy đủ trên trang Bảng giá. Không có phí cố định hàng tháng — bạn chỉ trả tiền cho những gì bạn thực sự sử dụng.",
+        },
+        expiry: {
+          question: "Credit có hết hạn không? Có phí duy trì hàng tháng không?",
+          answer: "Credit trong tài khoản của bạn <strong>không hết hạn</strong> miễn là tài khoản còn hoạt động. Không có phí duy trì hàng tháng. Credit nằm trong tài khoản cho đến khi bạn sử dụng hết thông qua các lệnh gọi API.",
+        },
+        refund: {
+          question: "Chính sách hoàn tiền như thế nào?",
+          answer: "Nếu bạn không hài lòng với dịch vụ, hãy liên hệ đội ngũ hỗ trợ trong vòng 7 ngày kể từ ngày mua. Chúng tôi cung cấp hoàn tiền một phần hoặc toàn bộ tùy từng trường hợp. Hoàn tiền cho credit chưa sử dụng thường được chấp thuận.",
+        },
+      },
+      usage: {
+        title: "Sử dụng & Giới hạn",
+        multiDevice: {
+          question: "Tôi có thể dùng một API key trên nhiều thiết bị không?",
+          answer: "Hoàn toàn có thể. Một API key hoạt động trên tất cả thiết bị và môi trường cùng lúc — laptop, server, CI/CD, Docker containers... Không có giới hạn số thiết bị. Chỉ cần giữ khóa an toàn và không commit lên các repository công khai.",
+        },
+        balance: {
+          question: "Làm sao kiểm tra số dư và lịch sử sử dụng?",
+          answer: "Bạn có thể kiểm tra số dư bất cứ lúc nào trong dashboard. Dashboard hiển thị credit hiện tại, lịch sử sử dụng, phân tích theo mô hình, và biểu đồ theo ngày/tuần. Mỗi lệnh gọi API cũng trả về quota còn lại trong response headers.",
+        },
+        rateLimit: {
+          question: "Có giới hạn tốc độ không?",
+          answer: "Giới hạn tốc độ phụ thuộc vào nhà cung cấp upstream và khối lượng sử dụng của bạn. Hầu hết người dùng dưới 100 yêu cầu/phút không gặp vấn đề gì. Người dùng khối lượng lớn (>1000 req/phút) có thể gặp giới hạn rate limit từ upstream. Để được hỗ trợ riêng về throughput cao, hãy liên hệ đội ngũ hỗ trợ.",
+        },
+      },
+      integration: {
+        title: "Tích hợp",
+        sdk: {
+          question: "Làm sao cấu hình Claude Code, Anthropic SDK hoặc OpenAI SDK?",
+          answer: "Chỉ cần đặt <code>base_url</code> thành endpoint gateway của chúng tôi và sử dụng AISHOPACC key của bạn làm API key:<br><br><strong>Anthropic SDK:</strong><br><code>ANTHROPIC_BASE_URL=https://your-gateway.com</code><br><code>ANTHROPIC_AUTH_TOKEN=your_key</code><br><br><strong>OpenAI SDK:</strong><br><code>base_url = \"https://your-gateway.com/v1\"</code><br><code>api_key = \"your_key\"</code>",
+        },
+        compatible: {
+          question: "Những công cụ và IDE nào tương thích?",
+          answer: "Bất kỳ công cụ nào cho phép cấu hình base URL tùy chỉnh cho Anthropic hoặc OpenAI đều tương thích. Bao gồm: Claude Code CLI, Cursor, Cline, Continue, Zed, OpenClaw, Roo Code, và bất kỳ ứng dụng nào sử dụng Anthropic hoặc OpenAI SDK chính thức.",
+        },
+        tools: {
+          question: "Có hỗ trợ function calling, vision và streaming không?",
+          answer: "Có, hỗ trợ đầy đủ tất cả các tính năng nâng cao: tools/function calling, vision (nhận diện ảnh), streaming responses, extended thinking (Claude), và prompt caching. Tất cả các tính năng hoạt động giống hệt như với API chính thức.",
+        },
+      },
+      support: {
+        title: "Hỗ trợ",
+        contact: {
+          question: "Làm sao để được hỗ trợ khi gặp sự cố?",
+          answer: "Trước tiên, hãy kiểm tra dashboard để xem thông báo lỗi và log sử dụng. Các lỗi phổ biến: <code>401</code> = khóa không hợp lệ, <code>402</code> = hết credit, <code>429</code> = rate limit, <code>5xx</code> = lỗi nhà cung cấp upstream. Nếu vấn đề vẫn tiếp diễn, hãy liên hệ chúng tôi qua Telegram kèm request ID (có trong response headers).",
+        },
+        bulk: {
+          question: "Có giảm giá cho người dùng khối lượng lớn hoặc doanh nghiệp không?",
+          answer: "Có! Chúng tôi cung cấp chiết khấu theo khối lượng bắt đầu từ nạp 500 USD (bonus 5% credit), tăng lên 10% cho 1000 USD+. Để được hỗ trợ về nhu cầu doanh nghiệp (throughput riêng, SLA, white-label), hãy liên hệ qua Telegram để được báo giá tùy chỉnh.",
+        },
+      },
+    },
+  },
+  // Pricing Page
+  pricing: {
+    badge: "Bảng giá",
+    title: "Bảng giá đơn giản, minh bạch",
+    subtitle: "Chỉ trả tiền cho những gì bạn sử dụng. Không phí ẩn, không tối thiểu hàng tháng.",
+    popular: "Phổ biến nhất",
+    plans: {
+      free: {
+        name: "Dùng thử miễn phí",
+        description: "Người dùng mới bắt đầu với credit miễn phí",
+        priceLabel: "0đ",
+        priceNote: "",
+        f1: "5 USD credit miễn phí",
+        f2: "Truy cập tất cả mô hình",
+        f3: "Dashboard sử dụng cơ bản",
+        button: "Đăng ký miễn phí",
+      },
+      starter: {
+        name: "Starter",
+        description: "Phù hợp cho nhà phát triển cá nhân",
+        priceLabel: "250.000đ",
+        priceNote: "/ tháng",
+        f1: "10 USD credit hàng tháng",
+        f2: "Ưu tiên định tuyến",
+        f3: "Phân tích sử dụng đầy đủ",
+        f4: "Hỗ trợ qua email",
+        button: "Bắt đầu ngay",
+      },
+      pro: {
+        name: "Pro",
+        description: "Dành cho nhóm và người dùng khối lượng lớn",
+        priceLabel: "1.250.000đ",
+        priceNote: "/ tháng",
+        f1: "50 USD credit hàng tháng",
+        f2: "Tất cả tính năng của Starter",
+        f3: "Phân tích nâng cao",
+        f4: "Hỗ trợ ưu tiên",
+        f5: "Giới hạn rate tùy chỉnh",
+        button: "Nâng cấp Pro",
+      },
+    },
+    payPerUse: {
+      title: "Bảng giá theo mô hình (Pay-Per-Use)",
+      subtitle: "Mức giá per-token minh bạch cho mọi mô hình",
+    },
+    table: {
+      model: "Mô hình",
+      input: "Đầu vào (mỗi 1M token)",
+      output: "Đầu ra (mỗi 1M token)",
+      note: "Bảng giá mang tính tham khảo. Tỷ giá thực tế có thể thay đổi. Kiểm tra dashboard để xem bảng giá mô hình mới nhất.",
+    },
+    models: {
+      claude: "Anthropic Claude",
+      openai: "OpenAI",
+      gemini: "Google Gemini",
+      prices: {
+        claudeOpusInput: "65.000đ",
+        claudeOpusOutput: "325.000đ",
+        claudeSonnetInput: "39.000đ",
+        claudeSonnetOutput: "195.000đ",
+        claudeHaikuInput: "5.200đ",
+        claudeHaikuOutput: "26.000đ",
+        gpt45Input: "97.500đ",
+        gpt45Output: "390.000đ",
+        gpt4oInput: "39.000đ",
+        gpt4oOutput: "156.000đ",
+        o1Input: "260.000đ",
+        o1Output: "1.040.000đ",
+        geminiProInput: "26.000đ",
+        geminiProOutput: "104.000đ",
+        geminiFlashInput: "2.600đ",
+        geminiFlashOutput: "10.400đ",
+      },
+    },
+    cta: {
+      title: "Sẵn sàng bắt đầu chưa?",
+      description: "Đăng ký hôm nay và nhận credit miễn phí để thử tất cả mô hình.",
+      signup: "Đăng ký miễn phí",
+      dashboard: "Đến Dashboard",
+      faq: "Đọc FAQ",
+    },
+  },
   docs: {
     badge: "Tài liệu",
-    title: "Tài liệu Sub2API",
+    title: "Tài liệu API AISHOPACC",
     subtitle:
-      "Hướng dẫn nhanh để tạo API Key, cấu hình client và theo dõi mức sử dụng trên cùng một giao diện quen thuộc.",
+      "Hướng dẫn toàn diện về sử dụng API AI với chi phí tiết kiệm đến 10 lần so với nhà cung cấp trực tiếp.",
     backHome: "Về trang chủ",
-    openExternal: "Mở tài liệu đầy đủ",
-    embedded: {
-      title: "Tài liệu đầy đủ",
-      description: "Nội dung tài liệu từ cấu hình website của bạn.",
+    openExternal: "Xem trên website",
+
+    // Categories
+    categories: {
+      introduction: "Giới thiệu",
+      purchase: "Mua key & Nạp tiền",
+      openai: "OpenAI SDK",
+      anthropic: "Anthropic SDK",
+      googleGenai: "Google GenAI SDK",
+      claudeCode: "Claude Code",
+      codex: "Codex CLI",
+      cursor: "Cursor IDE",
+      cline: "Cline",
+      opencode: "OpenCode",
+      openclaw: "OpenClaw",
+      geminiCli: "Gemini CLI",
+      nanoBanana: "Nano Banana",
+      suno: "Suno AI",
+      sellerApi: "Seller API",
     },
-    quickStart: {
-      title: "Bắt đầu nhanh",
-      description: "Ba bước phổ biến nhất để sử dụng Sub2API.",
-      createKey: {
-        title: "Tạo API Key",
-        description: "Đăng nhập dashboard và tạo khóa mới trong mục API Keys.",
+
+    // Introduction
+    introduction: {
+      title: "Giới thiệu AISHOPACC",
+      subtitle:
+        "AISHOPACC là nền tảng marketplace cung cấp API key cho các dịch vụ AI hàng đầu với mức giá tiết kiệm đáng kể so với mua trực tiếp từ nhà cung cấp gốc.",
+      whyChoose: {
+        title: "Tại sao chọn AISHOPACC?",
+        costSavings: {
+          title: "Tiết kiệm chi phí vượt trội",
+          description:
+            "Mỗi đồng bạn bỏ ra đều được nhân lên nhiều lần thông qua hệ thống credit. Ngoài ra còn có khuyến mại theo mức - càng nạp nhiều, chiết khấu càng cao.",
+        },
+        compatibility: {
+          title: "Tương thích 99.99% với API gốc",
+          description:
+            "Hoạt động như một proxy hoàn toàn tương thích. Không cần thay đổi code ngoài Base URL và API key.",
+        },
+        quickIntegration: {
+          title: "Tích hợp nhanh chóng",
+          description: "Chỉ cần 2 bước để bắt đầu sử dụng API AI.",
+        },
       },
-      configureClient: {
-        title: "Cấu hình client",
-        description:
-          "Dùng endpoint tương thích OpenAI/Anthropic trong ứng dụng của bạn.",
+      features: {
+        streaming: "Streaming (SSE)",
+        vision: "Vision / Image input",
+        functionCalling: "Function calling / Tool use",
+        reasoning: "Extended thinking / Reasoning mode",
+        promptCaching: "Prompt caching (Anthropic)",
       },
-      monitorUsage: {
-        title: "Theo dõi sử dụng",
-        description:
-          "Kiểm tra quota, chi phí và nhật ký gọi API theo thời gian thực.",
+      howItWorks: {
+        title: "Cách hoạt động",
+        step1: "Chọn hình thức mua - Mua nhanh hoặc đăng nhập quản lý lâu dài",
+        step2: "Chọn group phù hợp - Group quyết định nhóm model/dịch vụ",
+        step3: "Chọn model hoặc dịch vụ - Chat, coding, tạo ảnh, video hoặc TTS",
+        step4: "Chọn gói credit - Tối thiểu $10, bội số của $10",
+        step5: "Thanh toán qua VietQR - Quét QR và chuyển đúng số tiền",
+        step6: "Nhận API key hoặc cập nhật số dư - Key được tạo sau khi thanh toán",
+      },
+      support: {
+        title: "Hỗ trợ",
+        telegramBot: "Telegram Bot",
+        telegramSupport: "Telegram Hỗ trợ",
+        email: "Email",
       },
     },
-    cards: {
-      apiKeys: {
-        title: "API Keys",
+
+    // Purchase
+    purchase: {
+      title: "Hướng dẫn Mua key & Nạp tiền",
+      subtitle:
+        "Tìm hiểu cách mua API key và nạp credit trên AISHOPACC.",
+      quickBuy: {
+        title: "Mua nhanh / Nạp tiền",
         description:
-          "Quản lý khóa truy cập, giới hạn quota và phạm vi sử dụng cho từng người dùng.",
+          "Mua key hoặc nạp credit không cần tạo tài khoản để truy cập nhanh.",
       },
-      routing: {
-        title: "Định tuyến mô hình",
-        description:
-          "Gọi nhiều nhà cung cấp AI qua một API thống nhất với cơ chế chuyển đổi linh hoạt.",
+      steps: {
+        buyKey: {
+          title: "Cách mua Key",
+          step1: "Mở section mua key nhanh trên website",
+          step2: "Chọn group phù hợp với nhu cầu sử dụng",
+          step3: "Chọn số tiền hoặc gói credit",
+          step4: "Nhập email nhận key nếu giao diện yêu cầu",
+          step5: "Quét VietQR và chuyển đúng số tiền, đúng nội dung",
+          step6: "Key sẽ được hiển thị hoặc gửi sau khi thanh toán thành công",
+        },
+        topup: {
+          title: "Cách nạp tiền",
+          step1: "Mở section nạp tiền",
+          step2: "Nhập API key hoặc thông tin key cần nạp",
+          step3: "Chọn số tiền muốn nạp",
+          step4: "Thanh toán qua VietQR đúng nội dung",
+        },
       },
-      billing: {
-        title: "Sử dụng & thanh toán",
+      groupGuide: {
+        title: "Hướng dẫn chọn Group",
         description:
-          "Theo dõi chi phí, lượt gọi và token đã dùng để kiểm soát ngân sách tốt hơn.",
+          "Group giúp xác định key được dùng với nhóm model, dịch vụ, hạn mức nào.",
+        howToChoose: {
+          title: "Cách chọn Group",
+          multiModel: "Dùng API đa model: Chọn group OpenAI-compatible",
+          claude: "Claude Code hoặc Anthropic SDK: Chọn group dành cho Claude",
+          gemini: "Gemini / Google GenAI SDK: Chọn group Google GenAI",
+          media: "Tạo ảnh, video, TTS: Chọn group có dịch vụ media tương ứng",
+        },
+      },
+    },
+
+    // OpenAI SDK
+    openai: {
+      title: "Hướng dẫn OpenAI SDK",
+      subtitle: "Sử dụng OpenAI SDK với API key của AISHOPACC.",
+      installation: {
+        title: "Cài đặt",
+      },
+      setup: {
+        title: "Cấu hình",
+      },
+      chatCompletion: {
+        title: "Chat Completion",
+      },
+      streaming: {
+        title: "Streaming Response",
+      },
+      vision: {
+        title: "Vision API",
+      },
+      functionCalling: {
+        title: "Function Calling",
+      },
+      endpoints: {
+        title: "API Endpoints",
+        method: "Method",
+        url: "URL",
+        description: "Mô tả",
+        chatCompletion: "Chat Completion",
+        imageGeneration: "Tạo Ảnh",
+        tts: "Text-to-Speech",
+        embeddings: "Embeddings",
+        rerank: "Rerank",
+        listModels: "Danh sách Models",
+      },
+    },
+
+    // Anthropic SDK
+    anthropic: {
+      title: "Hướng dẫn Anthropic SDK",
+      subtitle: "Sử dụng Anthropic SDK với API key của AISHOPACC.",
+      installation: {
+        title: "Cài đặt",
+      },
+      setup: {
+        title: "Cấu hình",
+      },
+      messages: {
+        title: "Messages API",
+      },
+      streaming: {
+        title: "Streaming Response",
+      },
+      vision: {
+        title: "Vision API",
+      },
+      toolUse: {
+        title: "Tool Use",
+      },
+      apiDetails: {
+        title: "Chi tiết API",
+      },
+    },
+
+    // Google GenAI
+    googleGenai: {
+      title: "Hướng dẫn Google GenAI SDK",
+      subtitle: "Sử dụng Google GenAI SDK với API key của AISHOPACC.",
+      installation: {
+        title: "Cài đặt",
+      },
+      setup: {
+        title: "Cấu hình",
+      },
+      generateContent: {
+        title: "Generate Content",
+      },
+      streaming: {
+        title: "Streaming Response",
+      },
+      vision: {
+        title: "Vision API",
+      },
+      functionCalling: {
+        title: "Function Calling",
+      },
+      endpoints: {
+        title: "API Endpoints",
+      },
+    },
+
+    // Claude Code
+    claudeCode: {
+      title: "Hướng dẫn Claude Code CLI",
+      subtitle:
+        "Cấu hình Claude Code CLI để sử dụng với API key của AISHOPACC.",
+      installation: {
+        title: "Cài đặt",
+      },
+      setup: {
+        title: "Cấu hình",
+        description: "Cấu hình Claude Code để sử dụng endpoint của AISHOPACC.",
+      },
+      settingsFile: {
+        title: "File Cài đặt",
+      },
+      envVars: {
+        title: "Biến môi trường",
+      },
+      usage: {
+        title: "Sử dụng",
+      },
+    },
+
+    // Codex CLI
+    codex: {
+      title: "Hướng dẫn Codex CLI",
+      subtitle:
+        "Cấu hình Codex CLI để sử dụng với API key của AISHOPACC.",
+      installation: {
+        title: "Cài đặt",
+      },
+      configuration: {
+        title: "Cấu hình",
+      },
+      usage: {
+        title: "Sử dụng",
+      },
+      envVars: {
+        title: "Biến môi trường",
+      },
+    },
+
+    // Cursor IDE
+    cursor: {
+      title: "Hướng dẫn Cursor IDE",
+      subtitle:
+        "Cấu hình Cursor IDE để sử dụng với API key của AISHOPACC.",
+      requirements: {
+        title: "Yêu cầu",
+        cursorPro: "Gói Cursor Pro (cho tính năng BYOK)",
+        apiKey: "API key từ AISHOPACC",
+      },
+      configuration: {
+        title: "Cấu hình",
+        step1: "Mở Cursor Settings → Models (Cmd/Ctrl + ,)",
+        step2: "Nhập API key từ AISHOPACC",
+        step3: "Đặt Base URL thành https://api.aishopacc.com/cursor",
+      },
+      openai: {
+        title: "Cài đặt OpenAI",
+        apiKey: "Nhập API key AISHOPACC của bạn",
+        baseUrl: "Override Base URL",
+      },
+      anthropic: {
+        title: "Cài đặt Anthropic",
+        description: "Sử dụng cùng API key như OpenAI",
+      },
+      google: {
+        title: "Cài đặt Google",
+        description: "Sử dụng cùng API key như OpenAI",
+      },
+      usage: {
+        title: "Sử dụng",
+        chat: "Mở panel chat",
+        inlineEdit: "Chỉnh sửa code trực tiếp",
+      },
+    },
+
+    // Cline
+    cline: {
+      title: "Hướng dẫn Cline",
+      subtitle:
+        "Cấu hình Cline trong VS Code để sử dụng với API key của AISHOPACC.",
+      configuration: {
+        title: "Cấu hình",
+      },
+      settings: {
+        title: "Cài đặt",
+        field: "Trường",
+        value: "Giá trị",
+        yourKey: "API key AISHOPACC của bạn",
+        exampleModel: "VD: gpt-5.2, claude-sonnet-4-5",
+      },
+      suggestedModels: {
+        title: "Models được khuyến nghị",
+      },
+      usage: {
+        title: "Sử dụng",
+      },
+    },
+
+    // OpenCode
+    opencode: {
+      title: "Hướng dẫn OpenCode",
+      subtitle:
+        "Cấu hình OpenCode để sử dụng với API key của AISHOPACC.",
+      installation: {
+        title: "Cài đặt",
+      },
+      auth: {
+        title: "Xác thực",
+      },
+      configFile: {
+        title: "File cấu hình",
+      },
+      usage: {
+        title: "Sử dụng",
+      },
+    },
+
+    // OpenClaw
+    openclaw: {
+      title: "Hướng dẫn OpenClaw",
+      subtitle:
+        "Cấu hình OpenClaw AI agent framework để sử dụng với AISHOPACC.",
+      endpoints: {
+        title: "Endpoints",
+      },
+      config: {
+        title: "Cấu hình",
+      },
+      usage: {
+        title: "Sử dụng",
+        step1: "Tạo file cấu hình openclaw.json",
+        step2: "Cấu hình API keys",
+        step3: "Chọn models",
+        step4: "Thiết lập bảo mật",
+        step5: "Khởi chạy OpenClaw",
+      },
+    },
+
+    // Gemini CLI
+    geminiCli: {
+      title: "Hướng dẫn Gemini CLI",
+      subtitle:
+        "Cấu hình Gemini CLI để sử dụng với API key của AISHOPACC.",
+      installation: {
+        title: "Cài đặt",
+      },
+      configuration: {
+        title: "Cấu hình",
+      },
+      envVars: {
+        title: "Biến môi trường",
+      },
+      usage: {
+        title: "Sử dụng",
+      },
+    },
+
+    // Nano Banana
+    nanoBanana: {
+      title: "Hướng dẫn Nano Banana API",
+      subtitle:
+        "Tạo hình ảnh sử dụng Google Gemini Image models qua Nano Banana API.",
+      endpoint: {
+        title: "Endpoint",
+      },
+      authentication: {
+        title: "Xác thực",
+      },
+      generate: {
+        title: "Tạo hình ảnh",
+      },
+      parameters: {
+        title: "Tham số",
+        name: "Tham số",
+        type: "Kiểu",
+        required: "Bắt buộc",
+        description: "Mô tả",
+      },
+      models: {
+        title: "Models",
+        refImages: "Ảnh tham chiếu",
+        sizes: "Kích thước ảnh",
+      },
+    },
+
+    // Suno AI
+    suno: {
+      title: "Hướng dẫn Suno AI API",
+      subtitle:
+        "Tạo nhạc và lời bài hát sử dụng Suno AI qua AISHOPACC API.",
+      baseUrl: {
+        title: "Base URL",
+      },
+      workflow: {
+        title: "Luồng sử dụng",
+      },
+      createMusic: {
+        title: "Tạo nhạc",
+      },
+      fetchResult: {
+        title: "Lấy kết quả",
+      },
+      models: {
+        title: "Models được hỗ trợ",
+        version: "Phiên bản",
+      },
+      status: {
+        title: "Trạng thái task",
+        submitted: "Đã gửi, đang chờ xếp hàng",
+        queueing: "Đang xếp hàng chờ xử lý",
+        processing: "Đang tạo nhạc/lời",
+        success: "Hoàn thành, có thể lấy kết quả",
+        failed: "Thất bại, xem fail_reason",
+      },
+    },
+
+    // Seller API
+    sellerApi: {
+      title: "Hướng dẫn Seller API",
+      subtitle:
+        "API dành cho Seller của AISHOPACC để quản lý key và credit theo chương trình.",
+      baseUrl: {
+        title: "Base URL",
+      },
+      authentication: {
+        title: "Xác thực",
+      },
+      warning: {
+        title: "Cảnh báo bảo mật",
+        message: "Không chia sẻ secret key. Không commit vào git hoặc để lộ trong code phía client.",
+      },
+      quickStart: {
+        title: "Sử dụng nhanh",
+        getInfo: {
+          title: "Lấy thông tin Seller",
+        },
+        createKey: {
+          title: "Tạo API Key",
+        },
+        listKeys: {
+          title: "Danh sách Keys",
+        },
+      },
+      endpoints: {
+        title: "API Endpoints",
+        description: "Mô tả",
+        getInfo: "Lấy thông tin seller",
+        listKeys: "Danh sách tất cả keys",
+        createKey: "Tạo key mới",
+        bulkCreate: "Tạo nhiều keys",
+        topup: "Nạp credit cho key",
+        deduct: "Trừ credit từ key",
+        updateStatus: "Cập nhật trạng thái key",
+        deleteKey: "Xóa key và hoàn credit",
+        stats: "Lấy thống kê sử dụng",
+        transactions: "Lấy lịch sử giao dịch",
       },
     },
   },
@@ -223,8 +810,8 @@ export default {
     queryFailedRetry: "Truy vấn không thành công, vui lòng thử lại sau",
   },
   setup: {
-    title: "Thiết lập Sub2API",
-    description: "Định cấu hình phiên bản Sub2API của bạn",
+    title: "Thiết lập AISHOPACC",
+    description: "Định cấu hình phiên bản AISHOPACC của bạn",
     database: {
       title: "Cấu hình cơ sở dữ liệu",
       description: "Kết nối tới cơ sở dữ liệu PostgreSQL của bạn",
@@ -422,6 +1009,8 @@ export default {
     channelMonitor: "Giám sát kênh",
     channelStatus: "Trạng thái kênh",
     riskControl: "Rủi ro Kiểm soát",
+    pricing: "Bảng giá",
+    faq: "Câu hỏi thường gặp",
   },
   auth: {
     welcomeBack: "Chào mừng bạn quay lại",
@@ -5861,7 +6450,7 @@ export default {
         backendModeDescription:
           "Vô hiệu hóa đăng ký người dùng, trang web công cộng và các tính năng tự phục vụ. Chỉ quản trị viên mới có thể đăng nhập và quản lý nền tảng.",
         siteName: "Tên trang web",
-        siteNamePlaceholder: "Sub2API",
+        siteNamePlaceholder: "AISHOPACC",
         siteNameHint: "Hiển thị trong email và tiêu đề trang",
         siteSubtitle: "Tiêu đề phụ của trang web",
         siteSubtitlePlaceholder: "Đăng ký nền tảng chuyển đổi API",
@@ -6200,7 +6789,7 @@ export default {
         fromEmail: "Từ Email",
         fromEmailPlaceholder: "noreply{'@'}example.com",
         fromName: "Từ Tên",
-        fromNamePlaceholder: "Sub2API",
+        fromNamePlaceholder: "AISHOPACC",
         useTls: "Sử dụng TLS",
         useTlsHint: "Bật mã hóa TLS cho kết nối SMTP",
       },

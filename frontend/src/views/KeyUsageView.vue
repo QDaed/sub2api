@@ -648,7 +648,7 @@ const appStore = useAppStore();
 
 const siteName = computed(
   () =>
-    appStore.cachedPublicSettings?.site_name || appStore.siteName || "Sub2API",
+    appStore.cachedPublicSettings?.site_name || appStore.siteName || "AISHOPACC",
 );
 const siteLogo = computed(
   () => appStore.cachedPublicSettings?.site_logo || appStore.siteLogo || "",

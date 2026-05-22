@@ -240,6 +240,100 @@
           </div>
         </div>
 
+        <!-- Pain Points Section -->
+        <div v-if="showPainPoints" class="mb-12">
+          <div class="mb-8 text-center">
+            <h2 class="mb-3 text-2xl font-bold text-gray-900 dark:text-white">
+              {{ t("home.painPoints.title") }}
+            </h2>
+          </div>
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div
+              v-for="(item, key) in painPoints"
+              :key="key"
+              class="rounded-2xl border border-red-100 bg-red-50/60 p-6 dark:border-red-900/30 dark:bg-red-900/10"
+            >
+              <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-red-100 dark:bg-red-900/30">
+                <Icon name="exclamationCircle" size="md" class="text-red-500" />
+              </div>
+              <h3 class="mb-2 font-semibold text-red-700 dark:text-red-400">
+                {{ item.title }}
+              </h3>
+              <p class="text-sm text-red-600/80 dark:text-red-300/80">
+                {{ item.desc }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div v-if="showComparison" class="mb-12 overflow-hidden rounded-2xl border border-gray-200/50 bg-white/60 backdrop-blur-sm dark:border-dark-700/50 dark:bg-dark-800/60">
+          <div class="border-b border-gray-200/50 px-6 py-4 dark:border-dark-700/50">
+            <h2 class="text-center text-2xl font-bold text-gray-900 dark:text-white">
+              {{ t("home.comparison.title") }}
+            </h2>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-gray-200/50 dark:border-dark-700/50">
+                  <th class="px-6 py-4 text-left font-semibold text-gray-500 dark:text-dark-400">
+                    {{ t("home.comparison.headers.feature") }}
+                  </th>
+                  <th class="px-6 py-4 text-center font-semibold text-gray-400 dark:text-dark-500">
+                    {{ t("home.comparison.headers.official") }}
+                  </th>
+                  <th class="px-6 py-4 text-center font-semibold text-primary-600 dark:text-primary-400">
+                    {{ t("home.comparison.headers.us") }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(item, key) in comparisonItems"
+                  :key="key"
+                  class="border-b border-gray-100 dark:border-dark-700/30 last:border-0"
+                >
+                  <td class="px-6 py-4 text-sm font-medium text-gray-700 dark:text-dark-200">
+                    {{ item.feature }}
+                  </td>
+                  <td class="px-6 py-4 text-center text-sm text-gray-500 dark:text-dark-400">
+                    {{ item.official }}
+                  </td>
+                  <td class="px-6 py-4 text-center text-sm font-medium text-primary-600 dark:text-primary-400">
+                    {{ item.us }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div
+          v-if="showCta"
+          class="mb-8 rounded-2xl border border-primary-200/50 bg-gradient-to-r from-primary-50/80 to-blue-50/80 p-8 text-center dark:border-primary-800/30 dark:from-primary-900/20 dark:to-blue-900/20 md:p-12"
+        >
+          <h2 class="mb-3 text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
+            {{ t("home.cta.title") }}
+          </h2>
+          <p class="mb-6 text-lg text-gray-600 dark:text-dark-300">
+            {{ t("home.cta.description") }}
+          </p>
+          <router-link
+            :to="isAuthenticated ? dashboardPath : '/register'"
+            class="btn btn-primary px-10 py-3 text-base shadow-lg shadow-primary-500/30"
+          >
+            {{ t("home.cta.button") }}
+            <Icon
+              name="arrowRight"
+              size="md"
+              class="ml-2"
+              :stroke-width="2"
+            />
+          </router-link>
+        </div>
+
         <!-- Supported Providers -->
         <div class="mb-8 text-center">
           <h2 class="mb-3 text-2xl font-bold text-gray-900 dark:text-white">
@@ -383,7 +477,7 @@ const appStore = useAppStore();
 // Site settings - directly from appStore (already initialized from injected config)
 const siteName = computed(
   () =>
-    appStore.cachedPublicSettings?.site_name || appStore.siteName || "Sub2API",
+    appStore.cachedPublicSettings?.site_name || appStore.siteName || "AISHOPACC",
 );
 const siteLogo = computed(
   () => appStore.cachedPublicSettings?.site_logo || appStore.siteLogo || "",
@@ -419,6 +513,60 @@ const userInitial = computed(() => {
 
 // Current year for footer
 const currentYear = computed(() => new Date().getFullYear());
+
+// Pain Points section
+const showPainPoints = computed(() => !!t("home.painPoints.title"));
+const painPoints = computed(() => ({
+  expensive: {
+    title: t("home.painPoints.items.expensive.title"),
+    desc: t("home.painPoints.items.expensive.desc"),
+  },
+  complex: {
+    title: t("home.painPoints.items.complex.title"),
+    desc: t("home.painPoints.items.complex.desc"),
+  },
+  unstable: {
+    title: t("home.painPoints.items.unstable.title"),
+    desc: t("home.painPoints.items.unstable.desc"),
+  },
+  noControl: {
+    title: t("home.painPoints.items.noControl.title"),
+    desc: t("home.painPoints.items.noControl.desc"),
+  },
+}));
+
+// Comparison table
+const showComparison = computed(() => !!t("home.comparison.title"));
+const comparisonItems = computed(() => [
+  {
+    feature: t("home.comparison.items.pricing.feature"),
+    official: t("home.comparison.items.pricing.official"),
+    us: t("home.comparison.items.pricing.us"),
+  },
+  {
+    feature: t("home.comparison.items.models.feature"),
+    official: t("home.comparison.items.models.official"),
+    us: t("home.comparison.items.models.us"),
+  },
+  {
+    feature: t("home.comparison.items.management.feature"),
+    official: t("home.comparison.items.management.official"),
+    us: t("home.comparison.items.management.us"),
+  },
+  {
+    feature: t("home.comparison.items.stability.feature"),
+    official: t("home.comparison.items.stability.official"),
+    us: t("home.comparison.items.stability.us"),
+  },
+  {
+    feature: t("home.comparison.items.control.feature"),
+    official: t("home.comparison.items.control.official"),
+    us: t("home.comparison.items.control.us"),
+  },
+]);
+
+// CTA section
+const showCta = computed(() => !!t("home.cta.title"));
 
 // Toggle theme
 function toggleTheme() {

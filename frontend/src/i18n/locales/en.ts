@@ -114,50 +114,636 @@ export default {
       allRightsReserved: "All rights reserved.",
     },
   },
+  // FAQ Page
+  faq: {
+    badge: "FAQ",
+    title: "Frequently Asked Questions",
+    subtitle: "Everything you need to know about AISHOPACC",
+    stillHaveQuestions: {
+      title: "Still have questions?",
+      description: "Our support team is here to help you around the clock.",
+      telegram: "Contact on Telegram",
+      getStarted: "Get Started",
+    },
+    sections: {
+      general: {
+        title: "General",
+        what: {
+          question: "What is AISHOPACC?",
+          answer: "AISHOPACC is an AI API gateway platform that aggregates multiple AI service providers (Claude, GPT, Gemini, etc.) into a single unified API. You get one API key to access all connected models, with automatic failover and real-time usage tracking.",
+        },
+        why: {
+          question: "Why should I use AISHOPACC instead of official APIs directly?",
+          answer: "Three main reasons: <strong>Cost savings</strong> — pay only for what you use with no fixed monthly fees. <strong>Convenience</strong> — one key for all models instead of managing multiple subscriptions. <strong>Reliability</strong> — multi-account pooling with automatic failover means fewer service interruptions.",
+        },
+        security: {
+          question: "Is my data secure?",
+          answer: "Yes. Your API requests are routed through our gateway with TLS encryption in transit. We do not store your prompts or responses. Only usage metadata (model, token count, cost) is logged for billing purposes.",
+        },
+      },
+      payment: {
+        title: "Payment & Billing",
+        pricing: {
+          question: "How is pricing calculated?",
+          answer: "Pricing is based on actual token usage. Each model has its own per-token rate. You can view the full pricing table on our Pricing page. There are no fixed monthly fees — you only pay for what you actually use.",
+        },
+        expiry: {
+          question: "Do credits expire? Is there a monthly fee?",
+          answer: "Credits in your account do <strong>not expire</strong> as long as your account is active. There is no monthly maintenance fee. Credit stays in your account until you use it up through API calls.",
+        },
+        refund: {
+          question: "What is your refund policy?",
+          answer: "If you are not satisfied with the service, contact our support team within 7 days of purchase. We offer partial or full refunds on a case-by-case basis. Refunds for unused credit are typically approved.",
+        },
+      },
+      usage: {
+        title: "Usage & Limits",
+        multiDevice: {
+          question: "Can I use one API key on multiple devices?",
+          answer: "Yes, absolutely. One API key works across all your devices and environments simultaneously — laptop, server, CI/CD, Docker containers, you name it. There is no device limit. Just keep your key secure and do not commit it to public repositories.",
+        },
+        balance: {
+          question: "How can I check my balance and usage?",
+          answer: "You can check your balance in the dashboard at any time. The dashboard shows your current credit, usage history, per-model breakdown, and daily/weekly charts. Each API call also returns your remaining quota in the response headers.",
+        },
+        rateLimit: {
+          question: "Are there rate limits?",
+          answer: "Rate limits depend on the upstream provider and your usage volume. Most users under 100 requests/minute experience no issues. High-volume users (>1000 req/min) may encounter upstream rate limits. For dedicated high-throughput needs, contact our support team.",
+        },
+      },
+      integration: {
+        title: "Integration",
+        sdk: {
+          question: "How do I configure Claude Code, Anthropic SDK, or OpenAI SDK?",
+          answer: "Simply set the <code>base_url</code> to our gateway endpoint and use your AISHOPACC key as the API key:<br><br><strong>Anthropic SDK:</strong><br><code>ANTHROPIC_BASE_URL=https://your-gateway.com</code><br><code>ANTHROPIC_AUTH_TOKEN=your_key</code><br><br><strong>OpenAI SDK:</strong><br><code>base_url = \"https://your-gateway.com/v1\"</code><br><code>api_key = \"your_key\"</code>",
+        },
+        compatible: {
+          question: "Which tools and IDEs are compatible?",
+          answer: "Any tool that allows configuring a custom base URL for Anthropic or OpenAI is compatible. This includes: Claude Code CLI, Cursor, Cline, Continue, Zed, OpenClaw, Roo Code, and any application using the official Anthropic or OpenAI SDKs.",
+        },
+        tools: {
+          question: "Do you support function calling, vision, and streaming?",
+          answer: "Yes, full support for all advanced features: tools/function calling, vision (image input), streaming responses, extended thinking (Claude), and prompt caching. All features work exactly as they do with the official APIs.",
+        },
+      },
+      support: {
+        title: "Support",
+        contact: {
+          question: "How can I get help if something goes wrong?",
+          answer: "First, check your dashboard for error messages and usage logs. Common errors: <code>401</code> = invalid key, <code>402</code> = out of credit, <code>429</code> = rate limit, <code>5xx</code> = upstream provider issue. If the problem persists, contact us on Telegram with your request ID (found in response headers).",
+        },
+        bulk: {
+          question: "Do you offer discounts for high-volume or enterprise users?",
+          answer: "Yes! We offer volume discounts starting at $500 top-up (5% bonus credit), increasing to 10% for $1000+. For enterprise needs (dedicated throughput, SLA, white-label), contact us on Telegram for a custom quote.",
+        },
+      },
+    },
+  },
+  // Pricing Page
+  pricing: {
+    badge: "Pricing",
+    title: "Simple, Transparent Pricing",
+    subtitle: "Pay only for what you use. No hidden fees, no monthly minimums.",
+    popular: "Most Popular",
+    plans: {
+      free: {
+        name: "Free Trial",
+        description: "New users get started with free credits",
+        priceLabel: "$0",
+        priceNote: "",
+        f1: "5 USD in free credits",
+        f2: "Access to all models",
+        f3: "Basic usage dashboard",
+        button: "Sign Up Free",
+      },
+      starter: {
+        name: "Starter",
+        description: "Perfect for individual developers",
+        priceLabel: "$10",
+        priceNote: "/ month",
+        f1: "10 USD monthly credit",
+        f2: "Priority routing",
+        f3: "Full usage analytics",
+        f4: "Email support",
+        button: "Get Started",
+      },
+      pro: {
+        name: "Pro",
+        description: "For teams and high-volume users",
+        priceLabel: "$50",
+        priceNote: "/ month",
+        f1: "50 USD monthly credit",
+        f2: "Everything in Starter",
+        f3: "Advanced analytics",
+        f4: "Priority support",
+        f5: "Custom rate limits",
+        button: "Go Pro",
+      },
+    },
+    payPerUse: {
+      title: "Pay-Per-Use Model Pricing",
+      subtitle: "Transparent per-token rates for every model",
+    },
+    table: {
+      model: "Model",
+      input: "Input (per 1M tokens)",
+      output: "Output (per 1M tokens)",
+      note: "Prices are indicative. Actual rates may vary. Check the dashboard for the latest model pricing.",
+    },
+    models: {
+      claude: "Anthropic Claude",
+      openai: "OpenAI",
+      gemini: "Google Gemini",
+      prices: {
+        claudeOpusInput: "$2.50",
+        claudeOpusOutput: "$12.50",
+        claudeSonnetInput: "$1.50",
+        claudeSonnetOutput: "$7.50",
+        claudeHaikuInput: "$0.20",
+        claudeHaikuOutput: "$1.00",
+        gpt45Input: "$3.75",
+        gpt45Output: "$15.00",
+        gpt4oInput: "$1.50",
+        gpt4oOutput: "$6.00",
+        o1Input: "$10.00",
+        o1Output: "$40.00",
+        geminiProInput: "$1.00",
+        geminiProOutput: "$4.00",
+        geminiFlashInput: "$0.10",
+        geminiFlashOutput: "$0.40",
+      },
+    },
+    cta: {
+      title: "Ready to Get Started?",
+      description: "Sign up today and get free credits to try all models.",
+      signup: "Sign Up Free",
+      dashboard: "Go to Dashboard",
+      faq: "Read FAQ",
+    },
+  },
   docs: {
     badge: "Documentation",
-    title: "Sub2API Docs",
+    title: "AISHOPACC API Documentation",
     subtitle:
-      "A quick guide to create API keys, configure clients, and monitor usage in the same familiar interface.",
+      "Comprehensive guide to using AI APIs with cost savings up to 10x compared to direct providers.",
     backHome: "Back home",
-    openExternal: "Open full docs",
-    embedded: {
-      title: "Full documentation",
-      description: "Documentation content from your website configuration.",
+    openExternal: "View on website",
+
+    // Categories
+    categories: {
+      introduction: "Introduction",
+      purchase: "Purchase & Topup",
+      openai: "OpenAI SDK",
+      anthropic: "Anthropic SDK",
+      googleGenai: "Google GenAI SDK",
+      claudeCode: "Claude Code",
+      codex: "Codex CLI",
+      cursor: "Cursor IDE",
+      cline: "Cline",
+      opencode: "OpenCode",
+      openclaw: "OpenClaw",
+      geminiCli: "Gemini CLI",
+      nanoBanana: "Nano Banana",
+      suno: "Suno AI",
+      sellerApi: "Seller API",
     },
-    quickStart: {
-      title: "Quick start",
-      description: "The three most common steps for using Sub2API.",
-      createKey: {
-        title: "Create an API key",
-        description:
-          "Sign in to the dashboard and create a new key from API Keys.",
+
+    // Introduction
+    introduction: {
+      title: "Introduction to AISHOPACC",
+      subtitle:
+        "AISHOPACC is a marketplace platform providing API keys for leading AI services at significantly lower costs than buying directly from original providers.",
+      whyChoose: {
+        title: "Why Choose AISHOPACC?",
+        costSavings: {
+          title: "Superior Cost Savings",
+          description:
+            "Every dollar you spend is multiplied through our credit system with favorable rates. Plus, level-based promotions - the more you top up, the higher the discount.",
+        },
+        compatibility: {
+          title: "99.99% API Compatibility",
+          description:
+            "Works as a fully compatible proxy. No code changes needed except for the Base URL and API key.",
+        },
+        quickIntegration: {
+          title: "Quick Integration",
+          description: "Just 2 steps to start using AI APIs.",
+        },
       },
-      configureClient: {
-        title: "Configure your client",
-        description:
-          "Use the OpenAI/Anthropic-compatible endpoint in your app.",
+      features: {
+        streaming: "Streaming (SSE)",
+        vision: "Vision / Image input",
+        functionCalling: "Function calling / Tool use",
+        reasoning: "Extended thinking / Reasoning mode",
+        promptCaching: "Prompt caching (Anthropic)",
       },
-      monitorUsage: {
-        title: "Monitor usage",
-        description: "Check quota, costs, and API request logs in real time.",
+      howItWorks: {
+        title: "How It Works",
+        step1: "Choose purchase method - Quick buy or login for long-term management",
+        step2: "Select appropriate group - Group determines accessible models/services",
+        step3: "Choose model or service - Chat, coding, image, video or TTS",
+        step4: "Select credit package - Minimum $10, multiples of $10",
+        step5: "Pay via VietQR - Scan QR and transfer correct amount",
+        step6: "Receive API key or balance - Key created after payment confirmation",
+      },
+      support: {
+        title: "Support",
+        telegramBot: "Telegram Bot",
+        telegramSupport: "Telegram Support",
+        email: "Email",
       },
     },
-    cards: {
-      apiKeys: {
-        title: "API Keys",
+
+    // Purchase
+    purchase: {
+      title: "Purchase & Topup Guide",
+      subtitle:
+        "Learn how to purchase API keys and top up credit on AISHOPACC.",
+      quickBuy: {
+        title: "Quick Buy / Topup",
         description:
-          "Manage access keys, quota limits, and usage scope for each user.",
+          "Purchase keys or top up credit without creating an account for fast access.",
       },
-      routing: {
-        title: "Model routing",
-        description:
-          "Call multiple AI providers through one unified API with flexible failover.",
+      steps: {
+        buyKey: {
+          title: "How to Buy Keys",
+          step1: "Open the quick buy section on the website",
+          step2: "Select the appropriate group for your needs",
+          step3: "Choose the credit amount or package",
+          step4: "Enter email to receive the key if required",
+          step5: "Scan VietQR and transfer the correct amount and content",
+          step6: "Key will be displayed or sent after payment confirmation",
+        },
+        topup: {
+          title: "How to Top Up",
+          step1: "Open the topup section",
+          step2: "Enter API key or key information to top up",
+          step3: "Select the amount to top up",
+          step4: "Pay via VietQR with the correct content",
+        },
       },
-      billing: {
-        title: "Usage & billing",
+      groupGuide: {
+        title: "Group Selection Guide",
         description:
-          "Track costs, requests, and consumed tokens to keep budgets under control.",
+          "Groups determine which models, services, and limits your key can access.",
+        howToChoose: {
+          title: "How to Choose a Group",
+          multiModel: "Multi-model API usage: Choose OpenAI-compatible group",
+          claude: "Claude Code or Anthropic SDK: Choose Claude group",
+          gemini: "Gemini / Google GenAI SDK: Choose Google GenAI group",
+          media: "Image, Video, TTS: Choose groups with media services",
+        },
+      },
+    },
+
+    // OpenAI SDK
+    openai: {
+      title: "OpenAI SDK Guide",
+      subtitle: "Use OpenAI SDK with AISHOPACC API keys.",
+      installation: {
+        title: "Installation",
+      },
+      setup: {
+        title: "Setup",
+      },
+      chatCompletion: {
+        title: "Chat Completion",
+      },
+      streaming: {
+        title: "Streaming Response",
+      },
+      vision: {
+        title: "Vision API",
+      },
+      functionCalling: {
+        title: "Function Calling",
+      },
+      endpoints: {
+        title: "API Endpoints",
+        method: "Method",
+        url: "URL",
+        description: "Description",
+        chatCompletion: "Chat Completion",
+        imageGeneration: "Image Generation",
+        tts: "Text-to-Speech",
+        embeddings: "Embeddings",
+        rerank: "Rerank",
+        listModels: "List Models",
+      },
+    },
+
+    // Anthropic SDK
+    anthropic: {
+      title: "Anthropic SDK Guide",
+      subtitle: "Use Anthropic SDK with AISHOPACC API keys.",
+      installation: {
+        title: "Installation",
+      },
+      setup: {
+        title: "Setup",
+      },
+      messages: {
+        title: "Messages API",
+      },
+      streaming: {
+        title: "Streaming Response",
+      },
+      vision: {
+        title: "Vision API",
+      },
+      toolUse: {
+        title: "Tool Use",
+      },
+      apiDetails: {
+        title: "API Details",
+      },
+    },
+
+    // Google GenAI
+    googleGenai: {
+      title: "Google GenAI SDK Guide",
+      subtitle: "Use Google GenAI SDK with AISHOPACC API keys.",
+      installation: {
+        title: "Installation",
+      },
+      setup: {
+        title: "Setup",
+      },
+      generateContent: {
+        title: "Generate Content",
+      },
+      streaming: {
+        title: "Streaming Response",
+      },
+      vision: {
+        title: "Vision API",
+      },
+      functionCalling: {
+        title: "Function Calling",
+      },
+      endpoints: {
+        title: "API Endpoints",
+      },
+    },
+
+    // Claude Code
+    claudeCode: {
+      title: "Claude Code CLI Guide",
+      subtitle:
+        "Configure Claude Code CLI to use with AISHOPACC API keys.",
+      installation: {
+        title: "Installation",
+      },
+      setup: {
+        title: "Configuration",
+        description: "Configure Claude Code to use AISHOPACC endpoint.",
+      },
+      settingsFile: {
+        title: "Settings File",
+      },
+      envVars: {
+        title: "Environment Variables",
+      },
+      usage: {
+        title: "Usage",
+      },
+    },
+
+    // Codex CLI
+    codex: {
+      title: "Codex CLI Guide",
+      subtitle:
+        "Configure Codex CLI to use with AISHOPACC API keys.",
+      installation: {
+        title: "Installation",
+      },
+      configuration: {
+        title: "Configuration",
+      },
+      usage: {
+        title: "Usage",
+      },
+      envVars: {
+        title: "Environment Variables",
+      },
+    },
+
+    // Cursor IDE
+    cursor: {
+      title: "Cursor IDE Guide",
+      subtitle: "Configure Cursor IDE to use with AISHOPACC API keys.",
+      requirements: {
+        title: "Requirements",
+        cursorPro: "Cursor Pro Plan (for BYOK feature)",
+        apiKey: "API key from AISHOPACC",
+      },
+      configuration: {
+        title: "Configuration",
+        step1: "Open Cursor Settings → Models (Cmd/Ctrl + ,)",
+        step2: "Enter API key from AISHOPACC",
+        step3: "Set Base URL to https://api.aishopacc.com/cursor",
+      },
+      openai: {
+        title: "OpenAI Settings",
+        apiKey: "Enter your AISHOPACC API key",
+        baseUrl: "Base URL Override",
+      },
+      anthropic: {
+        title: "Anthropic Settings",
+        description: "Use the same API key as OpenAI",
+      },
+      google: {
+        title: "Google Settings",
+        description: "Use the same API key as OpenAI",
+      },
+      usage: {
+        title: "Usage",
+        chat: "Open chat panel",
+        inlineEdit: "Inline code editing",
+      },
+    },
+
+    // Cline
+    cline: {
+      title: "Cline Guide",
+      subtitle:
+        "Configure Cline in VS Code to use with AISHOPACC API keys.",
+      configuration: {
+        title: "Configuration",
+      },
+      settings: {
+        title: "Settings",
+        field: "Field",
+        value: "Value",
+        yourKey: "Your AISHOPACC API key",
+        exampleModel: "e.g., gpt-5.2, claude-sonnet-4-5",
+      },
+      suggestedModels: {
+        title: "Suggested Models",
+      },
+      usage: {
+        title: "Usage",
+      },
+    },
+
+    // OpenCode
+    opencode: {
+      title: "OpenCode Guide",
+      subtitle:
+        "Configure OpenCode to use with AISHOPACC API keys.",
+      installation: {
+        title: "Installation",
+      },
+      auth: {
+        title: "Authentication",
+      },
+      configFile: {
+        title: "Configuration File",
+      },
+      usage: {
+        title: "Usage",
+      },
+    },
+
+    // OpenClaw
+    openclaw: {
+      title: "OpenClaw Guide",
+      subtitle:
+        "Configure OpenClaw AI agent framework to use with AISHOPACC.",
+      endpoints: {
+        title: "Endpoints",
+      },
+      config: {
+        title: "Configuration",
+      },
+      usage: {
+        title: "Usage",
+        step1: "Create openclaw.json configuration file",
+        step2: "Configure API keys",
+        step3: "Select models",
+        step4: "Set up security",
+        step5: "Launch OpenClaw",
+      },
+    },
+
+    // Gemini CLI
+    geminiCli: {
+      title: "Gemini CLI Guide",
+      subtitle:
+        "Configure Gemini CLI to use with AISHOPACC API keys.",
+      installation: {
+        title: "Installation",
+      },
+      configuration: {
+        title: "Configuration",
+      },
+      envVars: {
+        title: "Environment Variables",
+      },
+      usage: {
+        title: "Usage",
+      },
+    },
+
+    // Nano Banana
+    nanoBanana: {
+      title: "Nano Banana API Guide",
+      subtitle:
+        "Generate images using Google Gemini Image models via Nano Banana API.",
+      endpoint: {
+        title: "Endpoint",
+      },
+      authentication: {
+        title: "Authentication",
+      },
+      generate: {
+        title: "Generate Image",
+      },
+      parameters: {
+        title: "Parameters",
+        name: "Parameter",
+        type: "Type",
+        required: "Required",
+        description: "Description",
+      },
+      models: {
+        title: "Models",
+        refImages: "Reference Images",
+        sizes: "Image Sizes",
+      },
+    },
+
+    // Suno AI
+    suno: {
+      title: "Suno AI API Guide",
+      subtitle:
+        "Generate music and lyrics using Suno AI via AISHOPACC API.",
+      baseUrl: {
+        title: "Base URL",
+      },
+      workflow: {
+        title: "Workflow",
+      },
+      createMusic: {
+        title: "Create Music",
+      },
+      fetchResult: {
+        title: "Fetch Result",
+      },
+      models: {
+        title: "Supported Models",
+        version: "Version",
+      },
+      status: {
+        title: "Task Status",
+        submitted: "Submitted, waiting in queue",
+        queueing: "Queued for processing",
+        processing: "Generating music/lyrics",
+        success: "Completed, results ready",
+        failed: "Failed, see fail_reason",
+      },
+    },
+
+    // Seller API
+    sellerApi: {
+      title: "Seller API Guide",
+      subtitle:
+        "API for AISHOPACC sellers to manage keys and credit programmatically.",
+      baseUrl: {
+        title: "Base URL",
+      },
+      authentication: {
+        title: "Authentication",
+      },
+      warning: {
+        title: "Security Warning",
+        message: "Do not share secret keys. Never commit to git or expose in client code.",
+      },
+      quickStart: {
+        title: "Quick Start",
+        getInfo: {
+          title: "Get Seller Info",
+        },
+        createKey: {
+          title: "Create API Key",
+        },
+        listKeys: {
+          title: "List Keys",
+        },
+      },
+      endpoints: {
+        title: "API Endpoints",
+        description: "Description",
+        getInfo: "Get seller information",
+        listKeys: "List all keys",
+        createKey: "Create new key",
+        bulkCreate: "Bulk create keys",
+        topup: "Top up key credit",
+        deduct: "Deduct key credit",
+        updateStatus: "Update key status",
+        deleteKey: "Delete key and refund credit",
+        stats: "Get usage statistics",
+        transactions: "Get transaction history",
       },
     },
   },
@@ -238,8 +824,8 @@ export default {
 
   // Setup Wizard
   setup: {
-    title: "Sub2API Setup",
-    description: "Configure your Sub2API instance",
+    title: "AISHOPACC Setup",
+    description: "Configure your AISHOPACC instance",
     database: {
       title: "Database Configuration",
       description: "Connect to your PostgreSQL database",
@@ -440,6 +1026,8 @@ export default {
     channelMonitor: "Channel Monitor",
     channelStatus: "Channel Status",
     riskControl: "Risk Control",
+    pricing: "Pricing",
+    faq: "FAQ",
   },
 
   // Auth
@@ -5902,7 +6490,7 @@ export default {
         backendModeDescription:
           "Disables user registration, public site, and self-service features. Only admin can log in and manage the platform.",
         siteName: "Site Name",
-        siteNamePlaceholder: "Sub2API",
+        siteNamePlaceholder: "AISHOPACC",
         siteNameHint: "Displayed in emails and page titles",
         siteSubtitle: "Site Subtitle",
         siteSubtitlePlaceholder: "Subscription to API Conversion Platform",
@@ -6238,7 +6826,7 @@ export default {
         fromEmail: "From Email",
         fromEmailPlaceholder: "noreply{'@'}example.com",
         fromName: "From Name",
-        fromNamePlaceholder: "Sub2API",
+        fromNamePlaceholder: "AISHOPACC",
         useTls: "Use TLS",
         useTlsHint: "Enable TLS encryption for SMTP connection",
       },
